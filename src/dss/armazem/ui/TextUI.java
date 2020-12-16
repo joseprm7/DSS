@@ -1,5 +1,7 @@
 package dss.armazem.ui;
 
+import dss.armazem.business.IArmazemLN;
+
 import java.util.Scanner;
 
 public class TextUI {
@@ -7,7 +9,7 @@ public class TextUI {
     private IArmazemLN model;
 
     // Menus da aplicação
-    private Menu menu;
+    private final Menu menu;
 
     // Scanner para leitura
     private Scanner sc;
@@ -27,7 +29,7 @@ public class TextUI {
                 "Adicionar Turma",
                 };
         this.menu = new Menu(opcoes);
-        //this.model = new TurmasFacade();
+        //this.model = new ();
         this.sc = new Scanner(System.in);
     }
 

@@ -26,7 +26,7 @@ public class TextUI {
                 "Comunicar código QR",
                 "Comunicar ordem de transporte",
                 "Consultar listagem de localizacoes",
-                "Adicionar Turma",
+                "Log in Gestor",
                 };
         this.menu = new Menu(opcoes);
         //this.model = new ();

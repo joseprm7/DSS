@@ -1,7 +1,9 @@
 package dss.armazem.business;
 
+import java.util.Objects;
+
 public class Localizacao {
-    int seccao;
+    private int seccao;
 
     public Localizacao() {
         this.seccao = -1;
@@ -25,6 +27,19 @@ public class Localizacao {
 
     public Localizacao clone() {
         return new Localizacao(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Localizacao that = (Localizacao) o;
+        return this.seccao == that.seccao;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(seccao);
     }
 
     /**

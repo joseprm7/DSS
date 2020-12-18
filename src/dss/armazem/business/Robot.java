@@ -5,9 +5,32 @@ import java.util.Objects;
 public class Robot {
     private String id;
     private String estado;
+    private Palete palete;
+    private Localizacao loc;
+
+    public Robot(){
+        this.id = "";
+        this.estado = "";
+        this.palete = null;
+        this.loc = new Localizacao();
+    }
+
+    public Robot(String id, String estado, Palete palete, Localizacao loc) {
+        this.id = id;
+        this.estado = estado;
+        setPalete(palete);
+        setLoc(loc);
+    }
+
+    public Robot(Robot r) {
+        this.id = r.getId();
+        this.estado = r.getEstado();
+        this.palete = r.getPalete();
+        this.loc = r.getLoc();
+    }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(String id) {
@@ -15,11 +38,27 @@ public class Robot {
     }
 
     public String getEstado() {
-        return estado;
+        return this.estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Palete getPalete() {
+        return this.palete;
+    }
+
+    public void setPalete(Palete palete) {
+        this.palete = palete/*.clone()*/;
+    }
+
+    public Localizacao getLoc() {
+        return this.loc.clone();
+    }
+
+    public void setLoc(Localizacao loc) {
+        this.loc = loc.clone();
     }
 
     @Override
@@ -34,5 +73,9 @@ public class Robot {
     @Override
     public int hashCode() {
         return Objects.hash(id, estado);
+    }
+
+    public Robot clone() {
+        return new Robot(this);
     }
 }

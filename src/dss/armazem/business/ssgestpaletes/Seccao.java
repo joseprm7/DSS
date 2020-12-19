@@ -13,4 +13,29 @@ public class Seccao {
         this.id = "";
         this.paletes = new ArrayList<>();
     }
+
+    public Seccao(String id, List<Palete> paletes) {
+        this.id = id;
+        this.setPaletes(paletes);
+    }
+
+    public void addPalete(Palete p) {
+        this.paletes.add(p);
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Palete> getPaletes() {
+        return this.paletes;
+    }
+
+    public void setPaletes(List<Palete> paletes) {
+        this.paletes = paletes;
+    }
 }

@@ -80,4 +80,12 @@ public class Robot {
     public Robot clone() {
         return new Robot(this);
     }
+
+    public void notificaEntrega(Localizacao locAtual) {
+        this.setEstado("Livre");
+        this.setLoc(locAtual);
+        Palete p = this.getPalete();
+        p.paleteEntregue(locAtual);
+        this.setPalete(null);
+    }
 }

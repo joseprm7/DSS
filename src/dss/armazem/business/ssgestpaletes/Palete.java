@@ -78,4 +78,14 @@ public class Palete {
     public Palete clone() {
         return new Palete(this);
     }
+
+    public void paleteEntregue(Localizacao locAtual) {
+        Localizacao loc = this.getLoc();
+        if(loc.getZona() == -1) {
+            this.setEstado("Armazenada");
+        } else {
+            this.setEstado("Pronta");
+        }
+        this.setLoc(locAtual);
+    }
 }

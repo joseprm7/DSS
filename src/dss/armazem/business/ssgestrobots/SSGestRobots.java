@@ -19,8 +19,12 @@ public class SSGestRobots {
 
     public void notificaEntrega(String id, Localizacao locAtual) {
         Robot r = this.robots.get(id);
-        System.out.println(r.getEstado()+"  " + r.getPalete().getID());
         r.notificaEntrega(locAtual);
-        System.out.println(r.getEstado() + " " + (r.getPalete() == null));
+    }
+
+    public void trasportaRobot(String idRobot, Palete p) {
+        Robot r = this.robots.get(idRobot);
+        r.setEstado("Em transporte");
+        r.setPalete(p);
     }
 }

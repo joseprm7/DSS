@@ -13,6 +13,11 @@ public class ArmazemLN {
         this.gestRobots = new SSGestRobots();
     }
 
+    /**
+     *
+     * @param id
+     * @param descricao
+     */
     public void validaCodigo(String id, String descricao) {
         this.gestPaletes.validaCodigo(id, descricao);
     }

@@ -1,4 +1,4 @@
-package dss.armazem.business;
+package dss.armazem.business.ssgestpaletes;
 
 import java.util.List;
 import java.util.Map;

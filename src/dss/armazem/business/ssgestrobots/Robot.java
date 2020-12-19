@@ -1,4 +1,6 @@
-package dss.armazem.business;
+package dss.armazem.business.ssgestrobots;
+
+import dss.armazem.business.ssgestpaletes.Palete;
 
 import java.util.Objects;
 

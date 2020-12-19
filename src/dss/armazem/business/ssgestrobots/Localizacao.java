@@ -1,4 +1,4 @@
-package dss.armazem.business;
+package dss.armazem.business.ssgestrobots;
 
 import java.util.Objects;
 

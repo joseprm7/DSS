@@ -1,4 +1,4 @@
-package dss.armazem.business;
+package dss.armazem.business.ssgestpaletes;
 
 public class Palete {
     private String estado;

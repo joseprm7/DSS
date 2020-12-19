@@ -3,26 +3,26 @@ package dss.armazem.business.ssgestrobots;
 import java.util.Objects;
 
 public class Localizacao {
-    private int seccao;
+    private int zona;
 
     public Localizacao() {
-        this.seccao = -1;
+        this.zona = -1;
     }
 
     public Localizacao(int seccao) {
-        this.seccao = seccao;
+        this.zona = seccao;
     }
 
     public Localizacao(Localizacao l) {
-        this.seccao = l.getSeccao();
+        this.zona = l.getZona();
     }
 
-    public int getSeccao() {
-        return this.seccao;
+    public int getZona() {
+        return this.zona;
     }
 
-    public void setSeccao(int seccao) {
-        this.seccao = seccao;
+    public void setZona(int zona) {
+        this.zona = zona;
     }
 
     public Localizacao clone() {
@@ -34,12 +34,12 @@ public class Localizacao {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Localizacao that = (Localizacao) o;
-        return this.seccao == that.seccao;
+        return this.zona == that.zona;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seccao);
+        return Objects.hash(zona);
     }
 
     /**
@@ -47,7 +47,7 @@ public class Localizacao {
      */
     public String toString() {
         String r = " ";
-        int s = this.seccao;
+        int s = this.zona;
 
         if(s == -1) r = "Zona de Entrada";
         else if (s > -1 && s < 5) r = "Corredor Norte -> Prateleira " + (s+1);

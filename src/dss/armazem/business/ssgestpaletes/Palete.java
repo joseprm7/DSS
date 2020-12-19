@@ -1,7 +1,6 @@
 package dss.armazem.business.ssgestpaletes;
 
 import dss.armazem.business.ssgestrobots.Localizacao;
-
 import java.util.Objects;
 
 public class Palete {

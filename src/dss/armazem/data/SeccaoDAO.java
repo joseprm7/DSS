@@ -2,8 +2,8 @@ package dss.armazem.data;
 
 import java.sql.*;
 
-public class RobotDAO {
-    private static RobotDAO singleton = null;
+public class SeccaoDAO {
+    private static SeccaoDAO singleton = null;
 
     private static final String USERNAME = "g41";
     private static final String PASSWORD = "g41";
@@ -14,7 +14,7 @@ public class RobotDAO {
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
-    private RobotDAO() {
+    private SeccaoDAO() {
 //        Driver é carregado automaticamente quando se abre uma conexão
 //        try {
 //            Class.forName("org.mariadb.jdbc.Driver");
@@ -27,18 +27,11 @@ public class RobotDAO {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
-            String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`robot` (\n" +
+            String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`seccao` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
-                    "  `estado` VARCHAR(15) NOT NULL,\n" +
-                    "  `loc` INT NOT NULL,\n" +
-                    "  `idPalete` VARCHAR(10) NOT NULL,\n" +
-                    "  PRIMARY KEY (`id`),\n" +
-                    "  INDEX `fk_robot_palete1_idx` (`idPalete` ASC) VISIBLE,\n" +
-                    "  CONSTRAINT `fk_robot_palete1`\n" +
-                    "    FOREIGN KEY (`idPalete`)\n" +
-                    "    REFERENCES `armazem`.`palete` (`id`)\n" +
-                    "    ON DELETE NO ACTION\n" +
-                    "    ON UPDATE NO ACTION)";
+                    "  `locInicial` INT NOT NULL,\n" +
+                    "  `locFinal` INT NOT NULL,\n" +
+                    "  PRIMARY KEY (`id`))";
             stm.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,11 +44,11 @@ public class RobotDAO {
      *
      * @return devolve a instância única desta classe
      */
-    public static RobotDAO getInstance() {
-        if (RobotDAO.singleton == null) {
-            RobotDAO.singleton = new RobotDAO();
+    public static SeccaoDAO getInstance() {
+        if (SeccaoDAO.singleton == null) {
+            SeccaoDAO.singleton = new SeccaoDAO();
         }
-        return RobotDAO.singleton;
+        return SeccaoDAO.singleton;
     }
 
     /**

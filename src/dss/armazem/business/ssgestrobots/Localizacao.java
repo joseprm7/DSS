@@ -2,20 +2,42 @@ package dss.armazem.business.ssgestrobots;
 
 import java.util.Objects;
 
+/**
+ * Classe que visa gerir todos os dados relativos a uma Localização de um objeto.
+ * Como o Mapa do Armazém é dividido por "zonas", p.e zona de entrada, zona de saída,
+ * secção 3 - prateleira 1, etc., esta classe irá ter apenas uma variável de instância
+ * correspondente à zona do objeto no Mapa.
+ *
+ */
 public class Localizacao {
     private int zona;
 
+    /**
+     * Construtor vazio
+     */
     public Localizacao() {
         this.zona = -1;
     }
 
-    public Localizacao(int seccao) {
-        this.zona = seccao;
+    /**
+     * Construtor parametrizado
+     * @param zona zona do objeto
+     */
+    public Localizacao(int zona) {
+        this.zona = zona;
     }
 
+    /**
+     * Construtor por cópia
+     * @param l Localização
+     */
     public Localizacao(Localizacao l) {
         this.zona = l.getZona();
     }
+
+    /**
+     * Getters e Setters
+     */
 
     public int getZona() {
         return this.zona;
@@ -24,6 +46,10 @@ public class Localizacao {
     public void setZona(int zona) {
         this.zona = zona;
     }
+
+    /**
+     * Métodos clone, equals, hashCode e toString
+     */
 
     public Localizacao clone() {
         return new Localizacao(this);

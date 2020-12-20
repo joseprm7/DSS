@@ -1,4 +1,4 @@
 package dss.armazem.data;
 
-public class ArmazemDAO {
+public class PaleteDAO {
 }

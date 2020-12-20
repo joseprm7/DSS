@@ -1,5 +1,9 @@
 package dss.armazem.data;
 
+import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.business.ssgestpaletes.Seccao;
+import dss.armazem.business.ssgestrobots.Robot;
+
 import java.sql.*;
 
 public class SeccaoDAO {
@@ -71,5 +75,35 @@ public class SeccaoDAO {
             throw new NullPointerException(e.getMessage());
         }
         return i;
+    }
+
+    public void put(Seccao s, int locInicial, int locFinal) {
+        try (Connection conn =
+                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
+             Statement stm = conn.createStatement()) {
+
+            // Actualizar a Sala
+            stm.executeUpdate(
+                    "INSERT INTO salas " +
+                            "VALUES ('"+ s.getId() + "', " +
+                            "'"+ locInicial + "', " +
+                            "'" + locFinal + "')");
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public void remove(Seccao s) {
+        try (Connection conn =
+                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
+             Statement stm = conn.createStatement()) {
+            stm.executeUpdate("DELETE FROM seccao WHERE Id ='" + s.getId() + "'");
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
     }
 }

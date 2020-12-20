@@ -1,5 +1,7 @@
 package dss.armazem.data;
 
+import dss.armazem.business.ssgestrobots.Robot;
+
 import java.sql.*;
 
 public class RobotDAO {
@@ -58,10 +60,6 @@ public class RobotDAO {
         return RobotDAO.singleton;
     }
 
-    /**
-     * Queries
-     */
-
     public int size() {
         int i = 0;
         try (Connection conn =
@@ -78,5 +76,36 @@ public class RobotDAO {
             throw new NullPointerException(e.getMessage());
         }
         return i;
+    }
+
+    public void put(Robot r) {
+        try (Connection conn =
+                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
+             Statement stm = conn.createStatement()) {
+
+            // Actualizar a Sala
+            stm.executeUpdate(
+                    "INSERT INTO salas " +
+                            "VALUES ('"+ r.getId() + "', " +
+                            "'"+ r.getEstado() + "', " +
+                            "'"+ r.getLoc() + "', " +
+                            "'" + r.getPalete().getID() + "')");
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public void remove(Robot r) {
+        try (Connection conn =
+                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
+             Statement stm = conn.createStatement()) {
+            stm.executeUpdate("DELETE FROM robot WHERE Id ='" + r.getId() + "'");
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
     }
 }

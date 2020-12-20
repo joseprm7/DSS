@@ -1,5 +1,8 @@
 package dss.armazem.data;
 
+import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.business.ssgestrobots.Robot;
+
 import java.sql.*;
 import java.util.*;
 
@@ -31,7 +34,7 @@ public class PaleteDAO {
             String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`palete` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
                     "  `estado` VARCHAR(15) NOT NULL,\n" +
-                    "  `descricao` VARCHAR(45) NULL,\n" +
+                    "  `descricao` VARCHAR(45) NOT NULL,\n" +
                     "  `idSeccao` VARCHAR(10) NOT NULL,\n" +
                     "  PRIMARY KEY (`id`),\n" +
                     "  INDEX `fk_palete_seccao_idx` (`idSeccao` ASC) VISIBLE,\n" +
@@ -59,22 +62,35 @@ public class PaleteDAO {
         return PaleteDAO.singleton;
     }
 
-    public int size() {
-        int i = 0;
+    public void put(Palete p, int seccao_id) {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT count(*) FROM turmas")) {
-            if(rs.next()) {
-                i = rs.getInt(1);
-            }
-        }
-        catch (Exception e) {
-            // Erro a criar tabela...
+             Statement stm = conn.createStatement()) {
+
+            // Actualizar a Sala
+            stm.executeUpdate(
+                    "INSERT INTO salas " +
+                            "VALUES ('"+ p.getID() + "', " +
+                            "'"+ p.getEstado() + "', " +
+                            "'"+ p.getDescricao() + "', " +
+                            "'" + seccao_id + "')");
+        } catch (SQLException e) {
+            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
-        return i;
+    }
+
+    public void remove(Palete p) {
+        try (Connection conn =
+                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
+             Statement stm = conn.createStatement()) {
+            stm.executeUpdate("DELETE FROM palete WHERE Id ='" + p.getID() + "'");
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
     }
 
 }

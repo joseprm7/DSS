@@ -101,7 +101,7 @@ public class RobotDAO {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("DELETE FROM robot WHERE Id ='" + r.getId() + "'");
+            stm.executeUpdate("DELETE FROM robot WHERE id ='" + r.getId() + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

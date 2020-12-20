@@ -85,7 +85,7 @@ public class PaleteDAO {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("DELETE FROM palete WHERE Id ='" + p.getID() + "'");
+            stm.executeUpdate("DELETE FROM palete WHERE id ='" + p.getID() + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

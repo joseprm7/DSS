@@ -99,7 +99,7 @@ public class SeccaoDAO {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("DELETE FROM seccao WHERE Id ='" + s.getId() + "'");
+            stm.executeUpdate("DELETE FROM seccao WHERE id ='" + s.getId() + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

@@ -16,7 +16,7 @@ public class RobotDAO {
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
-    private RobotDAO() {
+    public RobotDAO() {
 //        Driver é carregado automaticamente quando se abre uma conexão
 //        try {
 //            Class.forName("org.mariadb.jdbc.Driver");

@@ -1,5 +1,7 @@
 package dss.armazem.business.ssgestpaletes;
 
+import dss.armazem.data.PaleteDAO;
+import dss.armazem.data.SeccaoDAO;
 import java.util.*;
 
 /**
@@ -10,17 +12,15 @@ import java.util.*;
  * É de notar que todas estas listas estão armazenadas numa base de dados.
  */
 public class SSGestPaletes {
-    private Collection<String> queue;
-    private Collection<Palete> entrada;
-    private Map<String,Seccao> seccoes;
+    private PaleteDAO paleteDAO;
+    private SeccaoDAO seccaoDAO;
 
     /**
      * Construtor vazio
      */
     public SSGestPaletes() {
-        this.queue = new ArrayList<>();
-        this.seccoes = new TreeMap<>();
-        this.entrada =  new ArrayList<>();
+        this.paleteDAO = new PaleteDAO();
+        this.seccaoDAO = new SeccaoDAO();
     }
 
     /**
@@ -30,25 +30,23 @@ public class SSGestPaletes {
      * @param descricao descricao da Palete
      */
     public void validaCodigo(String id, String descricao) {
-        Palete p = new Palete("Queue", id, descricao, -1);
-        this.entrada.add(p);
-        this.queue.add(p.getID());
+        this.paleteDAO.put(id, "Queue", descricao, -1,true);
     }
 
     /**
      * Retorna o primeiro identificador da Palete da lista queue
      * @return primeiro identificador da Palete da lista queue
-     */
+     *
     public String queue() {
         List<String> p = (ArrayList<String>) this.queue;
         return p.get(0);
-    }
+    }*/
 
     /**
      * Procura, através do seu identificador, uma Palete que futuramente irá ser transportada
      * @param idPalete identificador da Palete
      * @return Palete que irá ser transportada
-     */
+     *
     public Palete transportaPalete(String idPalete) {
         int r = 0;
         Palete p = this.entrada.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
@@ -63,13 +61,13 @@ public class SSGestPaletes {
             }
         }
         return p;
-    }
+    }*/
 
     /**
      * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
      * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
      * @param idPalete identificador da Palete
-     */
+     *
     public void notificaRecolha(String idPalete) {
         int r = 0;
         Palete p = this.entrada.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
@@ -85,5 +83,5 @@ public class SSGestPaletes {
             }
         }
         if(p != null) p.setEstado("Transporte");
-    }
+    }*/
 }

@@ -18,7 +18,7 @@ public class SeccaoDAO {
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
-    private SeccaoDAO() {
+    public SeccaoDAO() {
 //        Driver é carregado automaticamente quando se abre uma conexão
 //        try {
 //            Class.forName("org.mariadb.jdbc.Driver");

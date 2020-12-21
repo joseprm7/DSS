@@ -33,6 +33,17 @@ public class SSGestPaletes {
         this.paleteDAO.put(id, "Queue", descricao, "Entrda", -1);
     }
 
+    public Collection<Palete> getListaPaletes() {
+        return this.paleteDAO.get();
+    }
+
+
+
+
+
+
+
+
     /**
      * Retorna o primeiro identificador da Palete da lista queue
      * @return primeiro identificador da Palete da lista queue

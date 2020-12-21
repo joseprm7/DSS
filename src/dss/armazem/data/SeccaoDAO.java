@@ -21,7 +21,7 @@ public class SeccaoDAO {
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
-    private SeccaoDAO() {
+    public SeccaoDAO() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {

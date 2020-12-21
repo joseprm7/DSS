@@ -17,7 +17,6 @@ public class SSGestRobots {
      */
     public SSGestRobots() {
         this.robots = new TreeMap<>();
-        this.robots.put("0", new Robot("0","Ocupado",new Palete("","1","",new Localizacao()), new Localizacao(-1)));
     }
 
     /**
@@ -34,7 +33,7 @@ public class SSGestRobots {
      * @param id identificador
      * @param locAtual localização atual do Robot em questão
      */
-    public void notificaEntrega(String id, Localizacao locAtual) {
+    public void notificaEntrega(String id, int locAtual) {
         Robot r = this.robots.get(id);
         r.notificaEntrega(locAtual);
     }

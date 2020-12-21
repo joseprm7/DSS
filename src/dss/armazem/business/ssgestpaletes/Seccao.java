@@ -10,14 +10,14 @@ import java.util.List;
  * as diversas secções do mapa e uma lista com as Paletes que lá estão armazenadas.
  */
 public class Seccao {
-    private int id;
+    private String id;
     private List<Palete> paletes;
 
     /**
      * Construtor vazio
      */
     public Seccao() {
-        this.id = -1;
+        this.id = "";
         this.paletes = new ArrayList<>();
     }
 
@@ -26,7 +26,7 @@ public class Seccao {
      * @param id identificador da Seccão
      * @param paletes lista de paletes Seccção
      */
-    public Seccao(int id, List<Palete> paletes) {
+    public Seccao(String id, List<Palete> paletes) {
         this.id = id;
         this.setPaletes(paletes);
     }
@@ -43,11 +43,11 @@ public class Seccao {
      * Getters e setters
      */
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

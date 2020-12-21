@@ -2,7 +2,6 @@ package dss.armazem.business;
 
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.SSGestPaletes;
-import dss.armazem.business.ssgestrobots.Localizacao;
 import dss.armazem.business.ssgestrobots.SSGestRobots;
 
 /**
@@ -39,7 +38,7 @@ public class ArmazemLN {
      * @param idRobot identificador
      * @param locAtual localização atual do Robot em questão
      */
-    public void notificaEntrega(String idRobot, Localizacao locAtual) {
+    public void notificaEntrega(String idRobot, int locAtual) {
         this.gestRobots.notificaEntrega(idRobot, locAtual);
     }
 

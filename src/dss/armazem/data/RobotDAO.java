@@ -18,7 +18,7 @@ public class RobotDAO {
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
-    private RobotDAO() {
+    public RobotDAO() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {

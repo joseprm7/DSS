@@ -19,7 +19,7 @@ public class PaleteDAO {
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
-    private PaleteDAO() {
+    public PaleteDAO() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {

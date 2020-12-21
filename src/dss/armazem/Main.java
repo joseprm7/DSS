@@ -1,14 +1,9 @@
 package dss.armazem;
 
-import dss.armazem.business.ArmazemLN;
-import dss.armazem.business.ssgestrobots.Localizacao;
-import dss.armazem.ui.TextUI;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Scanner;
 
 public class Main {
 

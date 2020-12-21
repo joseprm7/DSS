@@ -27,9 +27,9 @@ public class ArmazemLN {
      * @param id identificador da Palete
      * @param descricao Descrição da Palete
      */
-    public void validaCodigo(String id, String descricao) {
+    /*public void validaCodigo(String id, String descricao) {
         this.gestPaletes.validaCodigo(id, descricao);
-    }
+    }*/
 
     /**
      * A partir de um determinado identificador, um robot irá notificar o Sistema
@@ -48,19 +48,19 @@ public class ArmazemLN {
      * @param idRobot id do Robot
      * @throws Exception null
      */
-    public void robotLivre(String idRobot) throws Exception {
+    /*public void robotLivre(String idRobot) throws Exception {
         String l = this.gestPaletes.queue();
         if(l == null) throw new Exception();
         Palete p = this.gestPaletes.transportaPalete(l);
         this.gestRobots.trasportaRobot(idRobot, p);
-    }
+    }*/
 
     /**
      * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
      * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
      * @param idPalete identificador da Palete
      */
-    public void notificaRecolha(String idPalete) {
+    /*public void notificaRecolha(String idPalete) {
         this.gestPaletes.notificaRecolha(idPalete);
-    }
+    }*/
 }

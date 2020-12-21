@@ -1,7 +1,6 @@
 package dss.armazem.data;
 
 import dss.armazem.business.ssgestpaletes.Palete;
-import dss.armazem.business.ssgestrobots.Localizacao;
 import dss.armazem.business.ssgestrobots.Robot;
 
 import java.sql.*;
@@ -101,8 +100,8 @@ public class RobotDAO {
 
             return new Robot(id,
                     estado,
-                    new Palete(estadoPalete, idPalete, descPalete, new Localizacao(locPalete)),
-                    new Localizacao(loc));
+                    new Palete(estadoPalete, idPalete, descPalete, locPalete),
+                    loc);
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

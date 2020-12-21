@@ -29,9 +29,9 @@ public class SSGestPaletes {
      * @param id identificador da Palete
      * @param descricao descricao da Palete
      */
-    public void validaCodigo(String id, String descricao) {
+    /*public void validaCodigo(String id, String descricao) {
         this.paleteDAO.put(id, "Queue", descricao, -1,true);
-    }
+    }*/
 
     /**
      * Retorna o primeiro identificador da Palete da lista queue

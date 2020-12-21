@@ -1,6 +1,7 @@
 package dss.armazem.data;
 
 import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.business.ssgestrobots.Localizacao;
 import dss.armazem.business.ssgestrobots.Robot;
 
 import java.sql.*;
@@ -9,39 +10,30 @@ import java.util.*;
 public class PaleteDAO {
     private static PaleteDAO singleton = null;
 
-    private static final String USERNAME = "g41";
-    private static final String PASSWORD = "g41";
-    private static final String CREDENTIALS = "?user="+USERNAME+"&password="+PASSWORD;
-    private static final String DATABASE = "localhost:3306/turmas3l";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "123456";
+    private static final String OPTIONS = "&useTimezone=true&serverTimezone=UTC";
+    private static final String DATABASE = "localhost:3306/armazem";
 
 
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
     private PaleteDAO() {
-//        Driver é carregado automaticamente quando se abre uma conexão
-//        try {
-//            Class.forName("org.mariadb.jdbc.Driver");
-//        }
-//        catch (ClassNotFoundException e) {
-//            // Driver não disponível
-//            e.printStackTrace();
-//            throw new NullPointerException(e.getMessage());
-//        }
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement()) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`palete` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
                     "  `estado` VARCHAR(15) NOT NULL,\n" +
                     "  `descricao` VARCHAR(45) NULL,\n" +
-                    "  `seccao_id` VARCHAR(10) NOT NULL,\n" +
-                    "  `queue` TINYINT NOT NULL,\n" +
+                    "  `idSeccao` VARCHAR(10) NOT NULL,\n" +
+                    "  `loc` INT NOT NULL,\n" +
                     "  PRIMARY KEY (`id`),\n" +
-                    "  INDEX `fk_palete_seccao_idx` (`seccao_id` ASC) VISIBLE,\n" +
+                    "  INDEX `fk_palete_seccao_idx` (`idSeccao` ASC) VISIBLE,\n" +
                     "  CONSTRAINT `fk_palete_seccao`\n" +
-                    "    FOREIGN KEY (`seccao_id`)\n" +
-                    "    REFERENCES `mydb`.`seccao` (`id`)\n" +
+                    "    FOREIGN KEY (`idSeccao`)\n" +
+                    "    REFERENCES `armazem`.`seccao` (`id`)\n" +
                     "    ON DELETE NO ACTION\n" +
                     "    ON UPDATE NO ACTION)";
             stm.executeUpdate(sql);
@@ -63,10 +55,10 @@ public class PaleteDAO {
         return PaleteDAO.singleton;
     }
 
-    public void put(String id, String estado, String descricao, int seccao_id, boolean queue) {
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement()) {
+    public void put(String id, String estado, String descricao, String seccao_id, int loc) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
 
             // Actualizar a Sala
             stm.executeUpdate(
@@ -75,7 +67,7 @@ public class PaleteDAO {
                             "'"+ estado + "', " +
                             "'"+ descricao + "', " +
                             "'" + seccao_id + "', " +
-                            "'" + queue + "')");
+                            "'" + loc + "')");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -84,10 +76,26 @@ public class PaleteDAO {
     }
 
     public void remove(String id) {
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement()) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
             stm.executeUpdate("DELETE FROM palete WHERE id ='" + id + "'");
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public Palete get(String id) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            ResultSet rs = stm.executeQuery("SELECT * FROM palete WHERE id = '" + id + "'");
+            String estado = rs.getString("estado");
+            String descricao = rs.getString("descricao");
+            int loc = rs.getInt("loc");
+            return new Palete(estado, id, descricao, new Localizacao(loc));
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

@@ -1,5 +1,7 @@
 package dss.armazem.data;
 
+import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.business.ssgestrobots.Localizacao;
 import dss.armazem.business.ssgestrobots.Robot;
 
 import java.sql.*;
@@ -7,28 +9,19 @@ import java.sql.*;
 public class RobotDAO {
     private static RobotDAO singleton = null;
 
-    private static final String USERNAME = "g41";
-    private static final String PASSWORD = "g41";
-    private static final String CREDENTIALS = "?user="+USERNAME+"&password="+PASSWORD;
-    private static final String DATABASE = "localhost:3306/turmas3l";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "123456";
+    private static final String OPTIONS = "&useTimezone=true&serverTimezone=UTC";
+    private static final String DATABASE = "localhost:3306/armazem";
 
 
     /**
      * Construtor que permite a criação da tabela Palete residente na base de dados
      */
     private RobotDAO() {
-//        Driver é carregado automaticamente quando se abre uma conexão
-//        try {
-//            Class.forName("org.mariadb.jdbc.Driver");
-//        }
-//        catch (ClassNotFoundException e) {
-//            // Driver não disponível
-//            e.printStackTrace();
-//            throw new NullPointerException(e.getMessage());
-//        }
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement()) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`robot` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
                     "  `estado` VARCHAR(15) NOT NULL,\n" +
@@ -60,28 +53,10 @@ public class RobotDAO {
         return RobotDAO.singleton;
     }
 
-    public int size() {
-        int i = 0;
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT count(*) FROM turmas")) {
-            if(rs.next()) {
-                i = rs.getInt(1);
-            }
-        }
-        catch (Exception e) {
-            // Erro a criar tabela...
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
-        return i;
-    }
-
     public void put(String id, String estado, int loc, String idPalete) {
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement()) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
 
             // Actualizar a Sala
             stm.executeUpdate(
@@ -98,10 +73,36 @@ public class RobotDAO {
     }
 
     public void remove(String id) {
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement()) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
             stm.executeUpdate("DELETE FROM robot WHERE id ='" + id + "'");
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public Robot get(String id) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            ResultSet rsRobot = stm.executeQuery("SELECT * FROM robot WHERE id = '" + id + "'");
+            String estado = rsRobot.getString("estado");
+            String descricao = rsRobot.getString("descricao");
+            int loc = rsRobot.getInt("loc");
+            String idPalete = rsRobot.getString("idPalete");
+
+            ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE id = '" + idPalete + "'");
+            String estadoPalete = rsPalete.getString("estado");
+            String descPalete = rsPalete.getString("descricao");
+            int locPalete = rsPalete.getInt("loc");
+
+            return new Robot(id,
+                    estado,
+                    new Palete(estadoPalete, idPalete, descPalete, new Localizacao(locPalete)),
+                    new Localizacao(loc));
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

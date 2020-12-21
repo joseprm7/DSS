@@ -78,7 +78,7 @@ public class RobotDAO {
         return i;
     }
 
-    public void put(Robot r) {
+    public void put(String id, String estado, int loc, String idPalete) {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
@@ -86,10 +86,10 @@ public class RobotDAO {
             // Actualizar a Sala
             stm.executeUpdate(
                     "INSERT INTO salas " +
-                            "VALUES ('"+ r.getId() + "', " +
-                            "'"+ r.getEstado() + "', " +
-                            "'"+ r.getLoc() + "', " +
-                            "'" + r.getPalete().getID() + "')");
+                            "VALUES ('"+ id + "', " +
+                            "'"+ estado + "', " +
+                            "'"+ loc + "', " +
+                            "'" + idPalete + "')");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -97,11 +97,11 @@ public class RobotDAO {
         }
     }
 
-    public void remove(Robot r) {
+    public void remove(String id) {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("DELETE FROM robot WHERE id ='" + r.getId() + "'");
+            stm.executeUpdate("DELETE FROM robot WHERE id ='" + id + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

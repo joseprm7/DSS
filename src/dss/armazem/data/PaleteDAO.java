@@ -34,13 +34,14 @@ public class PaleteDAO {
             String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`palete` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
                     "  `estado` VARCHAR(15) NOT NULL,\n" +
-                    "  `descricao` VARCHAR(45) NOT NULL,\n" +
-                    "  `idSeccao` VARCHAR(10) NOT NULL,\n" +
+                    "  `descricao` VARCHAR(45) NULL,\n" +
+                    "  `seccao_id` VARCHAR(10) NOT NULL,\n" +
+                    "  `queue` TINYINT NOT NULL,\n" +
                     "  PRIMARY KEY (`id`),\n" +
-                    "  INDEX `fk_palete_seccao_idx` (`idSeccao` ASC) VISIBLE,\n" +
+                    "  INDEX `fk_palete_seccao_idx` (`seccao_id` ASC) VISIBLE,\n" +
                     "  CONSTRAINT `fk_palete_seccao`\n" +
-                    "    FOREIGN KEY (`idSeccao`)\n" +
-                    "    REFERENCES `armazem`.`seccao` (`id`)\n" +
+                    "    FOREIGN KEY (`seccao_id`)\n" +
+                    "    REFERENCES `mydb`.`seccao` (`id`)\n" +
                     "    ON DELETE NO ACTION\n" +
                     "    ON UPDATE NO ACTION)";
             stm.executeUpdate(sql);
@@ -62,7 +63,7 @@ public class PaleteDAO {
         return PaleteDAO.singleton;
     }
 
-    public void put(Palete p, int seccao_id) {
+    public void put(String id, String estado, String descricao, int seccao_id, boolean queue) {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
@@ -70,10 +71,11 @@ public class PaleteDAO {
             // Actualizar a Sala
             stm.executeUpdate(
                     "INSERT INTO salas " +
-                            "VALUES ('"+ p.getID() + "', " +
-                            "'"+ p.getEstado() + "', " +
-                            "'"+ p.getDescricao() + "', " +
-                            "'" + seccao_id + "')");
+                            "VALUES ('"+ id + "', " +
+                            "'"+ estado + "', " +
+                            "'"+ descricao + "', " +
+                            "'" + seccao_id + "', " +
+                            "'" + queue + "')");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -81,11 +83,11 @@ public class PaleteDAO {
         }
     }
 
-    public void remove(Palete p) {
+    public void remove(String id) {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("DELETE FROM palete WHERE id ='" + p.getID() + "'");
+            stm.executeUpdate("DELETE FROM palete WHERE id ='" + id + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

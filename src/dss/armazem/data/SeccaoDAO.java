@@ -59,25 +59,7 @@ public class SeccaoDAO {
      * Queries
      */
 
-    public int size() {
-        int i = 0;
-        try (Connection conn =
-                     DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
-             Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT count(*) FROM turmas")) {
-            if(rs.next()) {
-                i = rs.getInt(1);
-            }
-        }
-        catch (Exception e) {
-            // Erro a criar tabela...
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
-        return i;
-    }
-
-    public void put(Seccao s, int locInicial, int locFinal) {
+    public void put(String id, int locInicial, int locFinal) {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
@@ -85,7 +67,7 @@ public class SeccaoDAO {
             // Actualizar a Sala
             stm.executeUpdate(
                     "INSERT INTO salas " +
-                            "VALUES ('"+ s.getId() + "', " +
+                            "VALUES ('"+ id + "', " +
                             "'"+ locInicial + "', " +
                             "'" + locFinal + "')");
         } catch (SQLException e) {
@@ -95,11 +77,11 @@ public class SeccaoDAO {
         }
     }
 
-    public void remove(Seccao s) {
+    public void remove(String id) {
         try (Connection conn =
                      DriverManager.getConnection("jdbc:mariadb://"+DATABASE+CREDENTIALS);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("DELETE FROM seccao WHERE id ='" + s.getId() + "'");
+            stm.executeUpdate("DELETE FROM seccao WHERE id = '" + id + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

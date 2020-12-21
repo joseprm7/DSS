@@ -102,4 +102,25 @@ public class PaleteDAO {
         }
     }
 
+    public Collection<Palete> get() {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            ResultSet rs = stm.executeQuery("SELECT * FROM palete");
+            Collection<Palete> list = new ArrayList<>();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String estado = rs.getString("estado");
+                String descricao = rs.getString("descricao");
+                int loc = rs.getInt("loc");
+                list.add(new Palete(estado, id, descricao, loc));
+            }
+            return list;
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
 }

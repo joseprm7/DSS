@@ -4,6 +4,8 @@ import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.SSGestPaletes;
 import dss.armazem.business.ssgestrobots.SSGestRobots;
 
+import java.util.Collection;
+
 /**
  * Classe principal que visa gerir o Armazém.
  * Nela, existem como variáveis os seus subsistemas:
@@ -27,9 +29,22 @@ public class ArmazemLN {
      * @param id identificador da Palete
      * @param descricao Descrição da Palete
      */
-    /*public void validaCodigo(String id, String descricao) {
+    public void validaCodigo(String id, String descricao) {
         this.gestPaletes.validaCodigo(id, descricao);
-    }*/
+    }
+
+    public Collection<Palete> getListaPaletes() {
+        return this.gestPaletes.getListaPaletes();
+    }
+
+
+
+
+
+
+
+
+
 
     /**
      * A partir de um determinado identificador, um robot irá notificar o Sistema

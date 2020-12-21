@@ -61,7 +61,7 @@ public class PaleteDAO {
 
             // Actualizar a Sala
             stm.executeUpdate(
-                    "INSERT INTO salas " +
+                    "INSERT INTO palete " +
                             "VALUES ('"+ id + "', " +
                             "'"+ estado + "', " +
                             "'"+ descricao + "', " +
@@ -91,9 +91,13 @@ public class PaleteDAO {
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
             ResultSet rs = stm.executeQuery("SELECT * FROM palete WHERE id = '" + id + "'");
-            String estado = rs.getString("estado");
-            String descricao = rs.getString("descricao");
-            int loc = rs.getInt("loc");
+            String estado = null, descricao = null;
+            int loc = 0;
+            while (rs.next()) {
+                estado = rs.getString("estado");
+                descricao = rs.getString("descricao");
+                loc = rs.getInt("loc");
+            }
             return new Palete(estado, id, descricao, loc);
         } catch (Exception e) {
             // Database error!

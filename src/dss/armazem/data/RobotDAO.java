@@ -59,7 +59,7 @@ public class RobotDAO {
 
             // Actualizar a Sala
             stm.executeUpdate(
-                    "INSERT INTO salas " +
+                    "INSERT INTO robot " +
                             "VALUES ('"+ id + "', " +
                             "'"+ estado + "', " +
                             "'"+ loc + "', " +
@@ -88,15 +88,25 @@ public class RobotDAO {
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
             ResultSet rsRobot = stm.executeQuery("SELECT * FROM robot WHERE id = '" + id + "'");
-            String estado = rsRobot.getString("estado");
-            String descricao = rsRobot.getString("descricao");
-            int loc = rsRobot.getInt("loc");
-            String idPalete = rsRobot.getString("idPalete");
+            String estado = null, descricao = null, idPalete = null;
+            int loc = 0;
+
+            while(rsRobot.next()) {
+                estado = rsRobot.getString("estado");
+                descricao = rsRobot.getString("descricao");
+                loc = rsRobot.getInt("loc");
+                idPalete = rsRobot.getString("idPalete");
+            }
 
             ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE id = '" + idPalete + "'");
-            String estadoPalete = rsPalete.getString("estado");
-            String descPalete = rsPalete.getString("descricao");
-            int locPalete = rsPalete.getInt("loc");
+            String estadoPalete = null, descPalete = null;
+            int locPalete = 0;
+
+            while(rsPalete.next()) {
+                estadoPalete = rsPalete.getString("estado");
+                descPalete = rsPalete.getString("descricao");
+                locPalete = rsPalete.getInt("loc");
+            }
 
             return new Robot(id,
                     estado,

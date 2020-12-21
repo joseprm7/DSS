@@ -19,7 +19,8 @@ public class Main {
             Scanner in = new Scanner(System.in);
             armazem.notificaEntrega("0",new Localizacao(4));*/
             //Obter uma conexão
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/armazem?user=root&useTimezone=true&serverTimezone=UTC", "root", "peiobedisto2411");
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/armazem?user=root&useTimezone=true&serverTimezone=UTC", "root", "123456");
 
             //Criar um statement
             Statement statement = connection.createStatement();
@@ -30,7 +31,7 @@ public class Main {
                 System.out.println(rs.getString("estado"));
         }
         catch (Exception e) {
-            System.out.println("Não foi possível arrancar: "+e.getMessage());
+            System.out.println("ERROR: "+e.getMessage());
         }
     }
 }

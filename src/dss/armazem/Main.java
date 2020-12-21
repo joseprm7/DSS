@@ -6,6 +6,8 @@ import dss.armazem.ui.TextUI;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class Main {
@@ -17,8 +19,15 @@ public class Main {
             Scanner in = new Scanner(System.in);
             armazem.notificaEntrega("0",new Localizacao(4));*/
             //Obter uma conexão
-            Connection connection = DriverManager.getConnection("jbdc:mysql://mysql:3306/armazem", "student", "student");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/armazem?user=root&useTimezone=true&serverTimezone=UTC", "root", "peiobedisto2411");
 
+            //Criar um statement
+            Statement statement = connection.createStatement();
+
+            ResultSet rs = statement.executeQuery("select * from palete");
+
+            while (rs.next())
+                System.out.println(rs.getString("estado"));
         }
         catch (Exception e) {
             System.out.println("Não foi possível arrancar: "+e.getMessage());

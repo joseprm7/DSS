@@ -1,8 +1,6 @@
 package dss.armazem.business.ssgestpaletes;
-import dss.armazem.business.ssgestrobots.Localizacao;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Classe que visa gerir o subsistema das Paletes.
@@ -32,7 +30,7 @@ public class SSGestPaletes {
      * @param descricao descricao da Palete
      */
     public void validaCodigo(String id, String descricao) {
-        Palete p = new Palete("Queue", id, descricao, new Localizacao(-1));
+        Palete p = new Palete("Queue", id, descricao, -1);
         this.entrada.add(p);
         this.queue.add(p.getID());
     }

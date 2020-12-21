@@ -1,6 +1,5 @@
 package dss.armazem.business.ssgestpaletes;
 
-import dss.armazem.business.ssgestrobots.Localizacao;
 import java.util.Objects;
 
 /**
@@ -15,7 +14,7 @@ public class Palete {
     private String estado;
     private String id;
     private String descricao;
-    private Localizacao loc;
+    private int loc;
 
     /**
      * Construtor vazio
@@ -24,7 +23,7 @@ public class Palete {
         this.estado = "";
         this.id = "";
         this.descricao = "";
-        this.loc = new Localizacao();
+        this.loc = -1;
     }
 
     /**
@@ -34,7 +33,7 @@ public class Palete {
      * @param descricao descrição do material contido
      * @param loc localização da Palete
      */
-    public Palete(String estado, String id, String descricao, Localizacao loc) {
+    public Palete(String estado, String id, String descricao, int loc) {
         this.estado = estado;
         this.id = id;
         this.descricao = descricao;
@@ -80,12 +79,12 @@ public class Palete {
         this.descricao = descricao;
     }
 
-    public Localizacao getLoc() {
-        return this.loc.clone();
+    public int getLoc() {
+        return this.loc;
     }
 
-    public void setLoc(Localizacao loc) {
-        this.loc = new Localizacao(loc);
+    public void setLoc(int loc) {
+        this.loc = loc;
     }
 
     /**
@@ -114,9 +113,9 @@ public class Palete {
      * altera o estado da Palete para "Armazenada" ou "Pronta"
      * @param locAtual localização que a Palete vai passar a ter, depois de ser transportada
      */
-    public void paleteEntregue(Localizacao locAtual) {
-        Localizacao loc = this.getLoc();
-        if(loc.getZona() == -1) {
+    public void paleteEntregue(int locAtual) {
+        int loc = this.getLoc();
+        if(loc == -1) {
             this.setEstado("Armazenada");
         } else {
             this.setEstado("Pronta");

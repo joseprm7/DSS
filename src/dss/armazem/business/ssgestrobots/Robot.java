@@ -1,7 +1,6 @@
 package dss.armazem.business.ssgestrobots;
 
 import dss.armazem.business.ssgestpaletes.Palete;
-
 import java.util.Objects;
 
 /**
@@ -17,7 +16,7 @@ public class Robot {
     private String id;
     private String estado;
     private Palete palete;
-    private Localizacao loc;
+    private int loc;
 
     /**
      * Construtor vazio
@@ -26,7 +25,7 @@ public class Robot {
         this.id = "";
         this.estado = "";
         this.palete = null;
-        this.loc = new Localizacao();
+        this.loc = -1;
     }
 
     /**
@@ -36,11 +35,11 @@ public class Robot {
      * @param palete Palete associada
      * @param loc Localização
      */
-    public Robot(String id, String estado, Palete palete, Localizacao loc) {
+    public Robot(String id, String estado, Palete palete, int loc) {
         this.id = id;
         this.estado = estado;
-        setPalete(palete);
-        setLoc(loc);
+        this.setPalete(palete);
+        this.loc = loc;
     }
 
     /**
@@ -82,12 +81,12 @@ public class Robot {
         this.palete = palete/*.clone()*/;
     }
 
-    public Localizacao getLoc() {
-        return this.loc.clone();
+    public int getLoc() {
+        return this.loc;
     }
 
-    public void setLoc(Localizacao loc) {
-        this.loc = loc.clone();
+    public void setLoc(int loc) {
+        this.loc = loc;
     }
 
     /**
@@ -118,7 +117,7 @@ public class Robot {
      * a variável palete passa a tomar o valor de null.
      * @param locAtual localização atual do Robot e, consequentemente, da Palete
      */
-    public void notificaEntrega(Localizacao locAtual) {
+    public void notificaEntrega(int locAtual) {
         this.setEstado("Livre");
         this.setLoc(locAtual);
         Palete p = this.getPalete();

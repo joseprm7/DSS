@@ -2,7 +2,6 @@ package dss.armazem.data;
 
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.Seccao;
-import dss.armazem.business.ssgestrobots.Localizacao;
 import dss.armazem.business.ssgestrobots.Robot;
 
 import java.sql.*;
@@ -93,7 +92,7 @@ public class SeccaoDAO {
                 String descricao = rs.getString("descricao");
                 boolean queue = rs.getBoolean("queue");
                 int loc = rs.getInt("loc");
-                listPalete.add(new Palete(idPalete, estado, descricao, new Localizacao(loc)));
+                listPalete.add(new Palete(idPalete, estado, descricao, loc));
             }
             return new Seccao(id, listPalete);
         } catch (Exception e) {

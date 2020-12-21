@@ -1,7 +1,6 @@
 package dss.armazem.data;
 
 import dss.armazem.business.ssgestpaletes.Palete;
-import dss.armazem.business.ssgestrobots.Localizacao;
 import dss.armazem.business.ssgestrobots.Robot;
 
 import java.sql.*;
@@ -95,7 +94,7 @@ public class PaleteDAO {
             String estado = rs.getString("estado");
             String descricao = rs.getString("descricao");
             int loc = rs.getInt("loc");
-            return new Palete(estado, id, descricao, new Localizacao(loc));
+            return new Palete(estado, id, descricao, loc);
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

@@ -26,8 +26,9 @@ public class ArmazemLN implements IArmazemLN {
 
     /**
      * Adiciona o identificador e a descrição de uma Palete às variáveis de instância
-     * necessárias do subsistema das Paletes
-     * @param id identificador da Palete
+     * necessárias do subsistema das Paletes. Depois chama a função transporte para
+     * verificar se há algum robot livre para guardar a encomenda.
+     * @param id Identificador da Palete
      * @param descricao Descrição da Palete
      */
     public void validaCodigo(String id, String descricao) {

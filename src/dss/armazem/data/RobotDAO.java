@@ -54,18 +54,18 @@ public class RobotDAO {
         return RobotDAO.singleton;
     }
 
-    public void put(String id, String estado, int loc, String idPalete) {
+    public void put(Robot robot) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-
+            stm.executeUpdate("DELETE FROM robot WHERE id = '" + robot.getId() + "'");
             // Actualizar a Sala
             stm.executeUpdate(
                     "INSERT INTO robot " +
-                            "VALUES ('"+ id + "', " +
-                            "'"+ estado + "', " +
-                            loc + ", " +
-                            "'" + idPalete + "')");
+                            "VALUES ('"+ robot.getId() + "', " +
+                            "'"+ robot.getEstado() + "', " +
+                            robot.getLoc() + ", " +
+                            "'" + robot.getPalete().getID() + "')");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

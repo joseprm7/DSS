@@ -26,7 +26,7 @@ public class TextUI {
     public TextUI() {
         // Criar o menu
         String[] opcoes = {
-                "Comunicar código QR",
+                "Ler código QR",
                 "Comunicar ordem de transporte",
                 "Comunicar entrega de palete",
                 "Comunicar recolha de palete",

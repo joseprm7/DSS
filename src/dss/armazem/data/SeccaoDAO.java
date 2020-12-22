@@ -57,7 +57,7 @@ public class SeccaoDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-
+            stm.executeUpdate("DELETE FROM seccao WHERE loc = " + loc + "");
             stm.executeUpdate(
                     "INSERT INTO seccao " +
                             "VALUES ('"+ id + "', " +

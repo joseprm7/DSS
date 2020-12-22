@@ -25,14 +25,13 @@ public class PaleteDAO {
             String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`palete` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
                     "  `estado` VARCHAR(15) NOT NULL,\n" +
-                    "  `descricao` VARCHAR(45) NULL,\n" +
-                    "  `idSeccao` VARCHAR(10) NOT NULL,\n" +
-                    "  `loc` INT NOT NULL,\n" +
+                    "  `descricao` VARCHAR(45) NOT NULL,\n" +
+                    "  `locSeccao` INT NOT NULL,\n" +
                     "  PRIMARY KEY (`id`),\n" +
-                    "  INDEX `fk_palete_seccao_idx` (`idSeccao` ASC) VISIBLE,\n" +
-                    "  CONSTRAINT `fk_palete_seccao`\n" +
-                    "    FOREIGN KEY (`idSeccao`)\n" +
-                    "    REFERENCES `armazem`.`seccao` (`id`)\n" +
+                    "  INDEX `fk_palete_seccao1_idx` (`locSeccao` ASC) VISIBLE,\n" +
+                    "  CONSTRAINT `fk_palete_seccao1`\n" +
+                    "    FOREIGN KEY (`locSeccao`)\n" +
+                    "    REFERENCES `armazem`.`seccao` (`loc`)\n" +
                     "    ON DELETE NO ACTION\n" +
                     "    ON UPDATE NO ACTION)";
             stm.executeUpdate(sql);
@@ -54,19 +53,18 @@ public class PaleteDAO {
         return PaleteDAO.singleton;
     }
 
-    public void put(String id, String estado, String descricao, String seccao_id, int loc) {
+    public void put(String id, String estado, String descricao, int locSeccao) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
 
             // Actualizar a Sala
             stm.executeUpdate(
-                    "INSERT INTO salas " +
+                    "INSERT INTO palete " +
                             "VALUES ('"+ id + "', " +
                             "'"+ estado + "', " +
                             "'"+ descricao + "', " +
-                            "'" + seccao_id + "', " +
-                            "'" + loc + "')");
+                            locSeccao + ")");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -78,7 +76,7 @@ public class PaleteDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            stm.executeUpdate("DELETE FROM palete WHERE id ='" + id + "'");
+            stm.executeUpdate("DELETE FROM palete WHERE id = '" + id + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();
@@ -90,10 +88,14 @@ public class PaleteDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            ResultSet rs = stm.executeQuery("SELECT * FROM palete WHERE id = '" + id + "'");
-            String estado = rs.getString("estado");
-            String descricao = rs.getString("descricao");
-            int loc = rs.getInt("loc");
+            ResultSet rs = stm.executeQuery("SELECT estado, descricao, locSeccao FROM palete WHERE id = '" + id + "'");
+            String estado = null, descricao = null;
+            int loc = 0;
+            while (rs.next()) {
+                estado = rs.getString("estado");
+                descricao = rs.getString("descricao");
+                loc = rs.getInt("locSeccao");
+            }
             return new Palete(estado, id, descricao, loc);
         } catch (Exception e) {
             // Database error!
@@ -112,7 +114,7 @@ public class PaleteDAO {
                 String id = rs.getString("id");
                 String estado = rs.getString("estado");
                 String descricao = rs.getString("descricao");
-                int loc = rs.getInt("loc");
+                int loc = rs.getInt("locSeccao");
                 list.add(new Palete(estado, id, descricao, loc));
             }
             return list;

@@ -26,9 +26,10 @@ public class SeccaoDAO {
              Statement stm = connection.createStatement()) {
             String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`seccao` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
-                    "  `locInicial` INT NOT NULL,\n" +
-                    "  `locFinal` INT NOT NULL,\n" +
-                    "  PRIMARY KEY (`id`))";
+                    "  `prateleira` INT NOT NULL,\n" +
+                    "  `loc` INT NOT NULL,\n" +
+                    "  `cheia` TINYINT NOT NULL,\n" +
+                    "  PRIMARY KEY (`loc`))";
             stm.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,7 +53,7 @@ public class SeccaoDAO {
      * Métodos put, remove e get
      */
 
-    public void put(String id, int locInicial, int locFinal) {
+    public void put(String id, int prateleira, int loc, boolean cheia) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
@@ -60,8 +61,9 @@ public class SeccaoDAO {
             stm.executeUpdate(
                     "INSERT INTO seccao " +
                             "VALUES ('"+ id + "', " +
-                            "'"+ locInicial + "', " +
-                            "'" + locFinal + "')");
+                            prateleira + ", " +
+                            loc + ", " +
+                            cheia + ")");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -69,31 +71,33 @@ public class SeccaoDAO {
         }
     }
 
-    public void remove(String id) {
+    public void remove(int loc) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            stm.executeUpdate("DELETE FROM seccao WHERE id = '" + id + "'");
+            stm.executeUpdate("DELETE FROM seccao WHERE loc = " + loc + "");
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
     }
 
-    public Seccao get(String id) {
+    public Seccao get(int loc) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            ResultSet rs = stm.executeQuery("SELECT * FROM palete WHERE idSeccao = '" + id + "'");
+            ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE locSeccao = " + loc);
             List<Palete> listPalete = new ArrayList<>();
-            while (rs.next()) {
-                String idPalete = rs.getString("id");
-                String estado = rs.getString("estado");
-                String descricao = rs.getString("descricao");
-                boolean queue = rs.getBoolean("queue");
-                int loc = rs.getInt("loc");
+            while (rsPalete.next()) {
+                String idPalete = rsPalete.getString("id");
+                String estado = rsPalete.getString("estado");
+                String descricao = rsPalete.getString("descricao");
                 listPalete.add(new Palete(idPalete, estado, descricao, loc));
             }
+            ResultSet rsSeccao = stm.executeQuery("SELECT * FROM seccao where loc = " + loc);
+            String id = null;
+            while (rsSeccao.next())
+                id = rsSeccao.getString("id");
             return new Seccao(id, listPalete);
         } catch (Exception e) {
             e.printStackTrace();

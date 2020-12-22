@@ -108,6 +108,16 @@ public class Palete {
         return new Palete(this);
     }
 
+    @Override
+    public String toString() {
+        return "Palete{" +
+                "estado='" + estado + '\'' +
+                ", id='" + id + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", loc=" + loc +
+                '}';
+    }
+
     /**
      * Dependendo da localização anterior da palete, o método
      * altera o estado da Palete para "Armazenada" ou "Pronta"

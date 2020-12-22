@@ -12,8 +12,8 @@ import java.util.*;
  * É de notar que todas estas listas estão armazenadas numa base de dados.
  */
 public class SSGestPaletes {
-    private PaleteDAO paleteDAO;
-    private SeccaoDAO seccaoDAO;
+    private final PaleteDAO paleteDAO;
+    private final SeccaoDAO seccaoDAO;
 
     /**
      * Construtor vazio

@@ -2,8 +2,6 @@ package dss.armazem.data;
 
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.Seccao;
-import dss.armazem.business.ssgestrobots.Robot;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

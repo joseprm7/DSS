@@ -1,17 +1,13 @@
 package dss.armazem.business.ssgestrobots;
-import dss.armazem.business.ssgestpaletes.Palete;
-import dss.armazem.data.RobotDAO;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import dss.armazem.data.RobotDAO;
 
 /**
  * Classe que visa gerir o subsistema dos Robots.
  * Nela, irão ser tratados todos os Robots existentes no Armazém.
  */
 public class SSGestRobots {
-    private RobotDAO robotDAO;
+    private final RobotDAO robotDAO;
 
     /**
      * Construtor vazio
@@ -35,8 +31,6 @@ public class SSGestRobots {
     /**
      * A partir de um determinado identificador, um robot irá transportar uma
      * determinada Palete e alterará o seu estado para "Transporte"
-     * @param idRobot
-     * @param p
      */
     public void trasportaRobot(String idRobot, String p) {
         Robot r = this.robotDAO.get(idRobot);

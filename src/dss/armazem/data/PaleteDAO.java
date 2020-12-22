@@ -1,8 +1,6 @@
 package dss.armazem.data;
 
 import dss.armazem.business.ssgestpaletes.Palete;
-import dss.armazem.business.ssgestrobots.Robot;
-
 import java.sql.*;
 import java.util.*;
 
@@ -130,7 +128,6 @@ public class PaleteDAO {
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
             ResultSet rs = stm.executeQuery("select * from palete where id = (select min(id) from palete);");
-            Palete palete = new Palete();
             String id = null, estado = null, descricao = null;
             int loc = 0;
             while (rs.next()) {

@@ -12,8 +12,8 @@ import java.util.Collection;
  * O subsistema de gestão de paletes e o de gestão de robots.
  */
 public class ArmazemLN implements IArmazemLN {
-    private SSGestPaletes gestPaletes;
-    private SSGestRobots gestRobots;
+    private final SSGestPaletes gestPaletes;
+    private final SSGestRobots gestRobots;
 
     /**
      * Construtor vazio

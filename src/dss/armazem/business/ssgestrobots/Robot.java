@@ -19,7 +19,7 @@ public class Robot {
     private String estado;
     private String palete;
     private int loc;
-    private PaleteDAO paleteDAO;
+    private final PaleteDAO paleteDAO;
 
     /**
      * Construtor vazio

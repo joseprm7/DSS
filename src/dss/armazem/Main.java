@@ -1,17 +1,24 @@
 package dss.armazem;
 
 import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.business.ssgestpaletes.Seccao;
+import dss.armazem.business.ssgestrobots.Robot;
 import dss.armazem.data.PaleteDAO;
+import dss.armazem.data.RobotDAO;
+import dss.armazem.data.SeccaoDAO;
+import dss.armazem.ui.TextUI;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Collection;
 
 public class Main {
 
     public static void main(String[] args) {
         try {
+            new TextUI().run();
             /*ArmazemLN armazem = new ArmazemLN();
             //new TextUI().run();
             Scanner in = new Scanner(System.in);
@@ -27,10 +34,9 @@ public class Main {
 
             while (rs.next())
                 System.out.println(rs.getString("estado"));*/
-            /*PaleteDAO paleteDAO = new PaleteDAO();
-            paleteDAO.put("3", "Transporte", "Bróculos", "0", 43);
-            Palete palete = paleteDAO.get("3");
-            System.out.println(palete.getID() + ", " + palete.getEstado() + ", " + palete.getDescricao() + ", " + palete.getLoc() + ", " + palete.getLoc());*/
+            //SeccaoDAO seccaoDAO = new SeccaoDAO();
+            //seccaoDAO.put("2", 1, 5, false);
+            //seccaoDAO.remove(3);
 
         }
         catch (Exception e) {

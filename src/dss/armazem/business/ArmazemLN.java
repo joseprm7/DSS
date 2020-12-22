@@ -11,7 +11,7 @@ import java.util.Collection;
  * Nela, existem como variáveis os seus subsistemas:
  * O subsistema de gestão de paletes e o de gestão de robots.
  */
-public class ArmazemLN {
+public class ArmazemLN implements IArmazemLN {
     private SSGestPaletes gestPaletes;
     private SSGestRobots gestRobots;
 
@@ -36,14 +36,6 @@ public class ArmazemLN {
     public Collection<Palete> getListaPaletes() {
         return this.gestPaletes.getListaPaletes();
     }
-
-
-
-
-
-
-
-
 
 
     /**

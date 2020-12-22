@@ -1,7 +1,10 @@
 package dss.armazem.ui;
 
+import dss.armazem.business.ArmazemLN;
 import dss.armazem.business.IArmazemLN;
+import dss.armazem.business.ssgestpaletes.Palete;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class TextUI {
@@ -25,12 +28,14 @@ public class TextUI {
         String[] opcoes = {
                 "Comunicar código QR",
                 "Comunicar ordem de transporte",
-                "Consultar listagem de localizacoes",
-                "Log in Gestor",
+                "Comunicar entrega de palete",
+                "Comunicar recolha de palete",
+                "Consultar listagem de localizacoes"
                 };
         this.menu = new Menu(opcoes);
         //this.model = new ();
         this.sc = new Scanner(System.in);
+        this.model = new ArmazemLN();
     }
 
     /**
@@ -53,22 +58,13 @@ public class TextUI {
 
                     break;
                 case 5:
-
-                    break;
-                case 6:
-
-                    break;
-                case 7:
-
-                    break;
-                case 8:
-
+                    Collection<Palete> listaPaletes = this.model.getListaPaletes();
+                    for(Palete palete : listaPaletes)
+                        System.out.println(palete.toString());
                     break;
             }
-        } while (menu.getOpcao()!=0); // A opção 0 é usada para sair do menu.
-        System.out.println("Até breve!...");
+        } while (menu.getOpcao()!=0);
+        System.out.println("Fechando os portões...");
     }
-
-    //Métodos auxiliares
 
 }

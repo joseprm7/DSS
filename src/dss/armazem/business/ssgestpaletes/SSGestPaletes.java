@@ -30,7 +30,7 @@ public class SSGestPaletes {
      * @param descricao descricao da Palete
      */
     public void validaCodigo(String id, String descricao) {
-        this.paleteDAO.put(id, "Queue", descricao, "Entrda", -1);
+        this.paleteDAO.put(id, "Queue", descricao, -1);
     }
 
     public Collection<Palete> getListaPaletes() {

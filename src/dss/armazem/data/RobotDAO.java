@@ -4,6 +4,8 @@ import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestrobots.Robot;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class RobotDAO {
     private static RobotDAO singleton = null;
@@ -62,7 +64,7 @@ public class RobotDAO {
                     "INSERT INTO robot " +
                             "VALUES ('"+ id + "', " +
                             "'"+ estado + "', " +
-                            "'"+ loc + "', " +
+                            loc + ", " +
                             "'" + idPalete + "')");
         } catch (SQLException e) {
             // Database error!
@@ -75,7 +77,7 @@ public class RobotDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            stm.executeUpdate("DELETE FROM robot WHERE id ='" + id + "'");
+            stm.executeUpdate("DELETE FROM robot WHERE id = '" + id + "'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();
@@ -88,12 +90,11 @@ public class RobotDAO {
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
             ResultSet rsRobot = stm.executeQuery("SELECT * FROM robot WHERE id = '" + id + "'");
-            String estado = null, descricao = null, idPalete = null;
+            String estado = null, idPalete = null;
             int loc = 0;
 
             while(rsRobot.next()) {
                 estado = rsRobot.getString("estado");
-                descricao = rsRobot.getString("descricao");
                 loc = rsRobot.getInt("loc");
                 idPalete = rsRobot.getString("idPalete");
             }
@@ -105,7 +106,7 @@ public class RobotDAO {
             while(rsPalete.next()) {
                 estadoPalete = rsPalete.getString("estado");
                 descPalete = rsPalete.getString("descricao");
-                locPalete = rsPalete.getInt("loc");
+                locPalete = rsPalete.getInt("locSeccao");
             }
 
             return new Robot(id,

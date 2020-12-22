@@ -12,8 +12,8 @@ import java.util.*;
  * É de notar que todas estas listas estão armazenadas numa base de dados.
  */
 public class SSGestPaletes {
-    private PaleteDAO paleteDAO;
-    private SeccaoDAO seccaoDAO;
+    private final PaleteDAO paleteDAO;
+    private final SeccaoDAO seccaoDAO;
 
     /**
      * Construtor vazio
@@ -49,38 +49,14 @@ public class SSGestPaletes {
         this.paleteDAO.put(p);
     }
 
-
-
-
-
-
     /**
      * Retorna o primeiro identificador da Palete da lista queue
      * @return primeiro identificador da Palete da lista queue
-     *
+     */
     public String queue() {
-        List<String> p = (ArrayList<String>) this.queue;
-        return p.get(0);
-    }*/
-
-    /**
-     * Procura, através do seu identificador, uma Palete que futuramente irá ser transportada
-     * @param idPalete identificador da Palete
-     * @return Palete que irá ser transportada
-     *
-    public Palete transportaPalete(String idPalete) {
-        int r = 0;
-        Palete p = this.entrada.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
-        if(p == null) {
-            List<Seccao> ss = new ArrayList<>(this.seccoes.values());
-            for(int i = 0; i < ss.size() && r==0; i++) {
-                Collection<Palete> ps = ss.get(i).getPaletes();
-                p = ps.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
-                if(p != null) {
-                    r = 1;
-                }
-            }
-        }
-        return p;
-    }*/
+        Palete r = this.paleteDAO.getFirstPaleteInQueue();
+        r.setEstado("Transporte");
+        this.paleteDAO.put(r);
+        return r.getID();
+    }
 }

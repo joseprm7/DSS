@@ -9,13 +9,13 @@ import java.util.Scanner;
 
 public class TextUI {
     // O model tem a 'lógica de negócio'.
-    private IArmazemLN model;
+    private final IArmazemLN model;
 
     // Menus da aplicação
     private final Menu menu;
 
     // Scanner para leitura
-    private Scanner sc;
+    private final Scanner sc;
 
 
     /**
@@ -46,7 +46,11 @@ public class TextUI {
             menu.executa();
             switch (menu.getOpcao()) {
                 case 1:
-
+                    System.out.println("Id da palete");
+                    String id = this.sc.next();
+                    System.out.println("Descrição da palete");
+                    String d = this.sc.next();
+                    this.model.validaCodigo(id, d);
                     break;
                 case 2:
 

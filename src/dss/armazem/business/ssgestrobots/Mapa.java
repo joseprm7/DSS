@@ -1,48 +1,55 @@
 package dss.armazem.business.ssgestrobots;
 import java.util.*;
 
-/*public class Mapa {
-    private final List<Map.Entry<String, Collection<Node>>> grafo;
+public class Mapa {
+    private final List<MyEntry<String, Collection<Node>>> grafo;
 
     public Mapa() {
         this.grafo = new ArrayList<>();
     }
 
-    public Mapa(List<Map.Entry<String, Collection<Node>>> grafo) {
+    public Mapa(List<MyEntry<String, Collection<Node>>> grafo) {
         this.grafo = grafo;
     }
 
-    public void put(Map.Entry<String, Collection<Node>> entry) {
+    public List<MyEntry<String, Collection<Node>>> getGrafo() {
+        return grafo;
+    }
+
+    public void put(MyEntry<String, Collection<Node>> entry) {
         this.grafo.add(entry);
     }
 
-    public void addNodo(String origem, Node lista) {
-        this.grafo.get(Integer.getInteger(origem)).getValue().add(lista);
+    public void addNodo(int origem, Node node) {
+        Collection<Node> nodes = this.grafo.get(origem-1).getValue(); //add(node);
+        nodes.add(node);
     }
 
-    public int pesoCaminho(Map<String, Integer> caminho) {
+    public int pesoCaminho(Collection<MyEntry<String, Integer>> caminho) {
         int peso = 0;
-        for (Map.Entry<String, Integer> entry : caminho.entrySet())
+        for (MyEntry<String, Integer> entry : caminho)
             peso += entry.getValue();
         return peso;
     }
 
-    public Collection<Map.Entry<String, Integer>> caminhoMaisRapido(String origem, String destino) {
+    public Collection<MyEntry<String, Integer>> caminhoMaisRapido(String origem, String destino) {
         Collection<Node> nodosAdj = this.grafo.get(Integer.getInteger(origem)).getValue();
-        Collection<Map.Entry<String, Integer>> caminhoAux, caminhoFinal = new ArrayList<>();
-        Map.Entry<String, Integer> entry =
-        caminhoFinal.add(new Map.Entry<String, Integer>(origem, 0));
+        Collection<MyEntry<String, Integer>> caminhoAux, caminhoFinal = new ArrayList<>();
+        caminhoFinal.add(new MyEntry<>(origem, 0));
         try {
-            for (Node nodo : nodosAdj) {
+            for (Node nodo : nodosAdj)
                 if (nodo.getDestino().equals(destino)) {
-                    caminhoFinal.put(nodo.getDestino(), nodo.getPeso());
+                    caminhoFinal.add(new MyEntry<>(nodo.getDestino(), nodo.getPeso()));
                     return caminhoFinal;
-                } else caminhoAux = caminhoMaisRapido(nodo.getDestino(), destino);
+                }
+
+            for (Node nodo : nodosAdj) {
+                caminhoAux = caminhoMaisRapido(nodo.getDestino(), destino);
 
                 if (caminhoFinal != null)
                     caminhoFinal = caminhoAux;
                 else if (pesoCaminho(caminhoAux) < pesoCaminho(caminhoFinal))
-                    caminhoFinal.put(nodo.getDestino(), nodo.getPeso());
+                    caminhoFinal.add(new MyEntry<>(nodo.getDestino(), nodo.getPeso()));
             }
 
             return caminhoFinal;
@@ -52,4 +59,4 @@ import java.util.*;
         }
     }
 
-}*/
+}

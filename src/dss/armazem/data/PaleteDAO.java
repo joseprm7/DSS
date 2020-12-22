@@ -125,4 +125,26 @@ public class PaleteDAO {
         }
     }
 
+    public Palete getFirstPaleteInQueue() {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            ResultSet rs = stm.executeQuery("select * from palete where id = (select min(id) from palete);");
+            Palete palete = new Palete();
+            String id = null, estado = null, descricao = null;
+            int loc = 0;
+            while (rs.next()) {
+                id = rs.getString("id");
+                estado = rs.getString("estado");
+                descricao = rs.getString("descricao");
+                loc = rs.getInt("locSeccao");
+            }
+            return new Palete(estado, id, descricao, loc);
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
 }

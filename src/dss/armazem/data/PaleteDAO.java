@@ -53,18 +53,18 @@ public class PaleteDAO {
         return PaleteDAO.singleton;
     }
 
-    public void put(String id, String estado, String descricao, int locSeccao) {
+    public void put(Palete p) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-
+            stm.executeUpdate("DELETE FROM palete WHERE id = '" + p.getID() + "'");
             // Actualizar a Sala
             stm.executeUpdate(
                     "INSERT INTO palete " +
-                            "VALUES ('"+ id + "', " +
-                            "'"+ estado + "', " +
-                            "'"+ descricao + "', " +
-                            locSeccao + ")");
+                            "VALUES ('"+ p.getID() + "', " +
+                            "'"+ p.getEstado() + "', " +
+                            "'"+ p.getDescricao() + "', " +
+                            p.getLoc() + ")");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

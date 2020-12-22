@@ -54,44 +54,9 @@ public class SSGestPaletes {
      * @return primeiro identificador da Palete da lista queue
      */
     public String queue() {
-
+        Palete r = this.paleteDAO.getFirstPaleteInQueue();
+        r.setEstado("Transporte");
+        this.paleteDAO.put(r);
+        return r.getID();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Procura, através do seu identificador, uma Palete que futuramente irá ser transportada
-     * @param idPalete identificador da Palete
-     * @return Palete que irá ser transportada
-     *
-    public Palete transportaPalete(String idPalete) {
-        int r = 0;
-        Palete p = this.entrada.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
-        if(p == null) {
-            List<Seccao> ss = new ArrayList<>(this.seccoes.values());
-            for(int i = 0; i < ss.size() && r==0; i++) {
-                Collection<Palete> ps = ss.get(i).getPaletes();
-                p = ps.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
-                if(p != null) {
-                    r = 1;
-                }
-            }
-        }
-        return p;
-    }*/
 }

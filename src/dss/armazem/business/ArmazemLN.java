@@ -65,9 +65,8 @@ public class ArmazemLN implements IArmazemLN {
      * @throws Exception null
      */
     public void robotLivre(String idRobot) throws Exception {
-        String l = this.gestPaletes.queue();
-        if(l == null) throw new Exception();
-        Palete p = this.gestPaletes.transportaPalete(l);
+        String p = this.gestPaletes.queue();
+        if(p == null) throw new Exception();
         this.gestRobots.trasportaRobot(idRobot, p);
     }
 }

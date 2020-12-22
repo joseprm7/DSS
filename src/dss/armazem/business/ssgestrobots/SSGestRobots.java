@@ -32,15 +32,16 @@ public class SSGestRobots {
         this.robotDAO.put(r);
     }
 
-    /*
+    /**
      * A partir de um determinado identificador, um robot irá transportar uma
      * determinada Palete e alterará o seu estado para "Transporte"
      * @param idRobot
      * @param p
-     *
-    public void trasportaRobot(String idRobot, Palete p) {
-        Robot r = this.robots.get(idRobot);
+     */
+    public void trasportaRobot(String idRobot, String p) {
+        Robot r = this.robotDAO.get(idRobot);
         r.setEstado("Transporte");
         r.setPalete(p);
-    }*/
+        this.robotDAO.put(r);
+    }
 }

@@ -57,7 +57,8 @@ public class Main {
             m.addNodo(5, new Node("2", 1));
             System.out.println("9");
             m.addNodo(5, new Node("4", 1));
-            Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("5", "2");
+            m.toString(Integer.getInteger("4"));
+            //Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("5", "2", 5);
             /*for (MyEntry<String, Collection<Node>> entry : m.getGrafo())
                 System.out.println(entry.toString());
             for (MyEntry<String, Integer> map : caminho)

@@ -41,7 +41,7 @@ public class TextUI {
     /**
      * Executa o menu principal e invoca o método correspondente à opção seleccionada.
      */
-    public void run() {
+    public void run() throws Exception {
         do {
             menu.executa();
             switch (menu.getOpcao()) {
@@ -53,13 +53,21 @@ public class TextUI {
                     this.model.validaCodigo(id, d);
                     break;
                 case 2:
-
+                    System.out.println("Robot a transportar:");
+                    String r = this.sc.next();
+                    this.model.robotLivre(r);
                     break;
                 case 3:
-
+                    System.out.println("Id da palete");
+                    String pa = this.sc.next();
+                    this.model.notificaRecolha(pa);
                     break;
                 case 4:
-
+                    System.out.println("Robot");
+                    String rt = this.sc.next();
+                    System.out.println("Localização Atual");
+                    int loc = this.sc.nextInt();
+                    this.model.notificaEntrega(rt,loc);
                     break;
                 case 5:
                     Collection<Palete> listaPaletes = this.model.getListaPaletes();

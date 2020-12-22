@@ -9,4 +9,5 @@ public interface IArmazemLN {
     void validaCodigo(String id, String descricao);
     void notificaEntrega(String idRobot, int locAtual);
     void transporte();
+    void notificaRecolha(String idPalete);
 }

@@ -49,19 +49,30 @@ public class SSGestPaletes {
         this.paleteDAO.put(p);
     }
 
-
-
-
-
-
     /**
      * Retorna o primeiro identificador da Palete da lista queue
      * @return primeiro identificador da Palete da lista queue
-     *
+     */
     public String queue() {
-        List<String> p = (ArrayList<String>) this.queue;
-        return p.get(0);
-    }*/
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Procura, através do seu identificador, uma Palete que futuramente irá ser transportada

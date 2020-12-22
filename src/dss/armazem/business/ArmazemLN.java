@@ -64,10 +64,10 @@ public class ArmazemLN implements IArmazemLN {
      * @param idRobot id do Robot
      * @throws Exception null
      */
-    /*public void robotLivre(String idRobot) throws Exception {
+    public void robotLivre(String idRobot) throws Exception {
         String l = this.gestPaletes.queue();
         if(l == null) throw new Exception();
         Palete p = this.gestPaletes.transportaPalete(l);
         this.gestRobots.trasportaRobot(idRobot, p);
-    }*/
+    }
 }

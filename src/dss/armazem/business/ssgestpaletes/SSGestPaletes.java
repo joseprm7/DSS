@@ -38,26 +38,18 @@ public class SSGestPaletes {
         return this.paleteDAO.get();
     }
 
-    /**
-     * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
-     * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
-     * @param idPalete identificador da Palete
-     */
-    public void notificaRecolha(String idPalete) {
-        Palete p = this.paleteDAO.get(idPalete);
-        p.setEstado("Transporte");
-        //Mudar a Palete do robot para null, senão dá erro
-        this.paleteDAO.put(p);
-    }
-
-    /**
-     * Retorna o primeiro identificador da Palete da lista queue
-     * @return primeiro identificador da Palete da lista queue
-     */
-    public String queue() {
-        Palete r = this.paleteDAO.getFirstPaleteInQueue();
-        r.setEstado("Transporte");
-        this.paleteDAO.put(r);
-        return r.getID();
+    public Palete transporte(){
+        Palete p = null;
+        Seccao s = this.seccaoDAO.getSeccaoLivre();
+        if(s != null) {
+             p = this.paleteDAO.getFirstPaleteInQueue();
+             if(p != null) {
+                 s.setOcupado(true);
+                 this.seccaoDAO.put(s);
+                 p.setEstado("Espera");
+                 this.paleteDAO.put(p);
+             }
+        }
+        return p;
     }
 }

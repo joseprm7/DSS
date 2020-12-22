@@ -55,12 +55,12 @@ public class TextUI {
                 case 2:
                     System.out.println("Robot a transportar:");
                     String r = this.sc.next();
-                    this.model.robotLivre(r);
+                    //////////////////////////////////////////
                     break;
                 case 3:
                     System.out.println("Id da palete");
                     String pa = this.sc.next();
-                    this.model.notificaRecolha(pa);
+                    ///////////////////////////////////////
                     break;
                 case 4:
                     System.out.println("Robot");

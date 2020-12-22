@@ -5,7 +5,6 @@ import java.sql.*;
 
 public class RobotDAO {
     private static RobotDAO singleton = null;
-
     private static final String USERNAME = "root";
     private static final String PASSWORD = "123456";
     private static final String OPTIONS = "&useTimezone=true&serverTimezone=UTC";
@@ -90,6 +89,30 @@ public class RobotDAO {
             int loc = 0;
 
             while(rsRobot.next()) {
+                estado = rsRobot.getString("estado");
+                loc = rsRobot.getInt("loc");
+                idPalete = rsRobot.getString("idPalete");
+            }
+
+            return new Robot(id, estado, idPalete, loc);
+
+        } catch (Exception e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public Robot getRobotLivre() {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            ResultSet rsRobot = stm.executeQuery("SELECT * FROM robot WHERE estado = 'Livre' group by id");
+            String estado = null, idPalete = null;
+            int loc = 0; String id = null;
+
+            while(rsRobot.next()) {
+                id = rsRobot.getString("id");
                 estado = rsRobot.getString("estado");
                 loc = rsRobot.getInt("loc");
                 idPalete = rsRobot.getString("idPalete");

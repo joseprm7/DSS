@@ -23,7 +23,7 @@ public class RobotDAO {
                     "  `id` VARCHAR(10) NOT NULL,\n" +
                     "  `estado` VARCHAR(15) NOT NULL,\n" +
                     "  `loc` INT NOT NULL,\n" +
-                    "  `idPalete` VARCHAR(10) NOT NULL,\n" +
+                    "  `idPalete` VARCHAR(10) NULL,\n" +
                     "  PRIMARY KEY (`id`),\n" +
                     "  INDEX `fk_robot_palete1_idx` (`idPalete` ASC) VISIBLE,\n" +
                     "  CONSTRAINT `fk_robot_palete1`\n" +

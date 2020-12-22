@@ -1,6 +1,6 @@
 package dss.armazem;
 
-import dss.armazem.business.ssgestrobots.Mapa;
+
 import dss.armazem.business.ssgestrobots.Node;
 import dss.armazem.ui.TextUI;
 
@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            //new TextUI().run();
+            new TextUI().run();
             /*ArmazemLN armazem = new ArmazemLN();
             //new TextUI().run();
             Scanner in = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class Main {
             //SeccaoDAO seccaoDAO = new SeccaoDAO();
             //seccaoDAO.put("2", 1, 5, false);
             //seccaoDAO.remove(3);
-            Mapa m = new Mapa();
+            /*Mapa m = new Mapa();
             for (int i = 1; i <= 5; i++)
                 m.put(Integer.toString(i), new ArrayList<>());
             m.addNodo("1", new Node("2", 1));
@@ -47,7 +47,7 @@ public class Main {
             m.addNodo("5", new Node("4", 1));
             Map<String, Integer> caminho = m.caminhoMaisRapido("5", "2");
             for(Map.Entry<String, Integer> map : caminho.entrySet())
-                System.out.println("Vértice: " + map.getKey() + ", Peso: " + map.getValue());
+                System.out.println("Vértice: " + map.getKey() + ", Peso: " + map.getValue());*/
 
         }
         catch (Exception e) {

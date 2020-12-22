@@ -1,7 +1,7 @@
 package dss.armazem.business.ssgestrobots;
 import java.util.*;
 
-public class Mapa {
+/*public class Mapa {
     private final List<Map.Entry<String, Collection<Node>>> grafo;
 
     public Mapa() {
@@ -28,9 +28,10 @@ public class Mapa {
     }
 
     public Collection<Map.Entry<String, Integer>> caminhoMaisRapido(String origem, String destino) {
-        Collection<Node> nodosAdj = this.grafo.get(origem);
-        Map<String, Integer> caminhoAux, caminhoFinal = new TreeMap<>();
-        caminhoFinal.put(origem, 0);
+        Collection<Node> nodosAdj = this.grafo.get(Integer.getInteger(origem)).getValue();
+        Collection<Map.Entry<String, Integer>> caminhoAux, caminhoFinal = new ArrayList<>();
+        Map.Entry<String, Integer> entry =
+        caminhoFinal.add(new Map.Entry<String, Integer>(origem, 0));
         try {
             for (Node nodo : nodosAdj) {
                 if (nodo.getDestino().equals(destino)) {
@@ -51,4 +52,4 @@ public class Mapa {
         }
     }
 
-}
+}*/

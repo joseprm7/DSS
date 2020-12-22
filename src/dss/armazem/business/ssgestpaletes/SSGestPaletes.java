@@ -46,6 +46,7 @@ public class SSGestPaletes {
     public void notificaRecolha(String idPalete) {
         Palete p = this.paleteDAO.get(idPalete);
         p.setEstado("Transporte");
+        //Mudar a Palete do robot para null, senão dá erro
         this.paleteDAO.put(p);
     }
 

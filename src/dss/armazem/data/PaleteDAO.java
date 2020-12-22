@@ -56,7 +56,6 @@ public class PaleteDAO {
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
             stm.executeUpdate("DELETE FROM palete WHERE id = '" + p.getID() + "'");
-            // Actualizar a Sala
             stm.executeUpdate(
                     "INSERT INTO palete " +
                             "VALUES ('"+ p.getID() + "', " +
@@ -127,7 +126,7 @@ public class PaleteDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            ResultSet rs = stm.executeQuery("select * from palete where id = (select min(id) from palete);");
+            ResultSet rs = stm.executeQuery("select * from palete where id = (select min(id) from palete where estado = 'Queue');");
             String id = null, estado = null, descricao = null;
             int loc = 0;
             while (rs.next()) {

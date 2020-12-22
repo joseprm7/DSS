@@ -2,14 +2,22 @@ package dss.armazem.business.ssgestrobots;
 import java.util.*;
 
 public class Mapa {
-    private final Map<String, Collection<Node>> grafo;
+    private final List<Map.Entry<String, Collection<Node>>> grafo;
 
-    public Mapa(Map<String, Collection<Node>> grafo) {
+    public Mapa() {
+        this.grafo = new ArrayList<>();
+    }
+
+    public Mapa(List<Map.Entry<String, Collection<Node>>> grafo) {
         this.grafo = grafo;
     }
 
-    public void addNodo(String origem, Collection<Node> adjacentes) {
-        this.grafo.put(origem, adjacentes);
+    public void put(Map.Entry<String, Collection<Node>> entry) {
+        this.grafo.add(entry);
+    }
+
+    public void addNodo(String origem, Node lista) {
+        this.grafo.get(Integer.getInteger(origem)).getValue().add(lista);
     }
 
     public int pesoCaminho(Map<String, Integer> caminho) {
@@ -19,7 +27,7 @@ public class Mapa {
         return peso;
     }
 
-    public Map<String, Integer> caminhoMaisRapido(String origem, String destino) {
+    public Collection<Map.Entry<String, Integer>> caminhoMaisRapido(String origem, String destino) {
         Collection<Node> nodosAdj = this.grafo.get(origem);
         Map<String, Integer> caminhoAux, caminhoFinal = new TreeMap<>();
         caminhoFinal.put(origem, 0);
@@ -41,6 +49,6 @@ public class Mapa {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
-
     }
+
 }

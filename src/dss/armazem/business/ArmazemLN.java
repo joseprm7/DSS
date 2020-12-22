@@ -2,6 +2,7 @@ package dss.armazem.business;
 
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.SSGestPaletes;
+import dss.armazem.business.ssgestrobots.Robot;
 import dss.armazem.business.ssgestrobots.SSGestRobots;
 
 import java.util.Collection;
@@ -25,12 +26,14 @@ public class ArmazemLN implements IArmazemLN {
 
     /**
      * Adiciona o identificador e a descrição de uma Palete às variáveis de instância
-     * necessárias do subsistema das Paletes
-     * @param id identificador da Palete
+     * necessárias do subsistema das Paletes. Depois chama a função transporte para
+     * verificar se há algum robot livre para guardar a encomenda.
+     * @param id Identificador da Palete
      * @param descricao Descrição da Palete
      */
     public void validaCodigo(String id, String descricao) {
         this.gestPaletes.validaCodigo(id, descricao);
+        this.transporte();
     }
 
     public Collection<Palete> getListaPaletes() {
@@ -49,24 +52,11 @@ public class ArmazemLN implements IArmazemLN {
         this.gestRobots.notificaEntrega(idRobot, locAtual);
     }
 
-    /**
-     * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
-     * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
-     * @param idPalete identificador da Palete
-     */
-    public void notificaRecolha(String idPalete) {
-        this.gestPaletes.notificaRecolha(idPalete);
-    }
-
-    /**
-     * Escolhe o Robot mais próximo (primeiro elemento da lista) e este, de seguida,
-     * transporta uma Palete
-     * @param idRobot id do Robot
-     * @throws Exception null
-     */
-    public void robotLivre(String idRobot) throws Exception {
-        String p = this.gestPaletes.queue();
-        if(p == null) throw new Exception();
-        this.gestRobots.trasportaRobot(idRobot, p);
+    public void transporte() {
+        Robot r = this.gestRobots.robotLivre();
+        if(r != null) {
+            Palete p = this.gestPaletes.transporte();
+            if(p != null) this.gestRobots.transporte(r, p);
+        }
     }
 }

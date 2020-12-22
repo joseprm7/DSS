@@ -51,17 +51,17 @@ public class SeccaoDAO {
      * Métodos put, remove e get
      */
 
-    public void put(String id, int prateleira, int loc, boolean cheia) {
+    public void put(Seccao s) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            stm.executeUpdate("DELETE FROM seccao WHERE loc = " + loc + "");
+            stm.executeUpdate("DELETE FROM seccao WHERE loc = " + s.getLoc() + "");
             stm.executeUpdate(
                     "INSERT INTO seccao " +
-                            "VALUES ('"+ id + "', " +
-                            prateleira + ", " +
-                            loc + ", " +
-                            cheia + ")");
+                            "VALUES ('"+ s.getId() + "', " +
+                            s.getPrateleira() + ", " +
+                            s.getLoc() + ", " +
+                            s.isOcupado() + ")");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -93,10 +93,44 @@ public class SeccaoDAO {
                 listPalete.add(new Palete(idPalete, estado, descricao, loc));
             }
             ResultSet rsSeccao = stm.executeQuery("SELECT * FROM seccao where loc = " + loc);
-            String id = null;
-            while (rsSeccao.next())
+            String id = null; boolean cheia = false; int prateleira = 0;
+            while (rsSeccao.next()) {
                 id = rsSeccao.getString("id");
-            return new Seccao(id, listPalete);
+                cheia = rsSeccao.getBoolean("cheia");
+                prateleira = rsSeccao.getInt("prateleira");
+            }
+
+            return new Seccao(id, listPalete, cheia, loc, prateleira);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public Seccao getSeccaoLivre() {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+
+            ResultSet rsSeccao = stm.executeQuery("SELECT * FROM seccao where cheia = false group by id");
+            String id = null; boolean cheia = false; int prateleira = 0; int loc = 0;
+            while (rsSeccao.next()) {
+                id = rsSeccao.getString("id");
+                cheia = rsSeccao.getBoolean("cheia");
+                prateleira = rsSeccao.getInt("prateleira");
+                loc = rsSeccao.getInt("loc");
+            }
+
+            ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE locSeccao = " + loc);
+            List<Palete> listPalete = new ArrayList<>();
+            while (rsPalete.next()) {
+                String idPalete = rsPalete.getString("id");
+                String estado = rsPalete.getString("estado");
+                String descricao = rsPalete.getString("descricao");
+                listPalete.add(new Palete(idPalete, estado, descricao, loc));
+            }
+
+            return new Seccao(id, listPalete, cheia, loc, prateleira);
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());

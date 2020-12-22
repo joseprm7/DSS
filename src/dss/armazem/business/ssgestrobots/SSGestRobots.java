@@ -1,6 +1,10 @@
 package dss.armazem.business.ssgestrobots;
 
+import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.data.RobotDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe que visa gerir o subsistema dos Robots.
@@ -28,14 +32,16 @@ public class SSGestRobots {
         this.robotDAO.put(r);
     }
 
-    /**
-     * A partir de um determinado identificador, um robot irá transportar uma
-     * determinada Palete e alterará o seu estado para "Transporte"
-     */
-    public void trasportaRobot(String idRobot, String p) {
-        Robot r = this.robotDAO.get(idRobot);
-        r.setEstado("Transporte");
-        r.setPalete(p);
+    public Robot  robotLivre() {
+        return this.robotDAO.getRobotLivre();
+    }
+
+    public /*List<String>*/void transporte(Robot r, Palete p) {
+        r.setEstado("Trasnporte");
+        r.setPalete(p.getID());
         this.robotDAO.put(r);
+        //List<String> res = this.caminho();
+        //return res;
+        //Só falta retornar o caminho mais rapido
     }
 }

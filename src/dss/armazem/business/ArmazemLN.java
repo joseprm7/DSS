@@ -50,6 +50,15 @@ public class ArmazemLN implements IArmazemLN {
     }
 
     /**
+     * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
+     * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
+     * @param idPalete identificador da Palete
+     */
+    public void notificaRecolha(String idPalete) {
+        this.gestPaletes.notificaRecolha(idPalete);
+    }
+
+    /**
      * Escolhe o Robot mais próximo (primeiro elemento da lista) e este, de seguida,
      * transporta uma Palete
      * @param idRobot id do Robot
@@ -60,14 +69,5 @@ public class ArmazemLN implements IArmazemLN {
         if(l == null) throw new Exception();
         Palete p = this.gestPaletes.transportaPalete(l);
         this.gestRobots.trasportaRobot(idRobot, p);
-    }*/
-
-    /**
-     * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
-     * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
-     * @param idPalete identificador da Palete
-     */
-    /*public void notificaRecolha(String idPalete) {
-        this.gestPaletes.notificaRecolha(idPalete);
     }*/
 }

@@ -38,7 +38,16 @@ public class SSGestPaletes {
         return this.paleteDAO.get();
     }
 
-
+    /**
+     * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
+     * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
+     * @param idPalete identificador da Palete
+     */
+    public void notificaRecolha(String idPalete) {
+        Palete p = this.paleteDAO.get(idPalete);
+        p.setEstado("Transporte");
+        this.paleteDAO.put(p);
+    }
 
 
 
@@ -73,27 +82,5 @@ public class SSGestPaletes {
             }
         }
         return p;
-    }*/
-
-    /**
-     * Procura, através do seu identificador, uma Palete e remove-a da lista da Paletes da secção
-     * que pertencia anteriormente. De seguida, altera o seu estado para "Transporte"
-     * @param idPalete identificador da Palete
-     *
-    public void notificaRecolha(String idPalete) {
-        int r = 0;
-        Palete p = this.entrada.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
-        if(p == null) {
-            List<Seccao> ss = new ArrayList<>(this.seccoes.values());
-            for(int i = 0; i < ss.size() && r==0; i++) {
-                Collection<Palete> ps = ss.get(i).getPaletes();
-                p = ps.stream().filter(x -> x.getID().equals(idPalete)).findFirst().orElse(null);
-                if(p != null) {
-                    ps.remove(p);
-                    r = 1;
-                }
-            }
-        }
-        if(p != null) p.setEstado("Transporte");
     }*/
 }

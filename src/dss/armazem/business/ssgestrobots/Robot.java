@@ -1,6 +1,8 @@
 package dss.armazem.business.ssgestrobots;
 
 import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.data.PaleteDAO;
+
 import java.util.Objects;
 
 /**
@@ -15,8 +17,9 @@ import java.util.Objects;
 public class Robot {
     private String id;
     private String estado;
-    private Palete palete;
+    private String palete;
     private int loc;
+    private PaleteDAO paleteDAO;
 
     /**
      * Construtor vazio
@@ -24,8 +27,9 @@ public class Robot {
     public Robot() {
         this.id = "";
         this.estado = "";
-        this.palete = null;
+        this.palete = "";
         this.loc = -1;
+        this.paleteDAO = new PaleteDAO();
     }
 
     /**
@@ -35,11 +39,12 @@ public class Robot {
      * @param palete Palete associada
      * @param loc Localização
      */
-    public Robot(String id, String estado, Palete palete, int loc) {
+    public Robot(String id, String estado, String palete, int loc) {
         this.id = id;
         this.estado = estado;
-        this.setPalete(palete);
+        this.palete = palete;
         this.loc = loc;
+        this.paleteDAO = new PaleteDAO();
     }
 
     /**
@@ -51,6 +56,7 @@ public class Robot {
         this.estado = r.getEstado();
         this.palete = r.getPalete();
         this.loc = r.getLoc();
+        this.paleteDAO = new PaleteDAO();
     }
 
     /**
@@ -73,12 +79,12 @@ public class Robot {
         this.estado = estado;
     }
 
-    public Palete getPalete() {
+    public String getPalete() {
         return this.palete;
     }
 
-    public void setPalete(Palete palete) {
-        this.palete = palete/*.clone()*/;
+    public void setPalete(String palete) {
+        this.palete = palete;
     }
 
     public int getLoc() {
@@ -120,8 +126,9 @@ public class Robot {
     public void notificaEntrega(int locAtual) {
         this.setEstado("Livre");
         this.setLoc(locAtual);
-        Palete p = this.getPalete();
+        Palete p = this.paleteDAO.get(this.palete);
         p.paleteEntregue(locAtual);
-        this.setPalete(null);
+        //this.paleteDAO.put(p);
+        this.palete = null;
     }
 }

@@ -1,5 +1,6 @@
 package dss.armazem.business.ssgestrobots;
 import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.data.RobotDAO;
 
 import java.util.Map;
 import java.util.Set;
@@ -10,21 +11,13 @@ import java.util.TreeMap;
  * Nela, irão ser tratados todos os Robots existentes no Armazém.
  */
 public class SSGestRobots {
-    private Map<String, Robot> robots;
+    private RobotDAO robotDAO;
 
     /**
      * Construtor vazio
      */
     public SSGestRobots() {
-        this.robots = new TreeMap<>();
-    }
-
-    /**
-     * Getters e Setters
-     */
-
-    public Set<Robot> getRobots() {
-        return (Set<Robot>) this.robots.values();
+        this.robotDAO = new RobotDAO();
     }
 
     /**
@@ -34,19 +27,20 @@ public class SSGestRobots {
      * @param locAtual localização atual do Robot em questão
      */
     public void notificaEntrega(String id, int locAtual) {
-        Robot r = this.robots.get(id);
+        Robot r = this.robotDAO.get(id);
         r.notificaEntrega(locAtual);
+        //this.robotDAO.put(id);
     }
 
-    /**
+    /*
      * A partir de um determinado identificador, um robot irá transportar uma
      * determinada Palete e alterará o seu estado para "Transporte"
      * @param idRobot
      * @param p
-     */
+     *
     public void trasportaRobot(String idRobot, Palete p) {
         Robot r = this.robots.get(idRobot);
         r.setEstado("Transporte");
         r.setPalete(p);
-    }
+    }*/
 }

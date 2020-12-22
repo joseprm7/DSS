@@ -21,7 +21,10 @@ public class Mapa {
     }
 
     public void addNodo(int origem, Node node) {
-        this.grafo.get(origem-1).getValue().add(node); //add(node);
+        Collection<Node> nodos = this.grafo.get(origem-1).getValue();
+        //for (Node n : nodos)
+           // System.out.println("Origem: " + origem + ", " + "Succesor: " + n.getDestino());
+        this.grafo.get(origem-1).getValue().add(node);
     }
 
     public int pesoCaminho(Collection<MyEntry<String, Integer>> caminho) {
@@ -50,7 +53,7 @@ public class Mapa {
     }
 
     public Collection<MyEntry<String, Integer>> caminhoMaisRapido(String origem, String destino, int n_vertices) {
-        Collection<Node> nodosSucessores = this.grafo.get(Integer.getInteger(origem)).getValue();
+        Collection<Node> nodosSucessores = this.grafo.get(Integer.getInteger(origem)-1).getValue();
         Collection<MyEntry<String, Integer>> caminho = new ArrayList<>();
         caminho.add(new MyEntry<>(origem, 0));
         try {
@@ -67,13 +70,6 @@ public class Mapa {
                         if (haCaminho(sucNodo.getDestino(), destino, n_vertices))
                             caminho.add(new MyEntry<>(sucNodo.getDestino(), sucNodo.getPeso()));
                     }
-
-                /*caminhoAux = caminhoMaisRapido(nodo.getDestino(), destino);
-
-                if (caminhoFinal.size() == 0)
-                    caminhoFinal = caminhoAux;
-                else if (pesoCaminho(caminhoAux) < pesoCaminho(caminhoFinal))
-                    caminhoFinal.add(new MyEntry<>(nodo.getDestino(), nodo.getPeso()));*/
                 }
             }
 

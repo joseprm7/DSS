@@ -42,10 +42,10 @@ public class Mapa {
     }
 
     public boolean haCaminhoAux(String origem, String destino, int[] visitados) {
-        visitados[Integer.getInteger(origem)] = 1;
+        visitados[Integer.parseInt(origem)-1] = 1;
         if (origem.equals(destino)) return true;
-        for (Node nodo: this.grafo.get(Integer.getInteger(origem)-1).getValue()) {
-                if (visitados[Integer.getInteger(nodo.getDestino())] == 0
+        for (Node nodo: this.grafo.get(Integer.parseInt(origem)-1).getValue()) {
+                if (visitados[Integer.parseInt(nodo.getDestino())-1] == 0
                         && haCaminhoAux(nodo.getDestino(), destino, visitados))
                     return true;
         }
@@ -53,7 +53,7 @@ public class Mapa {
     }
 
     public Collection<MyEntry<String, Integer>> caminhoMaisRapido(String origem, String destino, int n_vertices) {
-        Collection<Node> nodosSucessores = this.grafo.get(Integer.getInteger(origem)-1).getValue();
+        Collection<Node> nodosSucessores = this.grafo.get(Integer.parseInt(origem)-1).getValue();
         Collection<MyEntry<String, Integer>> caminho = new ArrayList<>();
         caminho.add(new MyEntry<>(origem, 0));
         try {
@@ -66,7 +66,7 @@ public class Mapa {
 
             for (Node nodo : nodosSucessores) {
                 if (haCaminho(nodo.getDestino(), destino, n_vertices)) {
-                    for (Node sucNodo : this.grafo.get(Integer.getInteger(nodo.getDestino())-1).getValue()) {
+                    for (Node sucNodo : this.grafo.get(Integer.parseInt(nodo.getDestino())-1).getValue()) {
                         if (haCaminho(sucNodo.getDestino(), destino, n_vertices))
                             caminho.add(new MyEntry<>(sucNodo.getDestino(), sucNodo.getPeso()));
                     }

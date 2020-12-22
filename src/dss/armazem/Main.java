@@ -29,19 +29,20 @@ public class Main {
             m.addNodo(4, new Node("3", 1));
             m.addNodo(5, new Node("2", 1));
             m.addNodo(5, new Node("4", 1));
-            Collection<Node> nodosSucessores = m.getGrafo().get(Integer.getInteger("6")-1).getValue();
 
-            //Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("5", "2", 5);
+            Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("1", "3", 5);
             //System.out.println(caminho);
             /*for (MyEntry<String, Collection<Node>> entry : m.getGrafo())
                 System.out.println(entry.toString());
             for (MyEntry<String, Integer> map : caminho)
                 System.out.println("Vértice: " + map.getKey() + ", Peso: " + map.getValue());*/
-            for(MyEntry<String, Collection<Node>> entry : m.getGrafo()) {
+            /*for(MyEntry<String, Collection<Node>> entry : m.getGrafo()) {
                 System.out.println("Vértice: " + entry.getKey());
                 for (Node node : entry.getValue())
                     System.out.println("Sucessor: " + node.getDestino());
-            }
+            }*/
+            for (MyEntry<String, Integer> entry : caminho)
+                System.out.println("Vértice: " + entry.getKey() + ", Peso: " + entry.getValue());
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }

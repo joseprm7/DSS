@@ -49,7 +49,9 @@ public class ArmazemLN implements IArmazemLN {
      * @param locAtual localização atual do Robot em questão
      */
     public void notificaEntrega(String idRobot, int locAtual) {
-        this.gestRobots.notificaEntrega(idRobot, locAtual);
+        String idPalete = this.gestRobots.notificaEntrega(idRobot, locAtual);
+        this.gestPaletes.notificaEntrega(idPalete, locAtual);
+        this.transporte();
     }
 
     public void transporte() {
@@ -58,5 +60,9 @@ public class ArmazemLN implements IArmazemLN {
             Palete p = this.gestPaletes.transporte();
             if(p != null) this.gestRobots.transporte(r, p);
         }
+    }
+
+    public void notificaRecolha(String idPalete) {
+        this.gestPaletes.notificaRecolha(idPalete);
     }
 }

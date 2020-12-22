@@ -53,14 +53,12 @@ public class TextUI {
                     this.model.validaCodigo(id, d);
                     break;
                 case 2:
-                    System.out.println("Robot a transportar:");
-                    String r = this.sc.next();
-                    //////////////////////////////////////////
+                    this.model.transporte();
                     break;
                 case 3:
                     System.out.println("Id da palete");
                     String pa = this.sc.next();
-                    ///////////////////////////////////////
+                    this.model.notificaRecolha(pa);
                     break;
                 case 4:
                     System.out.println("Robot");

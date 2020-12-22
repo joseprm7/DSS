@@ -13,7 +13,7 @@ public class Mapa {
     }
 
     public List<MyEntry<String, Collection<Node>>> getGrafo() {
-        return grafo;
+        return this.grafo;
     }
 
     public void put(MyEntry<String, Collection<Node>> entry) {

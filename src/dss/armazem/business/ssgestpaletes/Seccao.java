@@ -91,4 +91,8 @@ public class Seccao {
     public void setPrateleira(int prateleira) {
         this.prateleira = prateleira;
     }
+
+    public void removePalete(Palete p) {
+        this.paletes.remove(p);
+    }
 }

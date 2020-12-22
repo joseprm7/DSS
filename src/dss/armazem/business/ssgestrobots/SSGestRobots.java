@@ -26,10 +26,14 @@ public class SSGestRobots {
      * @param id identificador
      * @param locAtual localização atual do Robot em questão
      */
-    public void notificaEntrega(String id, int locAtual) {
+    public String notificaEntrega(String id, int locAtual) {
         Robot r = this.robotDAO.get(id);
+        String res = r.getPalete();
         r.notificaEntrega(locAtual);
+        r.setPalete(null);
+        r.setEstado("Livre");
         this.robotDAO.put(r);
+        return res;
     }
 
     public Robot  robotLivre() {

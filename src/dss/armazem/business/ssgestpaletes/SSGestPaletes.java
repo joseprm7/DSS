@@ -52,4 +52,25 @@ public class SSGestPaletes {
         }
         return p;
     }
+
+    public void notificaRecolha(String idPalete) {
+        Palete p = this.paleteDAO.get(idPalete);
+        int loc = p.getLoc();
+        p.setEstado("Transporte");
+        this.paleteDAO.put(p);
+        Seccao s = this.seccaoDAO.get(loc);
+        if(loc != -1) s.setOcupado(false);
+        s.removePalete(p);
+        this.seccaoDAO.put(s);
+    }
+
+    public void notificaEntrega(String idPalete, int loc) {
+        Palete p = this.paleteDAO.get(idPalete);
+        p.setLoc(loc);
+        this.paleteDAO.put(p);
+
+        Seccao s = this.seccaoDAO.get(loc);
+        s.addPalete(p);
+        this.seccaoDAO.put(s);
+    }
 }

@@ -29,7 +29,7 @@ public class SSGestRobots {
     public void notificaEntrega(String id, int locAtual) {
         Robot r = this.robotDAO.get(id);
         r.notificaEntrega(locAtual);
-        //this.robotDAO.put(id);
+        this.robotDAO.put(r);
     }
 
     /*

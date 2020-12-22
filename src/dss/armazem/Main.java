@@ -1,18 +1,6 @@
 package dss.armazem;
 
-import dss.armazem.business.ssgestpaletes.Palete;
-import dss.armazem.business.ssgestpaletes.Seccao;
-import dss.armazem.business.ssgestrobots.Robot;
-import dss.armazem.data.PaleteDAO;
-import dss.armazem.data.RobotDAO;
-import dss.armazem.data.SeccaoDAO;
 import dss.armazem.ui.TextUI;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Collection;
 
 public class Main {
 

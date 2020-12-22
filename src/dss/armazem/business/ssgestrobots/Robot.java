@@ -128,7 +128,7 @@ public class Robot {
         this.setLoc(locAtual);
         Palete p = this.paleteDAO.get(this.palete);
         p.paleteEntregue(locAtual);
-        //this.paleteDAO.put(p);
+        this.paleteDAO.put(p);
         this.palete = null;
     }
 }

@@ -1,11 +1,7 @@
 package dss.armazem.data;
 
-import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestrobots.Robot;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class RobotDAO {
     private static RobotDAO singleton = null;
@@ -65,7 +61,7 @@ public class RobotDAO {
                             "VALUES ('"+ robot.getId() + "', " +
                             "'"+ robot.getEstado() + "', " +
                             robot.getLoc() + ", " +
-                            "'" + robot.getPalete().getID() + "')");
+                            "'" + robot.getPalete() + "')");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -99,20 +95,8 @@ public class RobotDAO {
                 idPalete = rsRobot.getString("idPalete");
             }
 
-            ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE id = '" + idPalete + "'");
-            String estadoPalete = null, descPalete = null;
-            int locPalete = 0;
+            return new Robot(id, estado, idPalete, loc);
 
-            while(rsPalete.next()) {
-                estadoPalete = rsPalete.getString("estado");
-                descPalete = rsPalete.getString("descricao");
-                locPalete = rsPalete.getInt("locSeccao");
-            }
-
-            return new Robot(id,
-                    estado,
-                    new Palete(estadoPalete, idPalete, descPalete, locPalete),
-                    loc);
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();

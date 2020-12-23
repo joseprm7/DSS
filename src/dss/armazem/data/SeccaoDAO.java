@@ -89,6 +89,36 @@ public class SeccaoDAO {
     }
 
     /**
+     * Obtém uma Seccao com uma determinada localização
+     * @param loc localização
+     * @return Seccao
+     */
+    public Seccao get(int loc) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE locSeccao = " + loc);
+            List<String> listPalete = new ArrayList<>();
+            while (rsPalete.next()) {
+                String idPalete = rsPalete.getString("id");
+                listPalete.add(idPalete);
+            }
+            ResultSet rsSeccao = stm.executeQuery("SELECT * FROM seccao where loc = " + loc);
+            String id = null; boolean cheia = false; int prateleira = 0;
+            while (rsSeccao.next()) {
+                id = rsSeccao.getString("id");
+                cheia = rsSeccao.getBoolean("cheia");
+                prateleira = rsSeccao.getInt("prateleira");
+            }
+
+            return new Seccao(id, listPalete, cheia, loc, prateleira);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    /**
      * Obtém a primeira Seccao que não esteja totalmente ocupada por paletes
      * @return Seccao
      */
@@ -107,12 +137,10 @@ public class SeccaoDAO {
             }
 
             ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE locSeccao = " + loc);
-            List<Palete> listPalete = new ArrayList<>();
+            List<String> listPalete = new ArrayList<>();
             while (rsPalete.next()) {
                 String idPalete = rsPalete.getString("id");
-                String estado = rsPalete.getString("estado");
-                String descricao = rsPalete.getString("descricao");
-                listPalete.add(new Palete(idPalete, estado, descricao, loc));
+                listPalete.add(idPalete);
             }
 
             return new Seccao(id, listPalete, cheia, loc, prateleira);

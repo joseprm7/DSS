@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Seccao {
     private String id;
-    private List<Palete> paletes;
+    private List<String> paletes;
     private boolean ocupado;
     private int loc;
     private int prateleira;
@@ -32,7 +32,7 @@ public class Seccao {
      * @param id identificador da Seccão
      * @param paletes lista de paletes Seccção
      */
-    public Seccao(String id, List<Palete> paletes, boolean ocupado, int loc, int prateleira) {
+    public Seccao(String id, List<String> paletes, boolean ocupado, int loc, int prateleira) {
         this.id = id;
         this.setPaletes(paletes);
         this.ocupado = ocupado;
@@ -44,7 +44,7 @@ public class Seccao {
      * Adiciona uma Palete à lista de Paletes
      * @param p palete a ser inserida
      */
-    public void addPalete(Palete p) {
+    public void addPalete(String p) {
         this.paletes.add(p);
     }
 
@@ -60,11 +60,11 @@ public class Seccao {
         this.id = id;
     }
 
-    public List<Palete> getPaletes() {
+    public List<String> getPaletes() {
         return this.paletes;
     }
 
-    public void setPaletes(List<Palete> paletes) {
+    public void setPaletes(List<String> paletes) {
         this.paletes = paletes;
     }
 
@@ -92,7 +92,7 @@ public class Seccao {
         this.prateleira = prateleira;
     }
 
-    public void removePalete(Palete p) {
+    public void removePalete(String p) {
         this.paletes.remove(p);
     }
 }

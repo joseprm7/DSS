@@ -141,6 +141,11 @@ public class Mapa {
      */
     public Collection<MyEntry<String, Integer>> caminhoMaisRapido(String origem, String destino, int n_vertices, int[] visitados) {
         try {
+            if (origem.equals(destino)) {
+                Collection<MyEntry<String, Integer>> list = new ArrayList<>();
+                list.add(new MyEntry<>(origem, 0));
+                return list;
+            }
             Collection<Node> nodosSucessores = this.mapa.get(Integer.parseInt(origem)-1).getValue();
             Collection<MyEntry<String, Integer>> caminho = new ArrayList<>();
             visitados[Integer.parseInt(origem)-1] = 1;

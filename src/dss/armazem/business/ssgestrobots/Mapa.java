@@ -6,36 +6,6 @@ public class Mapa {
 
     public Mapa() {
         this.mapa = new ArrayList<>();
-        for (int i = 1; i <= 14; i++) this.put(new MyEntry<>(Integer.toString(i), new ArrayList<>()));
-
-        this.addNodo(1, new Node("0", 1));
-        this.addNodo(2, new Node("1", 1));
-        this.addNodo(2, new Node("13", 1));
-        this.addNodo(2, new Node("3", 1));
-        this.addNodo(3, new Node("4", 1));
-        this.addNodo(3, new Node("2", 1));
-        this.addNodo(4, new Node("5", 1));
-        this.addNodo(4, new Node("3", 1));
-        this.addNodo(5, new Node("6", 1));
-        this.addNodo(5, new Node("4", 1));
-        this.addNodo(6, new Node("5", 1));
-        this.addNodo(6, new Node("7", 1));
-        this.addNodo(7, new Node("6", 1));
-        this.addNodo(7, new Node("14", 1));
-        this.addNodo(7, new Node("8", 1));
-        this.addNodo(8, new Node("9", 1));
-        this.addNodo(8, new Node("7", 1));
-        this.addNodo(9, new Node("10", 1));
-        this.addNodo(9, new Node("8", 1));
-        this.addNodo(10, new Node("11", 1));
-        this.addNodo(10, new Node("9", 1));
-        this.addNodo(11, new Node("10", 1));
-        this.addNodo(11, new Node("12", 1));
-        this.addNodo(12, new Node("13", 1));
-        this.addNodo(12, new Node("11", 1));
-        this.addNodo(13, new Node("2", 1));
-        this.addNodo(13, new Node("12", 1));
-        this.addNodo(14, new Node("5", 1));
     }
 
     public Mapa(List<MyEntry<String, Collection<Node>>> grafo) {
@@ -122,6 +92,8 @@ public class Mapa {
             Node node = new Node();
             for (Node nodo : nodosSucessores) {
                 int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
+                System.out.println(pesoAtual);
+                System.out.println(minLista(listPesos));
                 if (visitados[Integer.parseInt(nodo.getDestino()) - 1] == 0
                         && haCaminho(nodo.getDestino(), destino, n_vertices)
                         && pesoAtual == minLista(listPesos)) {

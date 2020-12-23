@@ -56,8 +56,8 @@ public class SSGestPaletes {
     public void notificaRecolha(String idPalete) {
         Palete p = this.paleteDAO.get(idPalete);
         int loc = p.getLoc();
-        p.setEstado("Transporte");
-        this.paleteDAO.put(p);
+        this.paleteDAO.updateEstadoLoc(idPalete, loc, "Transporte");
+
         Seccao s = this.seccaoDAO.get(loc);
         if(loc != -1) s.setOcupado(false);
         s.removePalete(p);

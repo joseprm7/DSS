@@ -73,8 +73,7 @@ public class TextUI {
                     break;
                 case 5:
                     Collection<Palete> listaPaletes = this.model.getListaPaletes();
-                    for(Palete palete : listaPaletes)
-                        System.out.println(palete.toString());
+                    this.menu.printaListaPaletes(listaPaletes);
                     break;
             }
         } while (menu.getOpcao()!=0);

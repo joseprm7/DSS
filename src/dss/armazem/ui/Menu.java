@@ -1,5 +1,6 @@
 package dss.armazem.ui;
 
+import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestrobots.MyEntry;
 
 import java.util.*;
@@ -74,5 +75,11 @@ public class Menu {
         }
 
         System.out.println("O robot recebeu o seguinte caminho: " + Arrays.toString(r));
+    }
+
+    public void printaListaPaletes(Collection<Palete> paletes) {
+        for(Palete p : paletes) {
+            System.out.println("Palete: " + p.getID() + "Localização -> " + p.getLoc());
+        }
     }
 }

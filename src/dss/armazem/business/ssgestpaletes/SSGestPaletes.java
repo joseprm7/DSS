@@ -29,7 +29,7 @@ public class SSGestPaletes implements IGestPaletes{
      * @param id identificador da Palete
      * @param descricao descricao da Palete
      */
-    public void validaCodigo(String id, String descricao) {
+    public void validaCodigo(String id, String descricao) throws Exception {
         Palete p = new Palete("Queue", id, descricao, 1);
         this.paleteDAO.put(p);
     }
@@ -38,16 +38,14 @@ public class SSGestPaletes implements IGestPaletes{
         return this.paleteDAO.get();
     }
 
-    public Palete transporte(){
+    public Palete transporte() throws Exception {
         Palete p = null;
         Seccao s = this.seccaoDAO.getSeccaoLivre();
         if(s.getId() != null) {
              p = this.paleteDAO.getFirstPaleteInQueue();
              if(p.getID() != null) {
-                 s.setOcupado(true);
-                 this.seccaoDAO.put(s);
-                 p.setEstado("Espera");
-                 this.paleteDAO.put(p);
+                 this.seccaoDAO.updateCheia(s.getLoc(), true);
+                 this.paleteDAO.updateEstadoLoc(p.getID(), p.getLoc(), "Espera");
              }
         }
         return p;
@@ -57,7 +55,7 @@ public class SSGestPaletes implements IGestPaletes{
         Palete p = this.paleteDAO.get(idPalete);
         int loc = p.getLoc();
         this.paleteDAO.updateEstadoLoc(idPalete, loc, "Transporte");
-        this.seccaoDAO.updateCheia(loc);
+        this.seccaoDAO.updateCheia(loc, false);
     }
 
     public void notificaEntrega(String idPalete, int loc) {

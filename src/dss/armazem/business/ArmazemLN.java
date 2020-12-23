@@ -34,7 +34,7 @@ public class ArmazemLN implements IArmazemLN {
      * @param id Identificador da Palete
      * @param descricao Descrição da Palete
      */
-    public Collection<MyEntry<String, Integer>> validaCodigo(String id, String descricao) {
+    public Collection<MyEntry<String, Integer>> validaCodigo(String id, String descricao) throws Exception {
         this.gestPaletes.validaCodigo(id, descricao);
         return this.transporte();
     }
@@ -51,13 +51,13 @@ public class ArmazemLN implements IArmazemLN {
      * @param idRobot identificador
      * @param locAtual localização atual do Robot em questão
      */
-    public Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot, int locAtual) {
+    public Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot, int locAtual) throws Exception {
         String idPalete = this.gestRobots.notificaEntrega(idRobot, locAtual);
         this.gestPaletes.notificaEntrega(idPalete, locAtual);
         return this.transporte();
     }
 
-    public Collection<MyEntry<String, Integer>> transporte() {
+    public Collection<MyEntry<String, Integer>> transporte() throws Exception {
         Collection<MyEntry<String, Integer>> res = null;
         Robot r = this.gestRobots.robotLivre();
         if(r.getId() != null) {

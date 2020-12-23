@@ -42,41 +42,46 @@ public class TextUI {
     /**
      * Executa o menu principal e invoca o método correspondente à opção seleccionada.
      */
-    public void run(){
+    public void run() {
         do {
-            menu.executa();
-            switch (menu.getOpcao()) {
-                case 1:
-                    System.out.println("Id da palete");
-                    String id = this.sc.next();
-                    System.out.println("Descrição da palete");
-                    String d = this.sc.next();
-                    Collection<MyEntry<String, Integer>> caminho = this.model.validaCodigo(id, d);
-                    if (caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
-                    break;
-                case 2:
-                    caminho = this.model.transporte();
-                    if (caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
-                    break;
-                case 3:
-                    System.out.println("ID da palete");
-                    String pa = this.sc.next();
-                    this.model.notificaRecolha(pa);
-                    break;
-                case 4:
-                    System.out.println("ID do Robot");
-                    String rt = this.sc.next();
-                    System.out.println("Localização Atual");
-                    int loc = this.sc.nextInt();
-                    caminho = this.model.notificaEntrega(rt,loc);
-                    if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
-                    break;
-                case 5:
-                    Collection<Palete> listaPaletes = this.model.getListaPaletes();
-                    this.menu.printaListaPaletes(listaPaletes);
-                    break;
+            try {
+                menu.executa();
+                switch (menu.getOpcao()) {
+                    case 1:
+                        System.out.println("Id da palete");
+                        String id = this.sc.next();
+                        System.out.println("Descrição da palete");
+                        String d = this.sc.next();
+                        Collection<MyEntry<String, Integer>> caminho = this.model.validaCodigo(id, d);
+                        if (caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
+                        break;
+                    case 2:
+                        caminho = this.model.transporte();
+                        if (caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
+                        break;
+                    case 3:
+                        System.out.println("ID da palete");
+                        String pa = this.sc.next();
+                        this.model.notificaRecolha(pa);
+                        break;
+                    case 4:
+                        System.out.println("ID do Robot");
+                        String rt = this.sc.next();
+                        System.out.println("Localização Atual");
+                        int loc = this.sc.nextInt();
+                        caminho = this.model.notificaEntrega(rt,loc);
+                        if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
+                        break;
+                    case 5:
+                        Collection<Palete> listaPaletes = this.model.getListaPaletes();
+                        this.menu.printaListaPaletes(listaPaletes);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         } while (menu.getOpcao() != 0);
         System.out.println("Fechando os portões...");
+
     }
 }

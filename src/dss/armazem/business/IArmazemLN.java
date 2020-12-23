@@ -6,8 +6,8 @@ import java.util.Collection;
 
 public interface IArmazemLN {
     Collection<Palete> getListaPaletes();
-    Collection<MyEntry<String, Integer>> validaCodigo(String id, String descricao);
-    Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot, int locAtual);
-    Collection<MyEntry<String, Integer>> transporte();
+    Collection<MyEntry<String, Integer>> validaCodigo(String id, String descricao) throws Exception;
+    Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot, int locAtual) throws Exception;
+    Collection<MyEntry<String, Integer>> transporte() throws Exception;
     void notificaRecolha(String idPalete);
 }

@@ -55,17 +55,23 @@ public class PaleteDAO {
      * Insere uma Palete na base de dados
      * @param p Palete
      */
-    public void put(Palete p) {
+    public void put(Palete p) throws Exception {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
-             Statement stm = connection.createStatement()) {
+             Statement stm = connection.createStatement();
+             Statement stmTeste = connection.createStatement()) {
+            ResultSet teste = stmTeste.executeQuery("select * from palete where id = '" + p.getID() + "'");
+            String idTeste = null;
+            while (teste.next()) {
+                idTeste = teste.getString("id");
+            }
+            if (idTeste != null) throw new Exception("Identificador já existente!");
             stm.executeUpdate("DELETE FROM palete WHERE id = '" + p.getID() + "'");
-            stm.executeUpdate(
-                    "INSERT INTO palete " +
-                            "VALUES ('"+ p.getID() + "', " +
-                            "'"+ p.getEstado() + "', " +
-                            "'"+ p.getDescricao() + "', " +
-                            p.getLoc() + ")");
+            stm.executeUpdate("INSERT INTO palete " +
+                                "VALUES ('" + p.getID() + "', " +
+                                "'" + p.getEstado() + "', " +
+                                "'" + p.getDescricao() + "', " +
+                                p.getLoc() + ")");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

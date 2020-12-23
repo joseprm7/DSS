@@ -126,11 +126,11 @@ public class SeccaoDAO {
      * Altera o boolean 'cheia' para false, significando que a secção deixa de estar cheia
      * @param loc localização
      */
-    public void updateCheia(int loc) {
+    public void updateCheia(int loc, boolean cheia) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stmCheia = connection.createStatement()) {
-            stmCheia.executeUpdate("update seccao set cheia = false where loc = " + loc);
+            stmCheia.executeUpdate("update seccao set cheia = " + cheia  + " where loc = " + loc);
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());

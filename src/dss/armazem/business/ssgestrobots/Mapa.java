@@ -84,23 +84,22 @@ public class Mapa {
                 }
 
             List<Integer> listPesos = new ArrayList<>();
-            for (Node nodo : nodosSucessores) {
-                int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
+            for (Node n : nodosSucessores) {
+                int pesoAtual = caminhoPeso(n.getDestino(), destino, n_vertices);
                 listPesos.add(pesoAtual);
             }
+            int min = minIndex(listPesos);
 
             Node node = new Node();
             for (Node nodo : nodosSucessores) {
                 int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
-                System.out.println(pesoAtual);
-                System.out.println(minLista(listPesos));
                 if (visitados[Integer.parseInt(nodo.getDestino()) - 1] == 0
                         && haCaminho(nodo.getDestino(), destino, n_vertices)
-                        && pesoAtual == minLista(listPesos)) {
+                        && pesoAtual == min) {
                     node = nodo;
                 }
             }
-            //caminho.add(new MyEntry<>(node.getDestino(), node.getPeso()));
+
             caminho.addAll(caminhoMaisRapido(node.getDestino(), destino, n_vertices, visitados));
             return caminho;
         } catch (Exception e) {
@@ -109,12 +108,8 @@ public class Mapa {
         }
     }
 
-    public int minLista(List<Integer> lista) {
-        int min = lista.get(0);
-        for (Integer i : lista)
-            if (i < min) min = i;
-        return min;
-    }
+    public static int minIndex (List<Integer> list) {
+        return list.indexOf (Collections.min(list)); }
 
     public void toString(int vertice) {
         for (Node nodo : this.mapa.get(vertice-1).getValue())

@@ -91,7 +91,7 @@ public class Main {
                     System.out.println("Sucessor: " + node.getDestino());
             }*/
             for (MyEntry<String, Integer> entry : caminho)
-                System.out.println("Vértice: " + entry.getKey() + ", Peso: " + entry.getValue());
+                System.out.println("Vértice: " + entry.getKey());
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }

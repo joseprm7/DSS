@@ -71,6 +71,11 @@ public class RobotDAO {
         }
     }
 
+    /**
+     * Atualiza a localização, o estado e o identificador da Palete associado ao Robot
+     * @param id identificador do Robot
+     * @param loc localização
+     */
     public void updateEntrega(String id, int loc) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);

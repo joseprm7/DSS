@@ -73,7 +73,7 @@ public class ArmazemLN implements IArmazemLN {
     public Collection<MyEntry<String, Integer>> transporte() throws Exception {
         Collection<MyEntry<String, Integer>> res = null;
         Robot r = this.gestRobots.robotLivre();
-        if(r.getId() != null) {
+        if(r.getId() != null && r.getLoc() != 1 && r.getLoc() != 14) {
             Palete p = this.gestPaletes.transporte();
             if(p.getID() != null) {
                 res = new ArrayList<>();

@@ -58,13 +58,28 @@ public class RobotDAO {
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
             stm.executeUpdate("DELETE FROM robot WHERE id = '" + robot.getId() + "'");
-            // Actualizar a Sala
             stm.executeUpdate(
                     "INSERT INTO robot " +
                             "VALUES ('"+ robot.getId() + "', " +
                             "'"+ robot.getEstado() + "', " +
                             robot.getLoc() + ", " +
                             "'" + robot.getPalete() + "')");
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public void updateEntrega(String id, int loc) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stmLoc = connection.createStatement();
+             Statement stmEstado = connection.createStatement();
+             Statement stmPalete = connection.createStatement()) {
+            stmLoc.executeUpdate("update robot set loc = " + loc + " where id = '" + id + "'");
+            stmEstado.executeUpdate("update robot set estado = 'Livre' where id = '" + id + "'");
+            stmPalete.executeUpdate("update robot set idPalete = null where id = '" + id + "'");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

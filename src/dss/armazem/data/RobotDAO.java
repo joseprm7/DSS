@@ -165,7 +165,7 @@ public class RobotDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            ResultSet rsRobot = stm.executeQuery("update robot set loc = " + loc + " where id = '" + id + "'");
+            stm.executeUpdate("update robot set loc = " + loc + " where id = '" + id + "'");
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());

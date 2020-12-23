@@ -52,11 +52,11 @@ public class TextUI {
                     System.out.println("Descrição da palete");
                     String d = this.sc.next();
                     Collection<MyEntry<String, Integer>> caminho = this.model.validaCodigo(id, d);
-                    if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
+                    if (caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                     break;
                 case 2:
                     caminho = this.model.transporte();
-                    if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
+                    if (caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                     break;
                 case 3:
                     System.out.println("ID da palete");
@@ -76,7 +76,7 @@ public class TextUI {
                     this.menu.printaListaPaletes(listaPaletes);
                     break;
             }
-        } while (menu.getOpcao()!=0);
+        } while (menu.getOpcao() != 0);
         System.out.println("Fechando os portões...");
     }
 }

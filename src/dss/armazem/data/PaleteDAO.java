@@ -142,7 +142,7 @@ public class PaleteDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            ResultSet rs = stm.executeQuery("SELECT * FROM palete order by loc");
+            ResultSet rs = stm.executeQuery("select * from palete order by locSeccao asc");
             Collection<Palete> list = new ArrayList<>();
             while (rs.next()) {
                 String id = rs.getString("id");

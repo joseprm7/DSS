@@ -78,7 +78,7 @@ public class Menu {
 
     public void printaListaPaletes(Collection<Palete> paletes) {
         for(Palete p : paletes) {
-            System.out.println("Palete: " + p.getID() + "Localização -> " + p.getLoc());
+            System.out.println("Palete: " + p.getID() + ", Localização -> " + p.getLoc());
         }
     }
 }

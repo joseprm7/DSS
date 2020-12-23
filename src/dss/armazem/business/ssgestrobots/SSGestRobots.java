@@ -42,7 +42,7 @@ public class SSGestRobots {
     }
 
     public Collection<MyEntry<String, Integer>> transporte(Robot r, Palete p) {
-        r.setEstado("Trasnporte");
+        r.setEstado("Transporte");
         r.setPalete(p.getID());
         this.robotDAO.put(r);
         int[] v = new int[14];

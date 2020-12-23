@@ -30,7 +30,7 @@ public class SSGestPaletes {
      * @param descricao descricao da Palete
      */
     public void validaCodigo(String id, String descricao) {
-        Palete p = new Palete("Queue", id, descricao, -1);
+        Palete p = new Palete("Queue", id, descricao, 1);
         this.paleteDAO.put(p);
     }
 
@@ -41,9 +41,9 @@ public class SSGestPaletes {
     public Palete transporte(){
         Palete p = null;
         Seccao s = this.seccaoDAO.getSeccaoLivre();
-        if(s != null) {
+        if(s.getId() != null) {
              p = this.paleteDAO.getFirstPaleteInQueue();
-             if(p != null) {
+             if(p.getID() != null) {
                  s.setOcupado(true);
                  this.seccaoDAO.put(s);
                  p.setEstado("Espera");

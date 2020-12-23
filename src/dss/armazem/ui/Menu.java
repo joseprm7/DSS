@@ -66,7 +66,7 @@ public class Menu {
     public void printaCaminho(List<MyEntry<String, Integer>> caminho) {
         String robotID = caminho.get(0).getKey();
         String paleteID = caminho.get(1).getKey();
-        System.out.println("O robot " + robotID + "vai transportar-se até à palete " + "paleteID");
+        System.out.println("O robot com o id " + robotID + " vai transportar-se até à palete " + paleteID);
 
         String[] r = new String[caminho.size() - 2];
         for(int i = 2; i < caminho.size(); i++) {

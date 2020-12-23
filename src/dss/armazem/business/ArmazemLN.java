@@ -59,9 +59,9 @@ public class ArmazemLN implements IArmazemLN {
     public Collection<MyEntry<String, Integer>> transporte() {
         Collection<MyEntry<String, Integer>> res = null;
         Robot r = this.gestRobots.robotLivre();
-        if(r != null) {
+        if(r.getId() != null) {
             Palete p = this.gestPaletes.transporte();
-            if(p != null) {
+            if(p.getID() != null) {
                 res = new ArrayList<>();
                 res.add(new MyEntry<>(r.getId(), 0));
                 res.add(new MyEntry<>(p.getID(), 0));

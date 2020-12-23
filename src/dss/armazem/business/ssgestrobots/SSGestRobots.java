@@ -12,12 +12,14 @@ import java.util.List;
  */
 public class SSGestRobots {
     private final RobotDAO robotDAO;
+    private final Mapa map;
 
     /**
      * Construtor vazio
      */
     public SSGestRobots() {
         this.robotDAO = new RobotDAO();
+        this.map = new Mapa();
     }
 
     /**

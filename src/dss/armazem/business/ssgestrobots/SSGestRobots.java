@@ -28,8 +28,8 @@ public class SSGestRobots {
      * @param locAtual localização atual do Robot em questão
      */
     public String notificaEntrega(String id, int locAtual) {
-        this.robotDAO.updateEntrega(id, locAtual);
         Robot r = this.robotDAO.get(id);
+        this.robotDAO.updateEntrega(id, locAtual);
         return r.getPalete();
     }
 

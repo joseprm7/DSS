@@ -55,7 +55,8 @@ public class TextUI {
                     if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                     break;
                 case 2:
-                    this.model.transporte();
+                    caminho = this.model.transporte();
+                    if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                     break;
                 case 3:
                     System.out.println("Id da palete");

@@ -25,7 +25,7 @@ public class SeccaoDAO {
             String sql = "CREATE TABLE IF NOT EXISTS `armazem`.`seccao` (\n" +
                     "  `id` VARCHAR(10) NOT NULL,\n" +
                     "  `prateleira` INT NOT NULL,\n" +
-                    "  `loc` INT NOT NULL,\n" +
+                    "  `loc` INT NULL,\n" +
                     "  `cheia` TINYINT NOT NULL,\n" +
                     "  PRIMARY KEY (`loc`))";
             stm.executeUpdate(sql);
@@ -148,6 +148,17 @@ public class SeccaoDAO {
             }
 
             return new Seccao(id, listPalete, cheia, loc, prateleira);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public void updateCheia(String id) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stmCheia = connection.createStatement()) {
+            stmCheia.executeUpdate("update seccao set cheia = false where id = '" + id + "'");
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());

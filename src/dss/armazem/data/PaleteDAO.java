@@ -84,8 +84,8 @@ public class PaleteDAO {
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stmLoc = connection.createStatement();
              Statement stmEstado = connection.createStatement()) {
-            stmLoc.executeUpdate("update palete set locSeccao = " + loc  + " where id = " + id);
-            stmEstado.executeUpdate("update palete set estado = " + estado  + " where id = " + id);
+            stmLoc.executeUpdate("update palete set locSeccao = " + loc  + " where id = '" + id + "'");
+            stmEstado.executeUpdate("update palete set estado = '" + estado  + "' where id = '" + id + "'");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

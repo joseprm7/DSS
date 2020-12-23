@@ -51,9 +51,6 @@ public class Mapa {
     }
 
     public void addNodo(int origem, Node node) {
-        Collection<Node> nodos = this.mapa.get(origem-1).getValue();
-        //for (Node n : nodos)
-           // System.out.println("Origem: " + origem + ", " + "Succesor: " + n.getDestino());
         this.mapa.get(origem-1).getValue().add(node);
     }
 
@@ -82,11 +79,12 @@ public class Mapa {
         return false;
     }
 
-    public Collection<MyEntry<String, Integer>> caminhoMaisRapido(String origem, String destino, int n_vertices) {
-        Collection<Node> nodosSucessores = this.mapa.get(Integer.parseInt(origem)-1).getValue();
-        Collection<MyEntry<String, Integer>> caminho = new ArrayList<>();
-        caminho.add(new MyEntry<>(origem, 0));
+    public Collection<MyEntry<String, Integer>> caminhoMaisRapido(String origem, String destino, int n_vertices, int[] visitados) {
         try {
+            Collection<Node> nodosSucessores = this.mapa.get(Integer.parseInt(origem)-1).getValue();
+            Collection<MyEntry<String, Integer>> caminho = new ArrayList<>();
+            visitados[Integer.parseInt(origem)-1] = 1;
+            caminho.add(new MyEntry<>(origem, 0));
             if (nodosSucessores.size() == 0) return caminho;
             for (Node nodo : nodosSucessores)
                 if (nodo.getDestino().equals(destino)) {
@@ -94,15 +92,12 @@ public class Mapa {
                     return caminho;
                 }
 
+            Collection<MyEntry<String, Integer>> caminhoAux = new ArrayList<>();
             for (Node nodo : nodosSucessores) {
-                if (haCaminho(nodo.getDestino(), destino, n_vertices)) {
-                    for (Node sucNodo : this.mapa.get(Integer.parseInt(nodo.getDestino())-1).getValue()) {
-                        if (haCaminho(sucNodo.getDestino(), destino, n_vertices))
-                            caminho.add(new MyEntry<>(sucNodo.getDestino(), sucNodo.getPeso()));
-                    }
-                }
+                if (visitados[Integer.parseInt(nodo.getDestino())-1] == 0 && haCaminho(nodo.getDestino(), destino, n_vertices))
+                    caminhoAux = caminhoMaisRapido(nodo.getDestino(), destino, n_vertices, visitados);
             }
-
+            caminho.addAll(caminhoAux);
             return caminho;
         } catch (Exception e) {
             e.printStackTrace();

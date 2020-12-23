@@ -2,7 +2,6 @@ package dss.armazem.ui;
 
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestrobots.MyEntry;
-
 import java.util.*;
 
 public class Menu {

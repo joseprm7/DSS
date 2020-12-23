@@ -1,8 +1,5 @@
 package dss.armazem.business.ssgestrobots;
 
-import dss.armazem.business.ssgestpaletes.Palete;
-import dss.armazem.data.PaleteDAO;
-
 import java.util.Objects;
 
 /**
@@ -19,7 +16,6 @@ public class Robot {
     private String estado;
     private String palete;
     private int loc;
-    private final PaleteDAO paleteDAO;
 
     /**
      * Construtor vazio
@@ -29,7 +25,6 @@ public class Robot {
         this.estado = "";
         this.palete = "";
         this.loc = -1;
-        this.paleteDAO = new PaleteDAO();
     }
 
     /**
@@ -44,7 +39,6 @@ public class Robot {
         this.estado = estado;
         this.palete = palete;
         this.loc = loc;
-        this.paleteDAO = new PaleteDAO();
     }
 
     /**
@@ -56,7 +50,6 @@ public class Robot {
         this.estado = r.getEstado();
         this.palete = r.getPalete();
         this.loc = r.getLoc();
-        this.paleteDAO = new PaleteDAO();
     }
 
     /**

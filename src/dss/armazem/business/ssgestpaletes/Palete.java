@@ -117,19 +117,4 @@ public class Palete {
                 ", loc=" + loc +
                 '}';
     }
-
-    /**
-     * Dependendo da localização anterior da palete, o método
-     * altera o estado da Palete para "Armazenada" ou "Pronta"
-     * @param locAtual localização que a Palete vai passar a ter, depois de ser transportada
-     */
-    public void paleteEntregue(int locAtual) {
-        int loc = this.getLoc();
-        if(loc == -1) {
-            this.setEstado("Armazenada");
-        } else {
-            this.setEstado("Pronta");
-        }
-        this.setLoc(locAtual);
-    }
 }

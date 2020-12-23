@@ -94,24 +94,6 @@ public class PaleteDAO {
     }
 
     /**
-     * Atualiza a Localização de uma Palete
-     * @param id identificador da Palete
-     * @param loc localização
-     */
-    public void updateLoc(String id, int loc) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
-                USERNAME + OPTIONS, USERNAME, PASSWORD);
-             Statement stmLoc = connection.createStatement();
-             Statement stmEstado = connection.createStatement()) {
-            stmLoc.executeUpdate("update palete set locSeccao = " + loc  + " where id = '" + id + "'");
-        } catch (SQLException e) {
-            // Database error!
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
-    }
-
-    /**
      * Remove uma Palete da base de dados
      * @param id identificador
      */

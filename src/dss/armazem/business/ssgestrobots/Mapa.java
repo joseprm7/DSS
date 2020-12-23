@@ -94,20 +94,6 @@ public class Mapa {
     }
 
     /**
-     * Determina o peso do caminho
-     * @param caminho lista de entradas com chave correspondente ao valor do peso
-     *                e valor com um boolean que verifica se existe um caminho até
-     *                um determinado nodo
-     * @return peso total do Caminho
-     */
-    /*public int pesoCaminho(Collection<MyEntry<String, Integer>> caminho) {
-        int peso = 0;
-        for (MyEntry<String, Integer> entry : caminho)
-            peso += entry.getValue();
-        return peso;
-    }*/
-
-    /**
      * Verifica se há caminho de um vértice origem até um determinado destino
      * @param origem identificador do vértice origem
      * @param destino identificador do vértice destino
@@ -119,45 +105,6 @@ public class Mapa {
         for (int i = 0; i < n_vertices; i++)
             visitados[i] = 0;
         return haCaminhoAux(origem, destino, visitados);
-    }
-
-    /**
-     * Determina o peso do caminho de um vértice origem até um vértice destino
-     * @param origem identificador do vértice origem
-     * @param destino identificador do vértice destino
-     * @param n_vertices número total de vértices do mapa/grafo
-     * @return peso total (distância) do caminho
-     */
-    public int caminhoPeso(String origem, String destino, int n_vertices) {
-        int[] visitados = new int[n_vertices];
-        int peso = 0;
-        for (int i = 0; i < n_vertices; i++)
-            visitados[i] = 0;
-        return caminhoAuxPeso(origem, destino, visitados, peso);
-    }
-
-    /**
-     * Função auxiliar da caminhoPeso
-     * @param origem identificador do vértice origem
-     * @param destino identificador do vértice destino
-     * @param visitados array com número de posições igual ao número total de vértices.
-     *                  Caso o valor de uma posição seja 1, significa que a função já passou
-     *                  por esse vértice, e por isso não irá voltar mais. Caso seja 0,
-     *                  significa que a função ainda não passou nesse vértice
-     * @param peso peso acumulativo
-     * @return peso
-     */
-    public int caminhoAuxPeso(String origem, String destino, int[] visitados, int peso) {
-        visitados[Integer.parseInt(origem)-1] = 1;
-        if (origem.equals(destino)) return peso;
-        for (Node nodo: this.mapa.get(Integer.parseInt(origem)-1).getValue()) { // 4 2
-            if (visitados[Integer.parseInt(nodo.getDestino())-1] == 0
-                    && haCaminhoAux(nodo.getDestino(), destino, visitados)) {
-                peso += nodo.getPeso();
-                return caminhoAuxPeso(nodo.getDestino(), destino, visitados, peso);
-            }
-        }
-        return 0;
     }
 
     /**
@@ -205,19 +152,10 @@ public class Mapa {
                     return caminho;
                 }
 
-            List<Integer> listPesos = new ArrayList<>();
-            for (Node n : nodosSucessores) {
-                int pesoAtual = caminhoPeso(n.getDestino(), destino, n_vertices);
-                listPesos.add(pesoAtual);
-            }
-            int min = minIndex(listPesos);
-
             Node node = new Node();
             for (Node nodo : nodosSucessores) {
-                int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
                 if (visitados[Integer.parseInt(nodo.getDestino()) - 1] == 0
-                        && haCaminho(nodo.getDestino(), destino, n_vertices)
-                        /*&& pesoAtual == min*/) {
+                        && haCaminho(nodo.getDestino(), destino, n_vertices)) {
                     node = nodo;
                 }
             }
@@ -228,14 +166,5 @@ public class Mapa {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
-    }
-
-    /**
-     * Obtém o elemento mínimo de uma lista
-     * @param list lista
-     * @return inteiro mínimo da lista
-     */
-    public static int minIndex (List<Integer> list) {
-        return list.indexOf (Collections.min(list));
     }
 }

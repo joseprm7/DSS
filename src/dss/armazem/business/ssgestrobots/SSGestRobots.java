@@ -2,14 +2,13 @@ package dss.armazem.business.ssgestrobots;
 
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.data.RobotDAO;
-
 import java.util.Collection;
 
 /**
  * Classe que visa gerir o subsistema dos Robots.
  * Nela, irão ser tratados todos os Robots existentes no Armazém.
  */
-public class SSGestRobots {
+public class SSGestRobots implements IGestRobots {
     private final RobotDAO robotDAO;
     private final Mapa map;
 

@@ -1,11 +1,12 @@
 package dss.armazem.business;
 
+import dss.armazem.business.ssgestpaletes.IGestPaletes;
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.SSGestPaletes;
+import dss.armazem.business.ssgestrobots.IGestRobots;
 import dss.armazem.business.ssgestrobots.MyEntry;
 import dss.armazem.business.ssgestrobots.Robot;
 import dss.armazem.business.ssgestrobots.SSGestRobots;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,8 +16,8 @@ import java.util.Collection;
  * O subsistema de gestão de paletes e o de gestão de robots.
  */
 public class ArmazemLN implements IArmazemLN {
-    private final SSGestPaletes gestPaletes;
-    private final SSGestRobots gestRobots;
+    private final IGestPaletes gestPaletes;
+    private final IGestRobots gestRobots;
 
     /**
      * Construtor vazio

@@ -11,7 +11,7 @@ import java.util.*;
  * Uma lista de Seccões com todas as secções do Armazém.
  * É de notar que todas estas listas estão armazenadas numa base de dados.
  */
-public class SSGestPaletes {
+public class SSGestPaletes implements IGestPaletes{
     private final PaleteDAO paleteDAO;
     private final SeccaoDAO seccaoDAO;
 

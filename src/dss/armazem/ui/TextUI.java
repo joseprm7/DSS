@@ -59,12 +59,12 @@ public class TextUI {
                     if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                     break;
                 case 3:
-                    System.out.println("Id da palete");
+                    System.out.println("ID da palete");
                     String pa = this.sc.next();
                     this.model.notificaRecolha(pa);
                     break;
                 case 4:
-                    System.out.println("Robot");
+                    System.out.println("ID do Robot");
                     String rt = this.sc.next();
                     System.out.println("Localização Atual");
                     int loc = this.sc.nextInt();

@@ -55,7 +55,6 @@ public class ArmazemLN implements IArmazemLN {
      * realizado pelo Robot. Uma vez que este se encontra Livre, chama-se a função transporte()
      * para verificar se há paletes para este transportar.
      * @param idRobot identificador
-     * @param locAtual localização atual do Robot em questão
      */
     public Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot) throws Exception {
         String idPalete = this.gestRobots.notificaEntrega(idRobot);

@@ -77,7 +77,6 @@ public class SSGestPaletes implements IGestPaletes{
      * significa que está na zona de saída do Armazém e irá sair do Armazém.
      * Caso não esteja, significa que a Palete apenas ficará armazenada no Armazém
      * @param idPalete identificador da Palete
-     * @param loc localização
      */
     public void notificaEntrega(String idPalete) {
         this.paleteDAO.updateEstado(idPalete, "Armazenada");

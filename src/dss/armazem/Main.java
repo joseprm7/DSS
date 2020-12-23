@@ -30,11 +30,12 @@ public class Main {
             m.addNodo(4, new Node("3", 1));
             m.addNodo(5, new Node("2", 1));
             m.addNodo(5, new Node("4", 1));
+            m.addNodo(5, new Node("1", 1));
 
             int[] visitados = new int[5];
             for (int i = 0; i < 4; i++)
                 visitados[i] = 0;
-            Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("1", "4", 5, visitados);
+            Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("4", "1", 5, visitados);
             //System.out.println(caminho);
             /*for (MyEntry<String, Collection<Node>> entry : m.getGrafo())
                 System.out.println(entry.toString());

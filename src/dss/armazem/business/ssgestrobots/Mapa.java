@@ -38,6 +38,27 @@ public class Mapa {
         return haCaminhoAux(origem, destino, visitados);
     }
 
+    public int caminhoPeso(String origem, String destino, int n_vertices) {
+        int[] visitados = new int[n_vertices];
+        int peso = 0;
+        for (int i = 0; i < n_vertices; i++)
+            visitados[i] = 0;
+        return caminhoAuxPeso(origem, destino, visitados, peso);
+    }
+
+    public int caminhoAuxPeso(String origem, String destino, int[] visitados, int peso) {
+        visitados[Integer.parseInt(origem)-1] = 1;
+        if (origem.equals(destino)) return peso;
+        for (Node nodo: this.grafo.get(Integer.parseInt(origem)-1).getValue()) {
+            if (visitados[Integer.parseInt(nodo.getDestino())-1] == 0
+                    && haCaminhoAux(nodo.getDestino(), destino, visitados)) {
+                peso += nodo.getPeso();
+                return caminhoAuxPeso(nodo.getDestino(), destino, visitados, peso);
+            }
+        }
+        return 0;
+    }
+
     public boolean haCaminhoAux(String origem, String destino, int[] visitados) {
         visitados[Integer.parseInt(origem)-1] = 1;
         if (origem.equals(destino)) return true;
@@ -62,17 +83,35 @@ public class Mapa {
                     return caminho;
                 }
 
-            Collection<MyEntry<String, Integer>> caminhoAux = new ArrayList<>();
+            List<Integer> listPesos = new ArrayList<>();
             for (Node nodo : nodosSucessores) {
-                if (visitados[Integer.parseInt(nodo.getDestino())-1] == 0 && haCaminho(nodo.getDestino(), destino, n_vertices))
-                    caminhoAux = caminhoMaisRapido(nodo.getDestino(), destino, n_vertices, visitados);
+                int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
+                listPesos.add(pesoAtual);
             }
-            caminho.addAll(caminhoAux);
+
+            Node node = new Node();
+            for (Node nodo : nodosSucessores) {
+                int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
+                if (visitados[Integer.parseInt(nodo.getDestino()) - 1] == 0
+                        && haCaminho(nodo.getDestino(), destino, n_vertices)
+                        && pesoAtual == minLista(listPesos)) {
+                    node = nodo;
+                }
+            }
+            //caminho.add(new MyEntry<>(node.getDestino(), node.getPeso()));
+            caminho.addAll(caminhoMaisRapido(node.getDestino(), destino, n_vertices, visitados));
             return caminho;
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
+    }
+
+    public int minLista(List<Integer> lista) {
+        int min = lista.get(0);
+        for (Integer i : lista)
+            if (i < min) min = i;
+        return min;
     }
 
     public void toString(int vertice) {

@@ -57,8 +57,6 @@ public class SSGestPaletes {
         Palete p = this.paleteDAO.get(idPalete);
         int loc = p.getLoc();
         this.paleteDAO.updateEstadoLoc(idPalete, loc, "Transporte");
-
-        Seccao s = this.seccaoDAO.get(loc);
         this.seccaoDAO.updateCheia(loc);
     }
 

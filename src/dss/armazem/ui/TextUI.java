@@ -5,6 +5,7 @@ import dss.armazem.business.IArmazemLN;
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestrobots.MyEntry;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -65,7 +66,11 @@ public class TextUI {
                         System.out.println("ID do Robot");
                         String rt = this.sc.next();
                         caminho = this.model.notificaRecolha(pa, rt);
-                        if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
+                        if(caminho != null) {
+                            List<MyEntry<String, Integer>> r = (List<MyEntry<String, Integer>>) caminho;
+                            Collections.reverse(r);
+                            this.menu.printaCaminho(r);
+                        }
                         break;
                     case 4:
                         System.out.println("ID do Robot");

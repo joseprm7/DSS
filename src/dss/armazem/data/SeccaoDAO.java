@@ -154,11 +154,11 @@ public class SeccaoDAO {
         }
     }
 
-    public void updateCheia(String id) {
+    public void updateCheia(int loc) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stmCheia = connection.createStatement()) {
-            stmCheia.executeUpdate("update seccao set cheia = false where id = '" + id + "'");
+            stmCheia.executeUpdate("update seccao set cheia = false where loc = " + loc);
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());

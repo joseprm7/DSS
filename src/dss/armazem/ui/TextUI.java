@@ -3,8 +3,10 @@ package dss.armazem.ui;
 import dss.armazem.business.ArmazemLN;
 import dss.armazem.business.IArmazemLN;
 import dss.armazem.business.ssgestpaletes.Palete;
+import dss.armazem.business.ssgestrobots.MyEntry;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextUI {
@@ -40,7 +42,7 @@ public class TextUI {
     /**
      * Executa o menu principal e invoca o método correspondente à opção seleccionada.
      */
-    public void run() throws Exception {
+    public void run(){
         do {
             menu.executa();
             switch (menu.getOpcao()) {
@@ -49,7 +51,8 @@ public class TextUI {
                     String id = this.sc.next();
                     System.out.println("Descrição da palete");
                     String d = this.sc.next();
-                    this.model.validaCodigo(id, d);
+                    Collection<MyEntry<String, Integer>> caminho = this.model.validaCodigo(id, d);
+                    if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                     break;
                 case 2:
                     this.model.transporte();
@@ -75,5 +78,4 @@ public class TextUI {
         } while (menu.getOpcao()!=0);
         System.out.println("Fechando os portões...");
     }
-
 }

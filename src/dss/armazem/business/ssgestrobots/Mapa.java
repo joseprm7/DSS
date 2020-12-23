@@ -236,7 +236,6 @@ public class Mapa {
      * @return inteiro mínimo da lista
      */
     public static int minIndex (List<Integer> list) {
-        return list.indexOf (Collections.min(list)); }
-
-
+        return list.indexOf (Collections.min(list));
+    }
 }

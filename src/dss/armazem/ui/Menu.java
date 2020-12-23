@@ -1,9 +1,8 @@
 package dss.armazem.ui;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import dss.armazem.business.ssgestrobots.MyEntry;
+
+import java.util.*;
 
 public class Menu {
     private static final Scanner is = new Scanner(System.in);
@@ -62,5 +61,18 @@ public class Menu {
      */
     public int getOpcao() {
         return this.op;
+    }
+
+    public void printaCaminho(List<MyEntry<String, Integer>> caminho) {
+        String robotID = caminho.get(0).getKey();
+        String paleteID = caminho.get(1).getKey();
+        System.out.println("O robot " + robotID + "vai transportar-se até à palete " + "paleteID");
+
+        String[] r = new String[caminho.size() - 2];
+        for(int i = 2; i < caminho.size(); i++) {
+            r[i - 2] = caminho.get(i).getKey();
+        }
+
+        System.out.println("O robot recebeu o seguinte caminho: " + Arrays.toString(r));
     }
 }

@@ -2,9 +2,11 @@ package dss.armazem.business;
 
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.SSGestPaletes;
+import dss.armazem.business.ssgestrobots.MyEntry;
 import dss.armazem.business.ssgestrobots.Robot;
 import dss.armazem.business.ssgestrobots.SSGestRobots;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -31,9 +33,9 @@ public class ArmazemLN implements IArmazemLN {
      * @param id Identificador da Palete
      * @param descricao Descrição da Palete
      */
-    public void validaCodigo(String id, String descricao) {
+    public Collection<MyEntry<String, Integer>> validaCodigo(String id, String descricao) {
         this.gestPaletes.validaCodigo(id, descricao);
-        this.transporte();
+        return this.transporte();
     }
 
     public Collection<Palete> getListaPaletes() {
@@ -54,12 +56,19 @@ public class ArmazemLN implements IArmazemLN {
         this.transporte();
     }
 
-    public void transporte() {
+    public Collection<MyEntry<String, Integer>> transporte() {
+        Collection<MyEntry<String, Integer>> res = null;
         Robot r = this.gestRobots.robotLivre();
         if(r != null) {
             Palete p = this.gestPaletes.transporte();
-            if(p != null) this.gestRobots.transporte(r, p);
+            if(p != null) {
+                res = new ArrayList<>();
+                res.add(new MyEntry<>(r.getId(), 0));
+                res.add(new MyEntry<>(p.getID(), 0));
+                res.addAll(this.gestRobots.transporte(r, p));
+            }
         }
+        return res;
     }
 
     public void notificaRecolha(String idPalete) {

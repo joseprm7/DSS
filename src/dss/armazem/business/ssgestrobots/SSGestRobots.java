@@ -3,6 +3,8 @@ package dss.armazem.business.ssgestrobots;
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.data.RobotDAO;
 
+import java.util.Collection;
+
 /**
  * Classe que visa gerir o subsistema dos Robots.
  * Nela, irão ser tratados todos os Robots existentes no Armazém.
@@ -39,12 +41,12 @@ public class SSGestRobots {
         return this.robotDAO.getRobotLivre();
     }
 
-    public /*List<String>*/void transporte(Robot r, Palete p) {
+    public Collection<MyEntry<String, Integer>> transporte(Robot r, Palete p) {
         r.setEstado("Trasnporte");
         r.setPalete(p.getID());
         this.robotDAO.put(r);
-        //List<String> res = this.caminho();
-        //return res;
-        //Só falta retornar o caminho mais rapido
+        int[] v = new int[14];
+        for(int i = 0; i<14;i++) v[i] = 0;
+        return this.map.caminhoMaisRapido(""+r.getLoc()+"", ""+p.getLoc()+"", 14, v);
     }
 }

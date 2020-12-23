@@ -74,6 +74,26 @@ public class PaleteDAO {
     }
 
     /**
+     * Atualiza o estado e a localização de uma pelete com um determinado identificador
+     * @param id identificador
+     * @param loc localização
+     * @param estado estado
+     */
+    public void updateEstadoLoc(String id, int loc, String estado) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stmLoc = connection.createStatement();
+             Statement stmEstado = connection.createStatement()) {
+            stmLoc.executeUpdate("update palete set locSeccao = " + loc  + " where id = " + id);
+            stmEstado.executeUpdate("update palete set estado = " + estado  + " where id = " + id);
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    /**
      * Remove uma Palete da base de dados
      * @param id identificador
      */

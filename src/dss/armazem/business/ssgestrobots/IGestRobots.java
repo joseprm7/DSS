@@ -8,4 +8,5 @@ public interface IGestRobots {
     String notificaEntrega(String id, int locAtual);
     Robot  robotLivre();
     Robot getRobot(String id);
+    void alteraLoc(int loc, String idRobot);
 }

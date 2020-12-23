@@ -58,4 +58,8 @@ public class SSGestRobots implements IGestRobots {
     public Robot getRobot(String id) {
         return this.robotDAO.get(id);
     }
+
+    public void alteraLoc(int loc, String idRobot) {
+        this.robotDAO.updateLoc(idRobot, loc);
+    }
 }

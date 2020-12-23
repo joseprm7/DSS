@@ -81,6 +81,7 @@ public class ArmazemLN implements IArmazemLN {
                 res.add(new MyEntry<>(r.getId(), 0));
                 res.add(new MyEntry<>(p.getID(), 0));
                 res.addAll(this.gestRobots.transporte(r, p));
+                this.gestRobots.alteraLoc(p.getLoc(), r.getId());
             }
         }
         return res;

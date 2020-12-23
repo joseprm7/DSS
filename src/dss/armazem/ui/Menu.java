@@ -77,9 +77,9 @@ public class Menu {
     }
 
     public void printaCaminho2(List<MyEntry<String, Integer>> caminho) {
-        String[] r = new String[caminho.size() - 2];
-        for(int i = 2; i < caminho.size(); i++) {
-            r[i - 2] = caminho.get(i).getKey();
+        String[] r = new String[caminho.size()];
+        for(int i = 0; i < caminho.size(); i++) {
+            r[i] = caminho.get(i).getKey();
         }
 
         System.out.println("O robot recebeu o seguinte caminho: " + Arrays.toString(r));

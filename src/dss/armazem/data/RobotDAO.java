@@ -155,4 +155,20 @@ public class RobotDAO {
             throw new NullPointerException(e.getMessage());
         }
     }
+
+    /**
+     * Atualiza a localização do robot
+     * @param id identificador
+     * @param loc localização
+     */
+    public void updateLoc(String id, int loc) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            ResultSet rsRobot = stm.executeQuery("update robot set loc = " + loc + " where id = '" + id + "'");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
 }

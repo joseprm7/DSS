@@ -57,7 +57,7 @@ public class Mapa {
         addNodo(13, new Node("2", 1));
         addNodo(13, new Node("12", 1));
 
-        addNodo(14, new Node("5", 1));
+        addNodo(14, new Node("7", 1));
     }
 
     /**

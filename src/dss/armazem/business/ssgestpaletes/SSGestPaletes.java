@@ -63,6 +63,7 @@ public class SSGestPaletes implements IGestPaletes{
     /**
      * Altera o estado duma palete e põe a variavel da seccao a false
      * de maneira a dizer que é possível guardar outras paletes nesta secção
+     * @param idPalete identificador da Palete
      */
     public Palete notificaRecolha(String idPalete) {
         Palete p = this.paleteDAO.get(idPalete);

@@ -8,7 +8,7 @@ import java.util.Collection;
 public interface IArmazemLN {
     Collection<Palete> getListaPaletes();
     Collection<MyEntry<String, Integer>> validaCodigo(String id, String descricao);
-    void notificaEntrega(String idRobot, int locAtual);
+    Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot, int locAtual);
     Collection<MyEntry<String, Integer>> transporte();
     void notificaRecolha(String idPalete);
 }

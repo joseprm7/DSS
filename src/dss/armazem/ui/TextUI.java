@@ -68,7 +68,8 @@ public class TextUI {
                     String rt = this.sc.next();
                     System.out.println("Localização Atual");
                     int loc = this.sc.nextInt();
-                    this.model.notificaEntrega(rt,loc);
+                    caminho = this.model.notificaEntrega(rt,loc);
+                    if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                     break;
                 case 5:
                     Collection<Palete> listaPaletes = this.model.getListaPaletes();

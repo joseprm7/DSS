@@ -17,7 +17,7 @@ public class Main {
         try {
             //new TextUI().run();
             Mapa m = new Mapa();
-            /*for (int i = 1; i <= 5; i++)
+            for (int i = 1; i <= 5; i++)
                 m.put(new MyEntry<>(Integer.toString(i), new ArrayList<>()));
             m.addNodo(1, new Node("2", 1));
             m.addNodo(1, new Node("5", 1));
@@ -30,12 +30,12 @@ public class Main {
             m.addNodo(4, new Node("3", 1));
             m.addNodo(5, new Node("2", 1));
             m.addNodo(5, new Node("4", 1));
-            m.addNodo(5, new Node("1", 1));*/
+            m.addNodo(5, new Node("1", 1));
 
-            int[] visitados = new int[14];
-            for (int i = 0; i < 14; i++)
+            int[] visitados = new int[5];
+            for (int i = 0; i < 5; i++)
                 visitados[i] = 0;
-            Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("4", "1", 14, visitados);
+            Collection<MyEntry<String, Integer>> caminho = m.caminhoMaisRapido("4", "1", 5, visitados);
             //System.out.println(caminho);
             /*for (MyEntry<String, Collection<Node>> entry : m.getGrafo())
                 System.out.println(entry.toString());
@@ -47,7 +47,7 @@ public class Main {
                     System.out.println("Sucessor: " + node.getDestino());
             }*/
             for (MyEntry<String, Integer> entry : caminho)
-                System.out.println("Vértice: " + entry.getKey() + ", Peso: " + entry.getValue());
+                System.out.println("Vértice: " + entry.getKey());
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }

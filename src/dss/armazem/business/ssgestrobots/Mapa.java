@@ -6,9 +6,9 @@ public class Mapa {
 
     public Mapa() {
         this.mapa = new ArrayList<>();
-        for (int i = 1; i <= 14; i++) this.put(new MyEntry<>(Integer.toString(i), new ArrayList<>()));
+        /*for (int i = 1; i <= 14; i++) this.put(new MyEntry<>(Integer.toString(i), new ArrayList<>()));*/
 
-        this.addNodo(1, new Node("0", 1));
+        /*this.addNodo(1, new Node("0", 1));
         this.addNodo(2, new Node("1", 1));
         this.addNodo(2, new Node("13", 1));
         this.addNodo(2, new Node("3", 1));
@@ -35,7 +35,7 @@ public class Mapa {
         this.addNodo(12, new Node("11", 1));
         this.addNodo(13, new Node("2", 1));
         this.addNodo(13, new Node("12", 1));
-        this.addNodo(14, new Node("5", 1));
+        this.addNodo(14, new Node("5", 1));*/
     }
 
     public Mapa(List<MyEntry<String, Collection<Node>>> grafo) {
@@ -114,21 +114,22 @@ public class Mapa {
                 }
 
             List<Integer> listPesos = new ArrayList<>();
-            for (Node nodo : nodosSucessores) {
-                int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
+            for (Node n : nodosSucessores) {
+                int pesoAtual = caminhoPeso(n.getDestino(), destino, n_vertices);
                 listPesos.add(pesoAtual);
             }
+            int min = minIndex(listPesos);
 
             Node node = new Node();
             for (Node nodo : nodosSucessores) {
                 int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
                 if (visitados[Integer.parseInt(nodo.getDestino()) - 1] == 0
                         && haCaminho(nodo.getDestino(), destino, n_vertices)
-                        && pesoAtual == minLista(listPesos)) {
+                        && pesoAtual == min) {
                     node = nodo;
                 }
             }
-            //caminho.add(new MyEntry<>(node.getDestino(), node.getPeso()));
+
             caminho.addAll(caminhoMaisRapido(node.getDestino(), destino, n_vertices, visitados));
             return caminho;
         } catch (Exception e) {
@@ -137,12 +138,8 @@ public class Mapa {
         }
     }
 
-    public int minLista(List<Integer> lista) {
-        int min = lista.get(0);
-        for (Integer i : lista)
-            if (i < min) min = i;
-        return min;
-    }
+    public static int minIndex (List<Integer> list) {
+        return list.indexOf (Collections.min(list)); }
 
     public void toString(int vertice) {
         for (Node nodo : this.mapa.get(vertice-1).getValue())

@@ -33,7 +33,6 @@ public class TextUI {
                 "Consultar listagem de localizacoes"
                 };
         this.menu = new Menu(opcoes);
-        //this.model = new ();
         this.sc = new Scanner(System.in);
         this.model = new ArmazemLN();
     }

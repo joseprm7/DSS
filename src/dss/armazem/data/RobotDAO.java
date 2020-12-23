@@ -12,7 +12,7 @@ public class RobotDAO {
 
 
     /**
-     * Construtor que permite a criação da tabela Palete residente na base de dados
+     * Construtor que permite a criação da tabela Robot residente na base de dados
      */
     public RobotDAO() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
@@ -49,6 +49,10 @@ public class RobotDAO {
         return RobotDAO.singleton;
     }
 
+    /**
+     * Insere um Robot na base de dados
+     * @param robot Robot que se pretende inserir
+     */
     public void put(Robot robot) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -68,6 +72,10 @@ public class RobotDAO {
         }
     }
 
+    /**
+     * Remove um Robot com um determinado identificador da base de dados
+     * @param id identificador do Robot
+     */
     public void remove(String id) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -80,6 +88,11 @@ public class RobotDAO {
         }
     }
 
+    /**
+     * Obtém o Robot com um determinado identificador
+     * @param id identificador
+     * @return Robot
+     */
     public Robot get(String id) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -103,6 +116,10 @@ public class RobotDAO {
         }
     }
 
+    /**
+     * Obtém o primeiro Robot que tenha o estado "Livre" da tabela Robot residente na base de dados
+     * @return Robot
+     */
     public Robot getRobotLivre() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);

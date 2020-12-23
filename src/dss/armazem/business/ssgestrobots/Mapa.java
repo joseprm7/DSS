@@ -1,36 +1,119 @@
 package dss.armazem.business.ssgestrobots;
 import java.util.*;
 
+/**
+ * Classe Mapa.
+ * Esta classe corresponde, de certa forma, a um grafo que contém uma lista de vértices que,
+ * por sua vez, estão associados a uma lista de vértices que os sucedem. Caso exista algum vértice
+ * "X" que não tenha vértices sucessores, a lista que estará associada a "X" estará vazia.
+ */
 public class Mapa {
     private final List<MyEntry<String, Collection<Node>>> mapa;
 
+    /**
+     * Construtor vazio
+     */
     public Mapa() {
         this.mapa = new ArrayList<>();
+        for (int i = 1; i <= 14; i++) put(new MyEntry<>(Integer.toString(i), new ArrayList<>()));
+
+        addNodo(1, new Node("2", 1));
+
+        addNodo(2, new Node("1", 1));
+        addNodo(2, new Node("13", 1));
+        addNodo(2, new Node("3", 1));
+
+        addNodo(3, new Node("4", 1));
+        addNodo(3, new Node("2", 1));
+
+        addNodo(4, new Node("5", 1));
+        addNodo(4, new Node("3", 1));
+
+        addNodo(5, new Node("6", 1));
+        addNodo(5, new Node("4", 1));
+
+        addNodo(6, new Node("5", 1));
+        addNodo(6, new Node("7", 1));
+
+        addNodo(7, new Node("6", 1));
+        addNodo(7, new Node("14", 1));
+        addNodo(7, new Node("8", 1));
+
+        addNodo(8, new Node("9", 1));
+        addNodo(8, new Node("7", 1));
+
+        addNodo(9, new Node("10", 1));
+        addNodo(9, new Node("8", 1));
+
+        addNodo(10, new Node("11", 1));
+        addNodo(10, new Node("9", 1));
+
+        addNodo(11, new Node("10", 1));
+        addNodo(11, new Node("12", 1));
+
+        addNodo(12, new Node("13", 1));
+        addNodo(12, new Node("11", 1));
+
+        addNodo(13, new Node("2", 1));
+        addNodo(13, new Node("12", 1));
+
+        addNodo(14, new Node("5", 1));
     }
 
+    /**
+     * Construtor parametrizado
+     * @param grafo grafo/mapa
+     */
     public Mapa(List<MyEntry<String, Collection<Node>>> grafo) {
         this.mapa = grafo;
     }
 
+    /**
+     * Getter que obtém o mapa
+     * @return mapa
+     */
     public List<MyEntry<String, Collection<Node>>> getMapa() {
         return this.mapa;
     }
 
+    /**
+     * Adiciona uma entrada à lista
+     * @param entry entrada
+     */
     public void put(MyEntry<String, Collection<Node>> entry) {
         this.mapa.add(entry);
     }
 
+    /**
+     * Adiciona um nodo sucessor a um determinado vértice que lhe antecede
+     * @param origem vértice origem
+     * @param node nodo destino
+     */
     public void addNodo(int origem, Node node) {
         this.mapa.get(origem-1).getValue().add(node);
     }
 
-    public int pesoCaminho(Collection<MyEntry<String, Integer>> caminho) {
+    /**
+     * Determina o peso do caminho
+     * @param caminho lista de entradas com chave correspondente ao valor do peso
+     *                e valor com um boolean que verifica se existe um caminho até
+     *                um determinado nodo
+     * @return peso total do Caminho
+     */
+    /*public int pesoCaminho(Collection<MyEntry<String, Integer>> caminho) {
         int peso = 0;
         for (MyEntry<String, Integer> entry : caminho)
             peso += entry.getValue();
         return peso;
-    }
+    }*/
 
+    /**
+     * Verifica se há caminho de um vértice origem até um determinado destino
+     * @param origem identificador do vértice origem
+     * @param destino identificador do vértice destino
+     * @param n_vertices número de vértices total do mapa/grafo
+     * @return true caso exista caminho, falso em caso contrário
+     */
     public boolean haCaminho(String origem, String destino, int n_vertices) {
         int[] visitados = new int[n_vertices];
         for (int i = 0; i < n_vertices; i++)
@@ -38,6 +121,13 @@ public class Mapa {
         return haCaminhoAux(origem, destino, visitados);
     }
 
+    /**
+     * Determina o peso do caminho de um vértice origem até um vértice destino
+     * @param origem identificador do vértice origem
+     * @param destino identificador do vértice destino
+     * @param n_vertices número total de vértices do mapa/grafo
+     * @return peso total (distância) do caminho
+     */
     public int caminhoPeso(String origem, String destino, int n_vertices) {
         int[] visitados = new int[n_vertices];
         int peso = 0;
@@ -46,6 +136,17 @@ public class Mapa {
         return caminhoAuxPeso(origem, destino, visitados, peso);
     }
 
+    /**
+     * Função auxiliar da caminhoPeso
+     * @param origem identificador do vértice origem
+     * @param destino identificador do vértice destino
+     * @param visitados array com número de posições igual ao número total de vértices.
+     *                  Caso o valor de uma posição seja 1, significa que a função já passou
+     *                  por esse vértice, e por isso não irá voltar mais. Caso seja 0,
+     *                  significa que a função ainda não passou nesse vértice
+     * @param peso peso acumulativo
+     * @return peso
+     */
     public int caminhoAuxPeso(String origem, String destino, int[] visitados, int peso) {
         visitados[Integer.parseInt(origem)-1] = 1;
         if (origem.equals(destino)) return peso;
@@ -59,6 +160,16 @@ public class Mapa {
         return 0;
     }
 
+    /**
+     * Função auxiliar da haCaminho
+     * @param origem identificador do vértice origem
+     * @param destino identificador do vértice destino
+     * @param visitados array com número de posições igual ao número total de vértices.
+     *                  Caso o valor de uma posição seja 1, significa que a função já passou
+     *                  por esse vértice, e por isso não irá voltar mais. Caso seja 0,
+     *                  significa que a função ainda não passou nesse vértice
+     * @return true caso continue a existir caminho, false em caso contrário
+     */
     public boolean haCaminhoAux(String origem, String destino, int[] visitados) {
         visitados[Integer.parseInt(origem)-1] = 1;
         if (origem.equals(destino)) return true;
@@ -70,6 +181,17 @@ public class Mapa {
         return false;
     }
 
+    /**
+     * Calcula o caminho de um vértice origem até um vértice destino
+     * @param origem identificador do vértice origem
+     * @param destino identificador do vértice destino
+     * @param n_vertices número total de vértices do mapa/grafo
+     * @param visitados array com número de posições igual ao número total de vértices.
+     *                  Caso o valor de uma posição seja 1, significa que a função já passou
+     *                  por esse vértice, e por isso não irá voltar mais. Caso seja 0,
+     *                  significa que a função ainda não passou nesse vértice
+     * @return lista de entradas
+     */
     public Collection<MyEntry<String, Integer>> caminhoMaisRapido(String origem, String destino, int n_vertices, int[] visitados) {
         try {
             Collection<Node> nodosSucessores = this.mapa.get(Integer.parseInt(origem)-1).getValue();
@@ -108,12 +230,13 @@ public class Mapa {
         }
     }
 
+    /**
+     * Obtém o elemento mínimo de uma lista
+     * @param list lista
+     * @return inteiro mínimo da lista
+     */
     public static int minIndex (List<Integer> list) {
         return list.indexOf (Collections.min(list)); }
 
-    public void toString(int vertice) {
-        for (Node nodo : this.mapa.get(vertice-1).getValue())
-            System.out.println(nodo.getDestino() + ", " + nodo.getPeso());
-    }
 
 }

@@ -16,7 +16,7 @@ public class SeccaoDAO {
 
 
     /**
-     * Construtor que permite a criação da tabela Palete residente na base de dados
+     * Construtor que permite a criação da tabela Seccao residente na base de dados
      */
     public SeccaoDAO() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
@@ -47,10 +47,14 @@ public class SeccaoDAO {
         return SeccaoDAO.singleton;
     }
 
-    /**
+    /*
      * Métodos put, remove e get
      */
 
+    /**
+     * Insere uma Seccao na BD
+     * @param s Seccao
+     */
     public void put(Seccao s) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -69,6 +73,10 @@ public class SeccaoDAO {
         }
     }
 
+    /**
+     * Remove uma Seccao com uma determinada localização da BD
+     * @param loc Localização
+     */
     public void remove(int loc) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -80,6 +88,11 @@ public class SeccaoDAO {
         }
     }
 
+    /**
+     * Obtém uma Seccao com uma determinada localização
+     * @param loc localização
+     * @return Seccao
+     */
     public Seccao get(int loc) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -107,6 +120,10 @@ public class SeccaoDAO {
         }
     }
 
+    /**
+     * Obtém a primeira Seccao que não esteja totalmente ocupada por paletes
+     * @return Seccao
+     */
     public Seccao getSeccaoLivre() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);

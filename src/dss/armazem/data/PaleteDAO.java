@@ -51,6 +51,10 @@ public class PaleteDAO {
         return PaleteDAO.singleton;
     }
 
+    /**
+     * Insere uma Palete na base de dados
+     * @param p Palete
+     */
     public void put(Palete p) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -69,6 +73,10 @@ public class PaleteDAO {
         }
     }
 
+    /**
+     * Remove uma Palete da base de dados
+     * @param id identificador
+     */
     public void remove(String id) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -81,6 +89,11 @@ public class PaleteDAO {
         }
     }
 
+    /**
+     * Obtém uma Palete com um determinado identificador a partir da base de dados
+     * @param id identificador
+     * @return Palete
+     */
     public Palete get(String id) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -101,6 +114,10 @@ public class PaleteDAO {
         }
     }
 
+    /**
+     * Obtém a lista de Paletes contidas na base de dados
+     * @return Lista de Paletes
+     */
     public Collection<Palete> get() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
@@ -122,6 +139,10 @@ public class PaleteDAO {
         }
     }
 
+    /**
+     * Obtém a primeira Palete que tenha o estado "Queue"
+     * @return Palete
+     */
     public Palete getFirstPaleteInQueue() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);

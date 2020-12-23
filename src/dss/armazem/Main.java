@@ -18,50 +18,6 @@ public class Main {
             //new TextUI().run();
             Mapa m = new Mapa();
 
-            for (int i = 1; i <= 14; i++) m.put(new MyEntry<>(Integer.toString(i), new ArrayList<>()));
-
-            m.addNodo(1, new Node("2", 1));
-
-            m.addNodo(2, new Node("1", 1));
-            m.addNodo(2, new Node("13", 1));
-            m.addNodo(2, new Node("3", 1));
-
-            m.addNodo(3, new Node("4", 1));
-            m.addNodo(3, new Node("2", 1));
-
-            m.addNodo(4, new Node("5", 1));
-            m.addNodo(4, new Node("3", 1));
-
-            m.addNodo(5, new Node("6", 1));
-            m.addNodo(5, new Node("4", 1));
-
-            m.addNodo(6, new Node("5", 1));
-            m.addNodo(6, new Node("7", 1));
-
-            m.addNodo(7, new Node("6", 1));
-            m.addNodo(7, new Node("14", 1));
-            m.addNodo(7, new Node("8", 1));
-
-            m.addNodo(8, new Node("9", 1));
-            m.addNodo(8, new Node("7", 1));
-
-            m.addNodo(9, new Node("10", 1));
-            m.addNodo(9, new Node("8", 1));
-
-            m.addNodo(10, new Node("11", 1));
-            m.addNodo(10, new Node("9", 1));
-
-            m.addNodo(11, new Node("10", 1));
-            m.addNodo(11, new Node("12", 1));
-
-            m.addNodo(12, new Node("13", 1));
-            m.addNodo(12, new Node("11", 1));
-
-            m.addNodo(13, new Node("2", 1));
-            m.addNodo(13, new Node("12", 1));
-
-            m.addNodo(14, new Node("5", 1));
-
             int[] visitados = new int[14];
             for (int i = 0; i < 14; i++)
                 visitados[i] = 0;

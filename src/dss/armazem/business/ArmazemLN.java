@@ -94,6 +94,8 @@ public class ArmazemLN implements IArmazemLN {
     public Collection<MyEntry<String, Integer>> notificaRecolha(String idPalete, String idRobot) {
         Palete p = this.gestPaletes.notificaRecolha(idPalete);
         Robot r = this.gestRobots.getRobot(idRobot);
-        return this.gestRobots.transporte(r, p);
+        Collection<MyEntry<String, Integer>> res = this.gestRobots.transporte(r, p);
+        this.gestRobots.alteraLoc(p.getLoc(),r.getId());
+        return res;
     }
 }

@@ -41,7 +41,8 @@ public class ArmazemLN implements IArmazemLN {
 
     /**
      * Vai à base de dados buscar a lista de todas as paletes existentes, ordenadas
-     * pela localização, de forma ascendente, para depois mostrar ao gestor.
+     * pela localização, por ordem crescente, para depois mostrar ao gestor.
+     * @return lista de paletes existentes
      */
     public Collection<Palete> getListaPaletes() {
         return this.gestPaletes.getListaPaletes();
@@ -51,7 +52,7 @@ public class ArmazemLN implements IArmazemLN {
     /**
      * A partir de um determinado identificador, um robot irá notificar o Sistema
      * que já entregou a Palete e alterará o seu estado para "Livre". Este método será
-     * realizado pelo Robot. Uma vez que este se encontra Livre chama-se a função transporte()
+     * realizado pelo Robot. Uma vez que este se encontra Livre, chama-se a função transporte()
      * para verificar se há paletes para este transportar.
      * @param idRobot identificador
      * @param locAtual localização atual do Robot em questão
@@ -63,10 +64,10 @@ public class ArmazemLN implements IArmazemLN {
     }
 
     /**
-     * Este método serve para atribuir paletes em "Queue" a robots "Livres", estas vão ser guardadas
-     * numa seccão que não esteja cheia. Logo começa por procurar robots livres, caso não haja não faz mais
+     * Atribui paletes em "Queue" a robots "Livres". Estas vão ser guardadas
+     * numa seccão que não esteja cheia, logo começa por procurar robots livres, caso não haja não faz mais
      * nada, depois procura uma palete em queue e se encontrar procura um lugar para a guardar.
-     * Caso encontre estes três elementos pega na localização do robot e da prateleira e calcula um
+     * Caso encontre estes três elementos, através da localização do robot e da prateleira, calcula um
      * percurso para o robot.
      * @return caminho para o robot percorrer, caso seja necessario o robot ir buscar uma palete
      */
@@ -88,6 +89,7 @@ public class ArmazemLN implements IArmazemLN {
     /**
      * O robot utiliza este método para avisar o Sistema que já recolheu a palete que lhe
      * foi solicitada. Depois o sistema altera o estado da palete e calcula um novo percurso para o robot.
+     * @param idPalete identificador da Palete
      */
     public void notificaRecolha(String idPalete) {
         this.gestPaletes.notificaRecolha(idPalete);

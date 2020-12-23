@@ -140,8 +140,9 @@ public class SeccaoDAO {
     }
 
     /**
-     * Altera o boolean 'cheia' conforme o que for pedido pelos argumentos
+     * Altera o boolean 'cheia' conforme o que for pedido pelo argumento
      * @param loc localização
+     * @param cheia cheia
      */
     public void updateCheia(int loc, boolean cheia) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +

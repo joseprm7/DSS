@@ -191,7 +191,7 @@ public class PaleteDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
                 USERNAME + OPTIONS, USERNAME, PASSWORD);
              Statement stm = connection.createStatement()) {
-            stm.executeUpdate("update palete set estado = " + estado + " where id = '" + id + "'");
+            stm.executeUpdate("update palete set estado = '" + estado + "' where id = '" + id + "'");
         } catch (Exception e) {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());

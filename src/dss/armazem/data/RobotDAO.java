@@ -80,7 +80,7 @@ public class RobotDAO {
              Statement stmLoc = connection.createStatement();
              Statement stmEstado = connection.createStatement();
              Statement stmPalete = connection.createStatement()) {
-            stmLoc.executeUpdate("update robot set loc = " + loc + " where id = '" + id + "'");
+            //stmLoc.executeUpdate("update robot set loc = " + loc + " where id = '" + id + "'");
             stmEstado.executeUpdate("update robot set estado = 'Livre' where id = '" + id + "'");
             stmPalete.executeUpdate("update robot set idPalete = null where id = '" + id + "'");
         } catch (SQLException e) {

@@ -32,7 +32,6 @@ public class SSGestRobots implements IGestRobots {
      * A partir de um determinado identificador, um robot irá notificar o Sistema
      * que já entregou a Palete e alterará o seu estado para "Livre".
      * @param id identificador
-     * @param locAtual localização atual do Robot em questão
      * @return id da Palete que o robot entregou
      */
     public String notificaEntrega(String id) {

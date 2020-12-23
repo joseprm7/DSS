@@ -49,7 +49,7 @@ public class Mapa {
     public int caminhoAuxPeso(String origem, String destino, int[] visitados, int peso) {
         visitados[Integer.parseInt(origem)-1] = 1;
         if (origem.equals(destino)) return peso;
-        for (Node nodo: this.mapa.get(Integer.parseInt(origem)-1).getValue()) {
+        for (Node nodo: this.mapa.get(Integer.parseInt(origem)-1).getValue()) { // 4 2
             if (visitados[Integer.parseInt(nodo.getDestino())-1] == 0
                     && haCaminhoAux(nodo.getDestino(), destino, visitados)) {
                 peso += nodo.getPeso();
@@ -95,7 +95,7 @@ public class Mapa {
                 int pesoAtual = caminhoPeso(nodo.getDestino(), destino, n_vertices);
                 if (visitados[Integer.parseInt(nodo.getDestino()) - 1] == 0
                         && haCaminho(nodo.getDestino(), destino, n_vertices)
-                        && pesoAtual == min) {
+                        /*&& pesoAtual == min*/) {
                     node = nodo;
                 }
             }

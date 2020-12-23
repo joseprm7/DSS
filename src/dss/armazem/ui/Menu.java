@@ -76,6 +76,15 @@ public class Menu {
         System.out.println("O robot recebeu o seguinte caminho: " + Arrays.toString(r));
     }
 
+    public void printaCaminho2(List<MyEntry<String, Integer>> caminho) {
+        String[] r = new String[caminho.size() - 2];
+        for(int i = 2; i < caminho.size(); i++) {
+            r[i - 2] = caminho.get(i).getKey();
+        }
+
+        System.out.println("O robot recebeu o seguinte caminho: " + Arrays.toString(r));
+    }
+
     /**
      * Método que mostra ao Utilizador a localização e o id duma lista de paletes recebida.
      * @param paletes Lista de paletes a mostrar.

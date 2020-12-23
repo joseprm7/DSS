@@ -67,9 +67,7 @@ public class TextUI {
                         String rt = this.sc.next();
                         caminho = this.model.notificaRecolha(pa, rt);
                         if(caminho != null) {
-                            List<MyEntry<String, Integer>> r = (List<MyEntry<String, Integer>>) caminho;
-                            Collections.reverse(r);
-                            this.menu.printaCaminho(r);
+                            this.menu.printaCaminho2((List<MyEntry<String, Integer>>) caminho);
                         }
                         break;
                     case 4:

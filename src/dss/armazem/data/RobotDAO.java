@@ -171,4 +171,20 @@ public class RobotDAO {
             throw new NullPointerException(e.getMessage());
         }
     }
+
+    /**
+     * Atualiza o estado do robot
+     * @param id identificador
+     * @param estado estado
+     */
+    public void updateEstado(String id, String estado) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://" + DATABASE + "?user=" +
+                USERNAME + OPTIONS, USERNAME, PASSWORD);
+             Statement stm = connection.createStatement()) {
+            stm.executeUpdate("update robot set estado = " + estado + " where id = '" + id + "'");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
 }

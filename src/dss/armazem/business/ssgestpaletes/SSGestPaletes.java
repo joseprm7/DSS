@@ -50,8 +50,9 @@ public class SSGestPaletes implements IGestPaletes{
         if(s.getId() != null) {
              p = this.paleteDAO.getFirstPaleteInQueue();
              if(p.getID() != null) {
+                 if(p.getLoc() != -1) this.seccaoDAO.updateCheia(p.getLoc(), false);
                  this.seccaoDAO.updateCheia(s.getLoc(), true);
-                 this.paleteDAO.updateEstadoLoc(p.getID(), p.getLoc(), "Espera");
+                 this.paleteDAO.updateEstadoLoc(p.getID(), s.getLoc(), "Espera");
              }
         }
         return p;
@@ -60,12 +61,13 @@ public class SSGestPaletes implements IGestPaletes{
     /**
      * Método que altera o estado duma palete e põe a variavel da seccao a false
      * de maneira a dizer que é possível guardar outras paletes nesta secção
+     * @return
      */
-    public void notificaRecolha(String idPalete) {
+    public Palete notificaRecolha(String idPalete) {
         Palete p = this.paleteDAO.get(idPalete);
         int loc = p.getLoc();
         this.paleteDAO.updateEstadoLoc(idPalete, loc, "Transporte");
-        this.seccaoDAO.updateCheia(loc, false);
+        return p;
     }
 
     public void notificaEntrega(String idPalete, int loc) {

@@ -62,12 +62,14 @@ public class TextUI {
                     case 3:
                         System.out.println("ID da palete");
                         String pa = this.sc.next();
-                        this.model.notificaRecolha(pa);
+                        System.out.println("ID do Robot");
+                        String rt = this.sc.next();
+                        this.model.notificaRecolha(pa, rt);
                         System.out.println("Recolha da palete " + pa + " feita!!!!");
                         break;
                     case 4:
                         System.out.println("ID do Robot");
-                        String rt = this.sc.next();
+                        rt = this.sc.next();
                         System.out.println("Localização Atual");
                         int loc = this.sc.nextInt();
                         caminho = this.model.notificaEntrega(rt,loc);

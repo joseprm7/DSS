@@ -9,5 +9,5 @@ public interface IArmazemLN {
     Collection<MyEntry<String, Integer>> validaCodigo(String id, String descricao) throws Exception;
     Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot, int locAtual) throws Exception;
     Collection<MyEntry<String, Integer>> transporte() throws Exception;
-    void notificaRecolha(String idPalete);
+    Collection<MyEntry<String, Integer>> notificaRecolha(String idPalete, String idRobot);
 }

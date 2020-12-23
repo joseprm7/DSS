@@ -53,4 +53,8 @@ public class SSGestRobots implements IGestRobots {
         for(int i = 0; i<14;i++) v[i] = 0;
         return this.map.caminhoMaisRapido(""+r.getLoc()+"", ""+p.getLoc()+"", 14, v);
     }
+
+    public Robot getRobot(String id) {
+        return this.robotDAO.get(id);
+    }
 }

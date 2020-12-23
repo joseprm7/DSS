@@ -89,7 +89,9 @@ public class ArmazemLN implements IArmazemLN {
      * O robot utiliza este método para avisar o Sistema que já recolheu a palete que lhe
      * foi solicitada. Depois o sistema altera o estado da palete e calcula um novo percurso para o robot.
      */
-    public void notificaRecolha(String idPalete) {
-        this.gestPaletes.notificaRecolha(idPalete);
+    public Collection<MyEntry<String, Integer>> notificaRecolha(String idPalete, String idRobot) {
+        Palete p = this.gestPaletes.notificaRecolha(idPalete);
+        Robot r = this.gestRobots.getRobot(idRobot);
+        return this.gestRobots.transporte(r, p);
     }
 }

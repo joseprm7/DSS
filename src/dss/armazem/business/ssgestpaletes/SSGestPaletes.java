@@ -79,11 +79,7 @@ public class SSGestPaletes implements IGestPaletes{
      * @param idPalete identificador da Palete
      * @param loc localização
      */
-    public void notificaEntrega(String idPalete, int loc) {
-        if(loc == 14) {
-            this.paleteDAO.updateEstadoLoc(idPalete, loc, "Pronta");
-        } else {
-            this.paleteDAO.updateEstadoLoc(idPalete, loc, "Armazenada");
-        }
+    public void notificaEntrega(String idPalete) {
+        this.paleteDAO.updateEstado(idPalete, "Armazenada");
     }
 }

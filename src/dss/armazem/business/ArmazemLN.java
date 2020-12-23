@@ -57,9 +57,9 @@ public class ArmazemLN implements IArmazemLN {
      * @param idRobot identificador
      * @param locAtual localização atual do Robot em questão
      */
-    public Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot, int locAtual) throws Exception {
-        String idPalete = this.gestRobots.notificaEntrega(idRobot, locAtual);
-        this.gestPaletes.notificaEntrega(idPalete, locAtual);
+    public Collection<MyEntry<String, Integer>> notificaEntrega(String idRobot) throws Exception {
+        String idPalete = this.gestRobots.notificaEntrega(idRobot);
+        this.gestPaletes.notificaEntrega(idPalete);
         return this.transporte();
     }
 

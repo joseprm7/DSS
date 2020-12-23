@@ -35,9 +35,9 @@ public class SSGestRobots implements IGestRobots {
      * @param locAtual localização atual do Robot em questão
      * @return id da Palete que o robot entregou
      */
-    public String notificaEntrega(String id, int locAtual) {
+    public String notificaEntrega(String id) {
         Robot r = this.robotDAO.get(id);
-        this.robotDAO.updateEntrega(id, locAtual);
+        this.robotDAO.updateEntrega(id, r.getLoc());
         return r.getPalete();
     }
 

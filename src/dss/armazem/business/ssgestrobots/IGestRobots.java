@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public interface IGestRobots {
     Collection<MyEntry<String, Integer>> transporte(Robot r, Palete p);
-    String notificaEntrega(String id, int locAtual);
+    String notificaEntrega(String id);
     Robot  robotLivre();
     Robot getRobot(String id);
     void alteraLoc(int loc, String idRobot);

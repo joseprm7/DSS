@@ -73,9 +73,7 @@ public class TextUI {
                     case 4:
                         System.out.println("ID do Robot");
                         rt = this.sc.next();
-                        System.out.println("Localização Atual");
-                        int loc = this.sc.nextInt();
-                        caminho = this.model.notificaEntrega(rt,loc);
+                        caminho = this.model.notificaEntrega(rt);
                         System.out.println("Palete Entregue!");
                         if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                         break;

@@ -76,6 +76,10 @@ public class Menu {
         System.out.println("O robot recebeu o seguinte caminho: " + Arrays.toString(r));
     }
 
+    /**
+     * Método que mostra ao Utilizador a localização e o id duma lista de paletes recebida.
+     * @param paletes Lista de paletes a mostrar.
+     */
     public void printaListaPaletes(Collection<Palete> paletes) {
         for(Palete p : paletes) {
             System.out.println("Palete: " + p.getID() + ", Localização -> " + p.getLoc());

@@ -4,7 +4,6 @@ import dss.armazem.business.ArmazemLN;
 import dss.armazem.business.IArmazemLN;
 import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestrobots.MyEntry;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;

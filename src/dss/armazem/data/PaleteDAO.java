@@ -6,7 +6,6 @@ import java.util.*;
 
 public class PaleteDAO {
     private static PaleteDAO singleton = null;
-
     private static final String USERNAME = "root";
     private static final String PASSWORD = "123456";
     private static final String OPTIONS = "&useTimezone=true&serverTimezone=UTC";
@@ -41,7 +40,6 @@ public class PaleteDAO {
 
     /**
      * Implementação do padrão Singleton
-     *
      * @return devolve a instância única desta classe
      */
     public static PaleteDAO getInstance() {
@@ -73,7 +71,6 @@ public class PaleteDAO {
                                 "'" + p.getDescricao() + "', " +
                                 p.getLoc() + ")");
         } catch (SQLException e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -93,7 +90,6 @@ public class PaleteDAO {
             stmLoc.executeUpdate("update palete set locSeccao = " + loc  + " where id = '" + id + "'");
             stmEstado.executeUpdate("update palete set estado = '" + estado  + "' where id = '" + id + "'");
         } catch (SQLException e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -109,7 +105,6 @@ public class PaleteDAO {
              Statement stm = connection.createStatement()) {
             stm.executeUpdate("DELETE FROM palete WHERE id = '" + id + "'");
         } catch (Exception e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -134,7 +129,6 @@ public class PaleteDAO {
             }
             return new Palete(estado, id, descricao, loc);
         } catch (Exception e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -159,7 +153,6 @@ public class PaleteDAO {
             }
             return list;
         } catch (Exception e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -184,10 +177,8 @@ public class PaleteDAO {
             }
             return new Palete(estado, id, descricao, loc);
         } catch (Exception e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
     }
-
 }

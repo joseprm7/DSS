@@ -24,8 +24,7 @@ public class SSGestPaletes implements IGestPaletes{
     }
 
     /**
-     * Adiciona o código de uma Palete à variável queue e cria uma classe Palete que
-     * irá ser incluída na queue de entrada para mais tarde ser transportada
+     * Cria uma classe Palete que irá ser incluída na BD no estado "Queue" para mais tarde ser transportada
      * @param id identificador da Palete
      * @param descricao descricao da Palete
      */
@@ -34,11 +33,18 @@ public class SSGestPaletes implements IGestPaletes{
         this.paleteDAO.put(p);
     }
 
+    /**
+     * @return lista de paletes da BD
+     */
     public Collection<Palete> getListaPaletes() {
         return this.paleteDAO.get();
     }
 
-    public Palete transporte() throws Exception {
+    /**
+     * Método que procura um lugar livre para guardar uma palete e caso haja procura uma palete em Queue e
+     * devolve-a para que o sistema consiga escolher um robot para a transportar.
+     */
+    public Palete transporte(){
         Palete p = null;
         Seccao s = this.seccaoDAO.getSeccaoLivre();
         if(s.getId() != null) {
@@ -51,6 +57,10 @@ public class SSGestPaletes implements IGestPaletes{
         return p;
     }
 
+    /**
+     * Método que altera o estado duma palete e põe a variavel da seccao a false
+     * de maneira a dizer que é possível guardar outras paletes nesta secção
+     */
     public void notificaRecolha(String idPalete) {
         Palete p = this.paleteDAO.get(idPalete);
         int loc = p.getLoc();

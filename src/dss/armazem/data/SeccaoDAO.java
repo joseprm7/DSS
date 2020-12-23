@@ -1,6 +1,5 @@
 package dss.armazem.data;
 
-import dss.armazem.business.ssgestpaletes.Palete;
 import dss.armazem.business.ssgestpaletes.Seccao;
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.List;
 
 public class SeccaoDAO {
     private static SeccaoDAO singleton = null;
-
     private static final String USERNAME = "root";
     private static final String PASSWORD = "123456";
     private static final String OPTIONS = "&useTimezone=true&serverTimezone=UTC";
@@ -37,7 +35,6 @@ public class SeccaoDAO {
 
     /**
      * Implementação do padrão Singleton
-     *
      * @return devolve a instância única desta classe
      */
     public static SeccaoDAO getInstance() {
@@ -46,10 +43,6 @@ public class SeccaoDAO {
         }
         return SeccaoDAO.singleton;
     }
-
-    /*
-     * Métodos put, remove e get
-     */
 
     /**
      * Insere uma Seccao na BD
@@ -67,7 +60,6 @@ public class SeccaoDAO {
                             s.getLoc() + ", " +
                             s.isOcupado() + ")");
         } catch (SQLException e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -110,7 +102,6 @@ public class SeccaoDAO {
                 cheia = rsSeccao.getBoolean("cheia");
                 prateleira = rsSeccao.getInt("prateleira");
             }
-
             return new Seccao(id, listPalete, cheia, loc, prateleira);
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,14 +126,12 @@ public class SeccaoDAO {
                 prateleira = rsSeccao.getInt("prateleira");
                 loc = rsSeccao.getInt("loc");
             }
-
             ResultSet rsPalete = stm.executeQuery("SELECT * FROM palete WHERE locSeccao = " + loc);
             List<String> listPalete = new ArrayList<>();
             while (rsPalete.next()) {
                 String idPalete = rsPalete.getString("id");
                 listPalete.add(idPalete);
             }
-
             return new Seccao(id, listPalete, cheia, loc, prateleira);
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,7 +140,7 @@ public class SeccaoDAO {
     }
 
     /**
-     * Altera o boolean 'cheia' para false, significando que a secção deixa de estar cheia
+     * Altera o boolean 'cheia' conforme o que for pedido pelos argumentos
      * @param loc localização
      */
     public void updateCheia(int loc, boolean cheia) {
@@ -164,5 +153,4 @@ public class SeccaoDAO {
             throw new NullPointerException(e.getMessage());
         }
     }
-
 }

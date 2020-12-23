@@ -11,7 +11,7 @@ public class Mapa {
     private final List<MyEntry<String, Collection<Node>>> mapa;
 
     /**
-     * Construtor vazio
+     * Construtor vazio. Aqui já é construido o mapa/grafo do Armazem
      */
     public Mapa() {
         this.mapa = new ArrayList<>();

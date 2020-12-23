@@ -39,7 +39,6 @@ public class RobotDAO {
 
     /**
      * Implementação do padrão Singleton
-     *
      * @return devolve a instância única desta classe
      */
     public static RobotDAO getInstance() {
@@ -65,7 +64,6 @@ public class RobotDAO {
                             robot.getLoc() + ", " +
                             "'" + robot.getPalete() + "')");
         } catch (SQLException e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -86,7 +84,6 @@ public class RobotDAO {
             stmEstado.executeUpdate("update robot set estado = 'Livre' where id = '" + id + "'");
             stmPalete.executeUpdate("update robot set idPalete = null where id = '" + id + "'");
         } catch (SQLException e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -102,7 +99,6 @@ public class RobotDAO {
              Statement stm = connection.createStatement()) {
             stm.executeUpdate("DELETE FROM robot WHERE id = '" + id + "'");
         } catch (Exception e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -126,11 +122,9 @@ public class RobotDAO {
                 loc = rsRobot.getInt("loc");
                 idPalete = rsRobot.getString("idPalete");
             }
-
             return new Robot(id, estado, idPalete, loc);
 
         } catch (Exception e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
@@ -154,11 +148,9 @@ public class RobotDAO {
                 loc = rsRobot.getInt("loc");
                 idPalete = rsRobot.getString("idPalete");
             }
-
             return new Robot(id, estado, idPalete, loc);
 
         } catch (Exception e) {
-            // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }

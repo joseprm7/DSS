@@ -53,6 +53,7 @@ public class TextUI {
                         System.out.println("Descrição da palete");
                         String d = this.sc.next();
                         Collection<MyEntry<String, Integer>> caminho = this.model.validaCodigo(id, d);
+                        System.out.println("Palete " + id + " inserida!!!!");
                         if (caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                         break;
                     case 2:
@@ -63,6 +64,7 @@ public class TextUI {
                         System.out.println("ID da palete");
                         String pa = this.sc.next();
                         this.model.notificaRecolha(pa);
+                        System.out.println("Recolha da palete " + pa + " feita!!!!");
                         break;
                     case 4:
                         System.out.println("ID do Robot");
@@ -70,6 +72,7 @@ public class TextUI {
                         System.out.println("Localização Atual");
                         int loc = this.sc.nextInt();
                         caminho = this.model.notificaEntrega(rt,loc);
+                        System.out.println("Palete Entregue!!!!");
                         if(caminho != null) this.menu.printaCaminho((List<MyEntry<String, Integer>>) caminho);
                         break;
                     case 5:

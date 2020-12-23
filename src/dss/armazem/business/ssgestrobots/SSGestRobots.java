@@ -21,6 +21,14 @@ public class SSGestRobots implements IGestRobots {
     }
 
     /**
+     * Procura na base de dados um robot Livre
+     * @return robot com o estado "Livre"
+     */
+    public Robot  robotLivre() {
+        return this.robotDAO.getRobotLivre();
+    }
+
+    /**
      * A partir de um determinado identificador, um robot irá notificar o Sistema
      * que já entregou a Palete e alterará o seu estado para "Livre".
      * @param id identificador
@@ -34,16 +42,9 @@ public class SSGestRobots implements IGestRobots {
     }
 
     /**
-     * Método que procura na base de dados um robot Livre
-     */
-    public Robot  robotLivre() {
-        return this.robotDAO.getRobotLivre();
-    }
-
-    /**
-     * Método que altera o estado do robot para "Transporte", altera o id da palete que este está a
-     * trasnportar e de seguida calcula um percurso para este chegar até à palete.
-     * @return percurso
+     * Altera o estado do robot para "Transporte", altera o identificador da palete que este está a
+     * transportar e de seguida calcula um percurso para este chegar até à palete.
+     * @return percurso até à palete
      */
     public Collection<MyEntry<String, Integer>> transporte(Robot r, Palete p) {
         r.setEstado("Transporte");

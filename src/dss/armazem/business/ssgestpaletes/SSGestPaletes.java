@@ -34,6 +34,7 @@ public class SSGestPaletes implements IGestPaletes{
     }
 
     /**
+     * Obtém todas as paletes existentes na BD
      * @return lista de paletes da BD
      */
     public Collection<Palete> getListaPaletes() {
@@ -41,8 +42,9 @@ public class SSGestPaletes implements IGestPaletes{
     }
 
     /**
-     * Método que procura um lugar livre para guardar uma palete e caso haja procura uma palete em Queue e
+     * Procura um lugar livre para guardar uma palete e caso haja procura uma palete em Queue e
      * devolve-a para que o sistema consiga escolher um robot para a transportar.
+     * @return Palete
      */
     public Palete transporte(){
         Palete p = null;
@@ -59,9 +61,8 @@ public class SSGestPaletes implements IGestPaletes{
     }
 
     /**
-     * Método que altera o estado duma palete e põe a variavel da seccao a false
+     * Altera o estado duma palete e põe a variavel da seccao a false
      * de maneira a dizer que é possível guardar outras paletes nesta secção
-     * @return
      */
     public Palete notificaRecolha(String idPalete) {
         Palete p = this.paleteDAO.get(idPalete);
@@ -70,6 +71,13 @@ public class SSGestPaletes implements IGestPaletes{
         return p;
     }
 
+    /**
+     * Caso a localização esteja no último vértice, altera o seu estado para "Pronta", porque
+     * significa que está na zona de saída do Armazém e irá sair do Armazém.
+     * Caso não esteja, significa que a Palete apenas ficará armazenada no Armazém
+     * @param idPalete identificador da Palete
+     * @param loc localização
+     */
     public void notificaEntrega(String idPalete, int loc) {
         if(loc == 14) {
             this.paleteDAO.updateEstadoLoc(idPalete, loc, "Pronta");

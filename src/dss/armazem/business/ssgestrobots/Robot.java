@@ -116,19 +116,4 @@ public class Robot {
     public Robot clone() {
         return new Robot(this);
     }
-
-    /**
-     * O Robot entrega a Palete e altera o seu estado para "Livre".
-     * A partir deste momento, a Palete deixa de estar associada ao Robot e, por isso,
-     * a variável palete passa a tomar o valor de null.
-     * @param locAtual localização atual do Robot e, consequentemente, da Palete
-     */
-    public void notificaEntrega(int locAtual) {
-        this.setEstado("Livre");
-        this.setLoc(locAtual);
-        Palete p = this.paleteDAO.get(this.palete);
-        p.paleteEntregue(locAtual);
-        this.paleteDAO.put(p);
-        this.palete = null;
-    }
 }

@@ -30,8 +30,8 @@ public class TextUI {
         String[] opcoes = {
                 "Ler código QR",
                 "Comunicar ordem de transporte",
-                "Comunicar entrega de palete",
                 "Comunicar recolha de palete",
+                "Comunicar entrega de palete",
                 "Consultar listagem de localizacoes"
                 };
         this.menu = new Menu(opcoes);

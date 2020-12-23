@@ -29,12 +29,11 @@ public class SSGestRobots {
      */
     public String notificaEntrega(String id, int locAtual) {
         Robot r = this.robotDAO.get(id);
-        String res = r.getPalete();
-        r.notificaEntrega(locAtual);
-        r.setPalete(null);
         r.setEstado("Livre");
+        r.setLoc(locAtual);
+        r.setPalete(null);
         this.robotDAO.put(r);
-        return res;
+        return r.getPalete();
     }
 
     public Robot  robotLivre() {
